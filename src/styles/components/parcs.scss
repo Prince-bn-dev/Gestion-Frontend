@@ -1,0 +1,298 @@
+.parc-detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+
+  .parc-card {
+    background: var(--white-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 100%;
+    max-width: 500px;
+    text-align: left;
+
+    h2 {
+      font-size: 2rem;
+      color: var(--black-color);
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+
+      strong {
+        color: var(--black-color);
+      }
+
+      .open {
+        color: #28a745;
+        font-weight: bold;
+      }
+
+      .closed {
+        color: #dc3545;
+        font-weight: bold;
+      }
+    }
+
+    .buttons {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+
+      .btn {
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .edit {
+        background-color: var(--primary-color);
+        color:var(--white-color);
+
+        &:hover {
+          background-color: var(--secondary-color);
+        }
+      }
+
+      .back {
+        background-color: var(--secondary-color);
+        color:var(--white-color);
+
+        &:hover {
+          background-color: var(--primary-color);
+        }
+      }
+    }
+  }
+
+  &__loading,
+  &__not-found {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-color);
+  }
+}
+
+.parc-form {
+  background: var(--white-color);
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color:var(--text-color);
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+
+    label {
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    input {
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+  }
+
+  .checkbox {
+    flex-direction: row;
+    align-items: center;
+
+    label {
+      font-weight: 500;
+      cursor: pointer;
+
+      input[type="checkbox"] {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background-color: var(--secondary-color);
+    }
+  }
+}
+
+.parc-list-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: var(--white-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  font-family: 'font-2';
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    h2 {
+      font-size: 1.8rem;
+      color: var(--black-color);
+    }
+
+    .btn.primary {
+      background-color: var(--primary-color);
+      color: var(--white-color);
+      padding: 8px;
+      border: none;
+    }
+  }
+
+  .parc-list {
+    list-style: none;
+    padding: 0;
+
+    .parc-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--white-color);
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+
+      .info {
+        h3 {
+          margin: 0;
+          font-size: 1.2rem;
+        }
+
+        p {
+          margin: 0.3rem 0;
+          color: var(--text-color);
+        }
+
+        .status {
+          font-size: 0.9rem;
+          padding: 0.3rem 0.6rem;
+          border-radius: 5px;
+          font-weight: bold;
+          display: inline-block;
+
+          &.open {
+            background-color: #d4edda;
+            color: #155724;
+          }
+
+          &.closed {
+            background-color: #f8d7da;
+            color: #721c24;
+          }
+        }
+      }
+
+      .actions {
+        display: flex;
+        gap: 0.5rem;
+
+        .btn {
+          padding: 0.5rem 0.8rem;
+          font-size: 0.9rem;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+          transition: background 0.3s ease;
+
+          &.details {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+          }
+
+          &.edit {
+            background-color: var(--secondary-color);
+            color: var(--black-color);
+          }
+
+          &.delete {
+            background-color: #dc3545;
+            color: var(--text-color);
+          }
+
+          &:hover {
+            opacity: 0.9;
+          }
+        }
+      }
+    }
+  }
+}
+
+.parcs-table {
+  padding: 2rem;
+  font-family: 'font-2';
+
+  h2 {
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--white-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+
+    thead{
+      tr{
+        th {
+          padding: 1rem;
+          font-weight: 600;
+          color: var(--white-color);
+          background-color: var(--primary-color);
+          text-align: left;
+        }
+      }
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f8f8f8;
+      font-weight: bold;
+      color: var(--text-color);
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  }
+}
+

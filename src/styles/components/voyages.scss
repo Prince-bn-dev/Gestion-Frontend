@@ -1,0 +1,256 @@
+.my-voyages-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: var(--white-color);
+  border-radius: 1rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      background-color: var(--white-color);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 0.75rem;
+      border: 1px solid #ddd;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #f1f1f1;
+      }
+
+      strong {
+        display: block;
+        font-size: 1.2rem;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+      }
+
+      button {
+        padding: 0.4rem 0.8rem;
+        margin-right: 0.5rem;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        font-size: 0.95rem;
+        transition: background-color 0.2s;
+
+        &:first-of-type {
+          background-color: var(--primary-color);
+          color:var(--white-color);
+
+          &:hover {
+            background-color: var(--primary-color);
+          }
+        }
+
+        &:last-of-type {
+          background-color: #e74c3c;
+          color: var(--white-color);
+
+          &:hover {
+            background-color: #c0392b;
+          }
+        }
+      }
+    }
+  }
+
+  p {
+    color: var(--text-color);
+    text-align: center;
+  }
+}
+
+
+.voyage-form-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    input,
+    select {
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+      }
+    }
+
+    button {
+      padding: 0.9rem;
+      background-color: var(--primary-color);
+      color: var(--text-color);
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: var(--secondary-color);
+      }
+    }
+
+    p {
+      margin-top: 1rem;
+      color: #2c3e50;
+      font-weight: 500;
+    }
+  }
+}
+
+
+.voyage-list-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: var(--white-color);
+  border-radius: 1rem;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+
+  h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    text-align: center;
+    color: red;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+
+  li {
+    background: var(--white-color);
+    padding: 1.2rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+
+    strong {
+      color: var(--text-color);
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.6rem 1rem;
+      background-color: var(--primary-color);
+      color: var(--white-color);
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: var(--secondary-color);
+      }
+    }
+  }
+}
+
+
+.voyages-table {
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+
+  h2 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+  }
+
+  .error {
+    color: red;
+    font-weight: bold;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+
+    th, td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f6f8fa;
+      color: #555;
+    }
+
+    tr:hover {
+      background-color: #f7f9fa;
+    }
+
+    .status {
+      font-weight: bold;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      text-transform: capitalize;
+    }
+
+    .en-attente {
+      background-color: #ffeaa7;
+      color: #d35400;
+    }
+
+    .en-cours {
+      background-color: #74b9ff;
+      color: #2d3436;
+    }
+
+    .terminé {
+      background-color: #55efc4;
+      color: #00695c;
+    }
+
+    .annulé {
+      background-color: #fab1a0;
+      color: #c0392b;
+    }
+  }
+}

@@ -1,0 +1,149 @@
+.dashboard-container {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 32px 28px;
+  background: var(--white-color);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(50, 50, 93, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2d3a4a;
+
+  h1 {
+    text-align: center;
+    font-size: 2.4rem;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+
+  .intro-text {
+    max-width: 720px;
+    margin: 0 auto 36px auto;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .stats-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+
+    .card {
+      background: var(--white-color);
+      border-radius: 12px;
+      padding: 24px 20px;
+      box-shadow: 0 4px 12px rgba(45, 156, 219, 0.1);
+      text-align: center;
+      transition: box-shadow 0.3s ease;
+
+      &:hover {
+        box-shadow: 0 8px 24px rgba(45, 156, 219, 0.2);
+      }
+
+      h3 {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+        color: #219653;
+      }
+
+      p {
+        font-size: 2.4rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 8px;
+      }
+
+      small {
+        font-size: 0.9rem;
+        color: var(--text-color);
+        display: block;
+      }
+    }
+  }
+
+  .recent-reservations {
+    max-width: 100%;
+    margin-bottom: 36px;
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 8px;
+      color: #2d3a4a;
+    }
+
+    .section-description {
+      font-size: 1rem;
+      color: var(--text-color);
+      margin-bottom: 20px;
+      max-width: 720px;
+      line-height: 1.4;
+    }
+
+    p {
+      text-align: center;
+      font-size: 1.1rem;
+      color: var(--text-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      overflow: hidden;
+
+      thead {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+
+        th {
+          padding: 14px 12px;
+          text-align: left;
+          font-weight: 600;
+          user-select: none;
+        }
+      }
+
+      tbody {
+        tr {
+          border-bottom: 1px solid #e0e4e8;
+          transition: background-color 0.2s ease;
+
+          &:hover {
+            background-color: var(--white-color);
+          }
+
+          td {
+            padding: 12px;
+            color: var(--text-color);
+          }
+        }
+      }
+    }
+  }
+
+  .d-footer {
+    font-family: "font-2";
+    color: var(--black-color);
+  }
+
+  .loading-message,
+  .error-message {
+    text-align: center;
+    font-weight: 600;
+    margin-top: 40px;
+  }
+
+  .error-message {
+    color: #d32f2f;
+  }
+
+  .loading-message {
+    color: var(--primary-color);
+  }
+}

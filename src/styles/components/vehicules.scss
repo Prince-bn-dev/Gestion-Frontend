@@ -1,0 +1,344 @@
+.create-vehicule-container {
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 32px 28px;
+  background: var(--white-color);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(60, 60, 100, 0.12);
+  font-family: 'font-2';
+
+  h2 {
+    text-align: center;
+    color: #2d3a4a;
+    margin-bottom: 24px;
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+
+  p {
+    text-align: center;
+    color: #219653;
+    margin-bottom: 16px;
+    font-weight: 500;
+
+    &.error {
+      color: #d32f2f;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #d6dbe1;
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: #f9f9f9;
+      transition: border-color 0.2s;
+
+      &:focus {
+        border-color: var(--primary-color);
+        background-color: #fff;
+        outline: none;
+      }
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      font-size: 1rem;
+      color: var(--text-color);
+      font-weight: 500;
+      gap: 6px;
+    }
+
+    input[type="checkbox"] {
+      accent-color: var(--primary-color);
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+    }
+
+    button[type="submit"] {
+      margin-top: 8px;
+      padding: 12px;
+      background:var(--primary-color);
+      color: var(--white-color);
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(45, 156, 219, 0.08);
+      transition: background 0.2s, transform 0.1s;
+
+      &:hover {
+        background: var(--secondary-color);
+        transform: translateY(-2px) scale(1.02);
+      }
+    }
+  }
+}
+
+.vehicule-detail-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', sans-serif;
+  color: #1f2937;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .status-badge {
+      padding: 0.3rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+
+      &.disponible {
+        background-color: #ecfdf5;
+        color: #10b981;
+      }
+
+      &.en-service {
+        background-color: #eef2ff;
+        color: #6366f1;
+      }
+
+      &.maintenance {
+        background-color: #fff7ed;
+        color: #f97316;
+      }
+    }
+  }
+
+  .sub {
+    color: #6b7280;
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .vehicule-info,
+  .additional-info {
+    margin-bottom: 1.5rem;
+
+    p {
+      display: flex;
+      align-items: center;
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+      color: #374151;
+
+      svg {
+        margin-right: 0.5rem;
+        color: #6b7280;
+      }
+
+      .gps {
+        color: #10b981;
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    .btn {
+      background-color: #f3f4f6;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #1f2937;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background-color: #e5e7eb;
+      }
+
+      &.btn-danger {
+        background-color: #fee2e2;
+        color: #b91c1c;
+
+        &:hover {
+          background-color: #fecaca;
+        }
+      }
+    }
+  }
+}
+
+
+
+.voyages-list-container {
+  padding: 2rem;
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+
+  .voyage-card {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+
+    .title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #111;
+    }
+
+    .infos {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .conducteur, .vehicule {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: #333;
+
+      svg {
+        color: #888;
+      }
+    }
+
+    .statut {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.75rem;
+      border-radius: 9999px;
+      font-weight: 600;
+
+      &.en-cours {
+        background: #e0f2fe;
+        color: #0284c7;
+      }
+
+      &.termine {
+        background: #e5e7eb;
+        color: #374151;
+      }
+    }
+
+    .btn-reserver {
+      margin-top: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #16a34a;
+      color: white;
+      font-size: 0.85rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+
+      &:hover {
+        background: #15803d;
+      }
+
+      svg {
+        font-size: 0.9rem;
+      }
+    }
+
+    .commentaires-section {
+      margin-top: 1rem;
+    }
+  }
+
+  // Responsive grid
+  .voyages-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+
+
+.vehicules-table {
+  padding: 2rem;
+  font-family: 'font-2';
+
+  h2 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+  }
+
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    thead {
+      background-color: red;
+      tr{
+        background-color: var(--primary-color);
+        color: var(--text-color);
+      }
+    }
+
+    th, td {
+      padding: 1rem;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f6f8fa;
+      color:var(--text-color);
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: #f2f2f2;
+    }
+  }
+}
+

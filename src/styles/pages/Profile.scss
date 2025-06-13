@@ -1,0 +1,129 @@
+.profile-container {
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 2rem 2.5rem;
+  background-color: var(--white-color);
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-color);
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #e2e8f0;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.07);
+    transition: box-shadow 0.2s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 4px 16px rgba(44, 62, 80, 0.14);
+      cursor: pointer;
+    }
+  }
+
+  input[type="file"] {
+    margin-bottom: 1rem;
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 0.4rem 0.5rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.4rem;
+    background-color: var(--background-color);
+    color: var(--text-color);
+
+    &::-webkit-file-upload-button {
+      background-color: var(--primary-color);
+      color: var(--white-color);
+      border: none;
+      border-radius: 0.3rem;
+      padding: 0.4rem 1.2rem;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: var(--primary-color-hover);
+      }
+    }
+  }
+
+  button {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.6rem 1.6rem;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:disabled {
+      background-color: #a0aec0;
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: var(--primary-color-hover);
+    }
+  }
+
+  p {
+    width: 100%;
+    margin: 0.3rem 0;
+    font-size: 1.05rem;
+
+    strong {
+      color: var(--primary-color);
+    }
+  }
+
+  .update-password-link {
+    margin-top: 1.2rem;
+    width: 100%;
+    text-align: right;
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+
+      &:hover {
+        color: var(--primary-color-hover);
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.message {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  font-size: 1.1rem;
+
+  &.loading {
+    background-color: #e0e7ef;
+    color: var(--primary-color-hover);
+  }
+
+  &.info {
+    background-color: #f7fafc;
+    color: #4a5568;
+  }
+}
