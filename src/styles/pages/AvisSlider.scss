@@ -1,0 +1,76 @@
+.avis-container {
+  text-align: center;
+  padding: 50px 20px;
+  background: #fff;
+
+  h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    span {
+      font-weight: 300;
+    }
+    strong {
+      color: var(--primary-color);
+    }
+  }
+
+  .avis-swiper {
+    padding: 0 20px;
+  }
+
+  .avis-card {
+    background:var(--text-color);
+    border-radius: 12px;
+    padding: 25px;
+    position: relative;
+    text-align: left;
+    font-family: "font-1";
+
+    .avis-stars {
+      color: orange;
+      font-size: 18px;
+    }
+
+    .avis-date {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 12px;
+      color: var(--white-color);
+    }
+
+    .avis-message {
+      font-size: 18px;
+      color: var(--white-color);
+      font-family: 'font-1';
+      margin: 15px 0 25px;
+    }
+
+    .avis-user {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        margin-right: 12px;
+        object-fit: cover;
+      }
+
+      h4 {
+        margin: 0;
+        font-size: 16px;
+        font-family: 'font-2';
+        font-weight: bold;
+        color: var(--primary-color);
+      }
+
+      span {
+        font-size: 13px;
+        color: var(--white-color);
+      }
+    }
+  }
+
+}

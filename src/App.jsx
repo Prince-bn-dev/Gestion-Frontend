@@ -37,6 +37,7 @@ import VehiculesTable from "./components/vehicules/VehiculesTable";
 import VoyagesTable from "./components/voyages/VoyagesTable";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
+import Footer from "./components/Footer";
 
 const EditparcWrapper = () => {
   const { id } = useParams();
@@ -133,6 +134,7 @@ function AppRoutes() {
               
               <Route path="*" element={<h1>404 Not Found</h1>} />
             </Routes>
+            <Footer />
           </div>
           
         </div>

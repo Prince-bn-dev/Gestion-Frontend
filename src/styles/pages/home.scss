@@ -113,7 +113,6 @@
     flex-direction: column;
     align-items: center;
     font-family: 'font-2';
-    margin: 60px 0 ;
     background-color: #fff;
      h2 {
       font-size: 2rem;
@@ -247,42 +246,10 @@
     }
   }
 
-  .testimonial-section {
-    max-width: 720px;
-    margin: 0 auto 60px auto;
-    text-align: center;
-    color: var(--text-color);
-
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 32px;
-      color: var(--secondary-color);
-    }
-
-    blockquote {
-      background: var(--white-color);
-      border-left: 6px solid var(--primary-color);
-      padding: 20px 30px;
-      margin-bottom: 24px;
-      font-style: italic;
-      font-size: 1.1rem;
-      box-shadow: 0 4px 12px rgba(45, 156, 219, 0.1);
-
-      p {
-        margin-bottom: 12px;
-      }
-
-      footer {
-        font-weight: 600;
-        color: var(--text-color);
-      }
-    }
-  }
-
   .call-to-action {
     text-align: center;
     padding: 40px 20px;
-    background: var(--primary-color);
+    background: var(--secondary-color);
     color: var(--white-color);
 
     h2 {

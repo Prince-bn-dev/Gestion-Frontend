@@ -1,5 +1,10 @@
-.About{
-    .A-header{
+.About {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+  margin: auto;
+  color: var(--text-color);
+
+      .about-header{
         position: relative;
         height: 60vh;
         display: flex;
@@ -13,6 +18,7 @@
         h1{
             color: var(--white-color);
             z-index: 9;
+            
         }
 
         &::before{
@@ -25,102 +31,184 @@
               background: rgba(17, 17, 17, 0.507);
         }
     }
-    .A-container{
-        display: flex;
-        justify-content: space-around;
-        padding: 20px;
-        section{
-            width: 45%;
-            margin: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            h2{
-                color: var(--primary-color);
-            }
-            p{
-                margin: 8px;
-            }
 
-            img{
-                width: 60%;
-                border-radius: 15px;
-                transition: transform 0.9s;
-                position: relative;
+  .about-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
 
-                &:hover{
-                    transform: scale(1.1);
-                }
-            }
-        }
+    .about-text {
+      flex: 1 1 45%;
+      width: 45%;
+
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+      }
+
+      p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+        color: var(--text-color);
+      }
     }
-    .A-service{
-        display: flex;
-        justify-content: space-around;
-        background-color: var(--text-color);
 
-        .As-header{
-            width: 20%;
-            display: flex;
-            text-align: center;
-            align-items: center;
-            h2{
-                color: var(--white-color);
-                font-size: 2rem;
-            }
-        }
-        .As-text{
-            width: 70%;
-            div{
-                display: flex;
-                justify-content: space-between;
-                margin: 15px 0;
-                padding: 13px;
-                background-color: rgb(46, 45, 45);
-                img{
-                    width: 100px;
-                    height: 100px;
+    .about-image {
+      width: 40%;
+      text-align: center;
 
-                }
-                section{
-                    width: 80%;
-                p,h3{
-                 color: var(--white-color);
-                }
-                p{
-                 letter-spacing: 2px;
-                 margin: 10px;
-                }
-                }
-            }
-        }
+      img {
+        width: 80%;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.6s ease;
+        cursor: pointer;
+      }
     }
-    .A-equipe{
+  }
+
+  .services {
+    margin-bottom: 4rem;
+
+    > header {
+      h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        color: var(--primary-color);
+      }
+    }
+
+    .services-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      gap: 2rem;
+
+      .service-item {
+        background-color: var(--secondary-color);
+        border-radius: 12px;
+        padding: 1.5rem;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin: 25px 0;
-        padding: 20px;
-        background-color: rgb(46, 45, 45);
+        gap: 1rem;
+        align-items: flex-start;
+        transition: box-shadow 0.3s ease;
+        font-weight: bold;
+        width: 45%;
 
 
-        h2{
+        &:hover {
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+          width: 60px;
+          height: 60px;
+          object-fit: contain;
+          flex-shrink: 0;
+        }
+
+        div {
+          h3 {
+            margin: 0 0 0.5rem;
             color: var(--white-color);
-            font-size: 2.5rem;
-        }
-        .A-equipe-container{
-          display: flex;
-          justify-content: space-around;
-          margin: 15px;
-          div{
-            width: 25%;
-            border: solid 1px var(--secondary-color);
+            font-size: 1.2rem;
+          }
 
-            img{
-                width: 100%;
-            }
+          p {
+            margin: 0;
+            color: var(--text-color);
+            font-size: 1rem;
+            line-height: 1.4;
+          }
         }
-        }
+      }
     }
+  }
+
+  .team {
+    text-align: center;
+    margin-bottom: 4rem;
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: var(--primary-color);
+    }
+
+    .team-members {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+
+      .team-member {
+        width: 30%;
+        background-color: var(--background-color);
+        border-radius: 12px;
+        padding: 1rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+        cursor: default;
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+          width: 150px;
+          height: 150px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin-bottom: 1rem;
+        }
+
+        h3 {
+          margin: 0.5rem 0 0.25rem;
+          font-size: 1.3rem;
+          color: var(--primary-color);
+        }
+
+        p {
+          margin: 0;
+          font-style: italic;
+          color: var(--secondary-color);
+        }
+      }
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .about-container {
+      flex-direction: column;
+      width: 100% !important;
+      .about-text{
+        width: 100%;
+      }
+     .about-image{
+      width: 100%;
+      img{
+        width: 60%;
+      }
+     }
+    }
+
+
+    .team-members {
+      flex-wrap: wrap;
+      gap: 2rem;
+      .team-member{
+        margin: auto;
+        width: 45%;
+      }
+    }
+  }
 }

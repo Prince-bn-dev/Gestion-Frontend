@@ -27,7 +27,8 @@
     "react-slick": "^0.30.3",
     "react-to-print": "^3.1.0",
     "react-toastify": "^11.0.5",
-    "sass": "^1.89.0"
+    "sass": "^1.89.0",
+    "swiper": "^11.2.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

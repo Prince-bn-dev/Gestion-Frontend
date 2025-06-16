@@ -1,6 +1,7 @@
 // src/pages/Home.jsx
 import React from 'react';
 import CustomPaging from '../components/Customer';
+import AvisSlider from '../components/pages/AvisSlider';
 
 function Home() {
   const marque = [
@@ -143,22 +144,7 @@ function Home() {
           ))}
          </div>
       </div>
-
-      <section className="testimonial-section">
-        <h2>Ce que disent nos clients</h2>
-        <blockquote>
-          <p>
-            « Grâce à cette solution, nous avons réduit nos coûts de maintenance de 20% et amélioré la disponibilité de notre flotte. »
-          </p>
-          <footer>— Sophie L., Responsable flotte automobile</footer>
-        </blockquote>
-        <blockquote>
-          <p>
-            « L’interface intuitive et les rapports détaillés nous permettent de prendre des décisions éclairées rapidement. »
-          </p>
-          <footer>— Marc D., Directeur logistique</footer>
-        </blockquote>
-      </section>
+   <AvisSlider />
 
       <section className="call-to-action">
         <h2>Prêt à transformer la gestion de votre parc ?</h2>

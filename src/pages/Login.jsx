@@ -78,7 +78,6 @@ function Login() {
       </div>
       <div className="container" aria-live="polite">
         <h1>Connexion</h1>
-
         <ul className="login__selector">
           <li onClick={handleModeChange} id="EMAIL" className={mode === 'EMAIL' ? "active" : ""}>Par Email</li>
           <li onClick={handleModeChange} id="TELEPHONE" className={mode === 'TELEPHONE' ? "active" : ""}>Par Téléphone</li>
