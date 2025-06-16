@@ -30,7 +30,7 @@ function Home() {
         <br />
         <div className="hero-image">
           <img
-            src="/public/images/v-1.avif"
+            src="/images/v-1.avif"
             alt="Parc automobile"
           />
         </div>
@@ -93,7 +93,7 @@ function Home() {
         <div className="features-grid">
           <div className="feature-card fade-in">
             <img
-              src="/public/images/icone1.png"
+              src="/images/icone1.png"
               alt="Gestion des véhicules"
             />
             <h3>Gestion des véhicules</h3>
@@ -101,7 +101,7 @@ function Home() {
           </div>
           <div className="feature-card fade-in delay-1">
             <img
-              src="/public/images/icone2.png"
+              src="/images/icone2.png"
               alt="Gestion des parcings"
             />
             <h3>Gestion des parcings</h3>
@@ -109,7 +109,7 @@ function Home() {
           </div>
           <div className="feature-card fade-in delay-2">
             <img
-              src="/public/images/icone3.png"
+              src="/images/icone3.png"
               alt="Maintenance"
             />
             <h3>Suivi maintenance</h3>
@@ -117,7 +117,7 @@ function Home() {
           </div>
           <div className="feature-card fade-in delay-3">
             <img
-              src="/public/images/icone5.png"
+              src="/images/icone5.png"
               alt="Rapports et analyses"
             />
             <h3>Rapports et analyses</h3>
@@ -125,7 +125,7 @@ function Home() {
           </div>
           <div className="feature-card fade-in delay-4">
             <img
-              src="/public/images/icone4.png"
+              src="/images/icone4.png"
               alt="Sécurité renforcée"
             />
             <h3>Sécurité renforcée</h3>

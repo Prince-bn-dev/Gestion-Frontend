@@ -74,7 +74,7 @@ function Login() {
   return (
     <div className="login">
       <div className="left">
-        <img src="/public/login.jpg" alt="Login" />
+        <img src="/login.jpg" alt="Login" />
       </div>
       <div className="container" aria-live="polite">
         <h1>Connexion</h1>

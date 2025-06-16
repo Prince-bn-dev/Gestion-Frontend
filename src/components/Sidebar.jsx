@@ -224,7 +224,7 @@ const Sidebar = () => {
       <div className={`sidebar ${isMobileOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
           <span className="logo-icon">
-            <img src="/public/logo.png" alt="Logo" />
+            <img src="/logo.png" alt="Logo" />
           </span>
           <span className="logo-text">Auto-Track</span>
 

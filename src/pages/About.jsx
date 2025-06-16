@@ -21,7 +21,7 @@ function About() {
           </p>
         </section>
         <section className="about-image">
-          <img src="/public/logo.png" alt="Logo Auto-Track" />
+          <img src="/logo.png" alt="Logo Auto-Track" />
         </section>
       </div>
 
@@ -31,7 +31,7 @@ function About() {
         </header>
         <div className="services-list">
           <div className="service-item">
-            <img src="/public/images/icone1.png" alt="Gestion des véhicules" />
+            <img src="/images/icone1.png" alt="Gestion des véhicules" />
             <div>
               <h3>Gestion des véhicules</h3>
               <p>
@@ -40,7 +40,7 @@ function About() {
             </div>
           </div>
           <div className="service-item">
-            <img src="/public/images/icone2.png" alt="Gestion des parkings" />
+            <img src="/images/icone2.png" alt="Gestion des parkings" />
             <div>
               <h3>Gestion des parkings</h3>
               <p>
@@ -49,7 +49,7 @@ function About() {
             </div>
           </div>
           <div className="service-item">
-            <img src="/public/images/icone3.png" alt="Suivi maintenance" />
+            <img src="/images/icone3.png" alt="Suivi maintenance" />
             <div>
               <h3>Suivi maintenance</h3>
               <p>
@@ -58,7 +58,7 @@ function About() {
             </div>
           </div>
           <div className="service-item">
-            <img src="/public/images/icone4.png" alt="Rapports et analyses" />
+            <img src="/images/icone4.png" alt="Rapports et analyses" />
             <div>
               <h3>Rapports et analyses</h3>
               <p>
@@ -73,17 +73,17 @@ function About() {
         <h2>Notre Équipe</h2>
         <div className="team-members">
           <div className="team-member">
-            <img src="/public/personnes/mecano1.jpg" alt="Ange G" />
+            <img src="/personnes/mecano1.jpg" alt="Ange G" />
             <h3>Ange G.</h3>
             <p>Développeur Frontend</p>
           </div>
           <div className="team-member">
-            <img src="/public/personnes/passager2.jpg" alt="Ange G" />
+            <img src="/personnes/passager2.jpg" alt="Ange G" />
             <h3>Ange G.</h3>
             <p>Développeur Backend</p>
           </div>
           <div className="team-member">
-            <img src="/public/personnes/passager1.jpg" alt="Ange G" />
+            <img src="/personnes/passager1.jpg" alt="Ange G" />
             <h3>Ange G.</h3>
             <p>Manager</p>
           </div>

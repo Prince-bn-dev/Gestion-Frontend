@@ -107,7 +107,7 @@ function Register() {
   return (
     <div className="Register">
       <div className="left">
-       <img src="/public/register.jpg" alt="register" />
+       <img src="/register.jpg" alt="register" />
       </div>
       <div className='register'>
          <div className="register__header">
