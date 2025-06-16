@@ -5,14 +5,14 @@ import AvisSlider from '../components/pages/AvisSlider';
 
 function Home() {
   const marque = [
-    { name:"Toyota" , image:"/public/images/v-2.png" },
-    { name:"Lexus" , image:"/public/images/v-3.png" },
-    { name:"Nissan" , image:"/public/images/v-4.png" },
-    { name:"Hyundai" , image:"/public/images/v-5.png" },
-    { name:"Honda" , image:"/public/images/v-6.png" },
-    { name:"Mercedeces" , image:"/public/images/v-7.png" },
-    { name:"Ford" , image:"/public/images/v-8.png" },
-    { name:"BMW" , image:"/public/images/v-9.png" },
+    { name:"Toyota" , image:"/images/v-2.png" },
+    { name:"Lexus" , image:"/images/v-3.png" },
+    { name:"Nissan" , image:"/images/v-4.png" },
+    { name:"Hyundai" , image:"/images/v-5.png" },
+    { name:"Honda" , image:"/images/v-6.png" },
+    { name:"Mercedeces" , image:"/images/v-7.png" },
+    { name:"Ford" , image:"/images/v-8.png" },
+    { name:"BMW" , image:"/images/v-9.png" },
   ]
   return (
     <div className="home-container">
