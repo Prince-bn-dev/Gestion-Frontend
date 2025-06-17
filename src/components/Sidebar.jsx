@@ -66,7 +66,7 @@ const sidebarData = [
     hasSubmenu: true,
     roles: ['admin', 'chauffeur', 'voyageur', 'gestionnaire'],
     submenu: [
-      { id: 'creaction de voyages', label: 'Creaction de voyages', link: '/voyages/new', roles: ['gestionnaire', 'chauffeur'] },
+      { id: 'creaction de voyages', label: 'Creaction de voyages', link: '/voyages/new', roles: ['gestionnaire'] },
       { id: 'liste des voyages', label: 'Listes des voyages', link: '/voyages', roles: ['gestionnaire', 'chauffeur'] },
       { id: 'Les voyages', label: 'Les voyages', link: '/allVoyages', roles: ['voyageur'] },
       { id: 'Voyages Table', label: 'Voyages Table', link: '/allVoyagesTable', roles: ['admin'] },
@@ -97,7 +97,7 @@ const sidebarData = [
   },
   {
     id: 'Creer un utilisateur',
-    label: 'Creer un utilisateur',
+    label: 'utilisateur',
     icon: <IoIosPerson />,
     link: '/register',
     hasSubmenu: false,

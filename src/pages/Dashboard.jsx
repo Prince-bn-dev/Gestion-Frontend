@@ -1,5 +1,5 @@
-// src/pages/Dashboard.jsx
 import React, { useEffect, useState } from 'react';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 function Dashboard() {
   const [stats, setStats] = useState({
@@ -11,12 +11,33 @@ function Dashboard() {
   const [recentReservations, setRecentReservations] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
+  const RADIAN = Math.PI / 180;
+
+  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
+
+  const pieData = [
+    { name: 'Disponibles', value: stats.disponibles },
+    { name: 'En maintenance', value: stats.enMaintenance },
+    { name: 'Indisponibles', value: stats.totalVehicules - stats.disponibles - stats.enMaintenance },
+  ];
+
   useEffect(() => {
     // Données vitrines simulées
     const mockVehiculesStats = {
       total: 35,
       disponibles: 22,
-      enMaintenance: 13,
+      enMaintenance: 8,
     };
 
     const mockparcsStats = {
@@ -52,6 +73,7 @@ function Dashboard() {
         status: 'Terminée',
       },
     ];
+
     setStats({
       totalVehicules: mockVehiculesStats.total,
       disponibles: mockVehiculesStats.disponibles,
@@ -70,40 +92,52 @@ function Dashboard() {
       <h1>Tableau de bord - Gestion de parc automobile</h1>
 
       <p className="intro-text">
-        Ce tableau de bord centralise les informations clés de votre flotte automobile. Il vous permet d’optimiser la gestion quotidienne, 
-        d’anticiper les maintenances et de suivre les réservations récentes de véhicules.
+        Ce tableau de bord centralise les informations clés de votre flotte automobile.
       </p>
 
       <section className="stats-cards" aria-label="Statistiques clés du parc automobile">
         <div className="card total-vehicules">
           <h3>Total véhicules</h3>
           <p>{stats.totalVehicules}</p>
-          <small>Nombre total de véhicules enregistrés dans votre parc.</small>
         </div>
         <div className="card disponibles">
           <h3>Disponibles</h3>
           <p>{stats.disponibles}</p>
-          <small>Véhicules prêts à être utilisés immédiatement.</small>
         </div>
         <div className="card maintenance">
           <h3>En maintenance</h3>
           <p>{stats.enMaintenance}</p>
-          <small>Véhicules actuellement en réparation ou contrôle technique.</small>
         </div>
         <div className="card total-parcs">
           <h3>Parcs</h3>
           <p>{stats.totalparcs}</p>
-          <small>Nombre total de sites ou parcings gérés.</small>
         </div>
       </section>
 
-      <section className="recent-reservations" aria-label="Réservations récentes">
-        <h2>Réservations récentes</h2>
-        <p className="section-description">
-          Liste des dernières réservations effectuées, avec les informations sur le client, le véhicule et les dates de location.
-          Ce suivi vous aide à anticiper la disponibilité et à planifier la maintenance.
-        </p>
+      <section className="chart-section">
+        <h2>Répartition des véhicules</h2>
+        <ResponsiveContainer width="100%" height={300}>
+          <PieChart>
+            <Pie
+              data={pieData}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              label={renderCustomizedLabel}
+              outerRadius={100}
+              fill="#8884d8"
+              dataKey="value"
+            >
+              {pieData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
+      </section>
 
+      <section className="recent-reservations">
+        <h2>Réservations récentes</h2>
         {recentReservations.length === 0 ? (
           <p>Aucune réservation récente.</p>
         ) : (
@@ -112,8 +146,8 @@ function Dashboard() {
               <tr>
                 <th>Client</th>
                 <th>Véhicule</th>
-                <th>Date de début</th>
-                <th>Date de fin</th>
+                <th>Date début</th>
+                <th>Date fin</th>
                 <th>Statut</th>
               </tr>
             </thead>
@@ -131,11 +165,6 @@ function Dashboard() {
           </table>
         )}
       </section>
-
-      <p className="d-footer">
-        Un bon suivi de votre parc automobile permet de réduire les coûts, d’améliorer la sécurité des conducteurs et d’optimiser la disponibilité des véhicules.
-        Utilisez ce tableau de bord pour une gestion proactive et efficace.
-      </p>
     </div>
   );
 }

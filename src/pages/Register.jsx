@@ -136,8 +136,7 @@ function Register() {
         {
           token && user && user.role === 'admin' && (
             <div className="input-group">
-              <label htmlFor="role">Rôle :</label>
-              <select id="role" value={role} onChange={(e) => setRole(e.target.value)} required>
+              <select id="role" placeholder="Rôle" value={role} onChange={(e) => setRole(e.target.value)} required>
                 <option value="voyageur">Voyageur</option>
                 <option value="gestionnaire">Gestionnaire</option>
                 <option value="chauffeur">Chauffeur</option>
@@ -148,8 +147,7 @@ function Register() {
         {
           token && user && user.role === 'gestionnaire' && (
             <div className="input-group">
-              <label htmlFor="role">Rôle :</label>
-              <select id="role" value={role} onChange={(e) => setRole(e.target.value)} required>
+              <select id="role" placeholder="Rôle"  value={role} onChange={(e) => setRole(e.target.value)} required>
                 <option value="voyageur">Voyageur</option>
                 <option value="chauffeur">Chauffeur</option>
               </select>

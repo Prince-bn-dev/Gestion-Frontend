@@ -194,108 +194,84 @@
 
 
 
-.voyages-list-container {
-  padding: 2rem;
+.vehicules-list-container {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+  min-height: 90vh;
 
   h2 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
+    margin-bottom: 20px;
+    font-size: 24px;
     color: #333;
+    text-align: center;
   }
 
-  .voyage-card {
-    background: #fff;
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    padding: 1.5rem;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    transition: transform 0.2s;
+  .vehicules-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
 
-    &:hover {
-      transform: translateY(-4px);
+    th,
+    td {
+      padding: 12px 15px;
+      text-align: left;
     }
 
-    .title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #111;
-    }
+    thead {
+      background-color: #007bff;
+      color: #fff;
 
-    .infos {
-      font-size: 0.9rem;
-      color: #555;
-    }
-
-    .conducteur, .vehicule {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-      color: #333;
-
-      svg {
-        color: #888;
+      th {
+        font-weight: 600;
       }
     }
 
-    .statut {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      padding: 0.3rem 0.75rem;
-      font-size: 0.75rem;
-      border-radius: 9999px;
-      font-weight: 600;
+    tbody {
+      tr {
+        border-bottom: 1px solid #eee;
 
-      &.en-cours {
-        background: #e0f2fe;
-        color: #0284c7;
-      }
-
-      &.termine {
-        background: #e5e7eb;
-        color: #374151;
+        &:hover {
+          background-color: #f9f9f9;
+        }
       }
     }
 
-    .btn-reserver {
-      margin-top: 0.5rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: #16a34a;
-      color: white;
-      font-size: 0.85rem;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.2s;
-
-      &:hover {
-        background: #15803d;
-      }
-
-      svg {
-        font-size: 0.9rem;
-      }
+    a,
+    button {
+      transition: all 0.3s ease;
     }
 
-    .commentaires-section {
-      margin-top: 1rem;
+    a:hover {
+      opacity: 0.8;
     }
-  }
 
-  // Responsive grid
-  .voyages-grid {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    button:hover {
+      transform: scale(1.05);
+    }
   }
 }
+
+// Style spécial pour les chauffeurs
+.chauffeur-style {
+  background-color: #f3f6f9; // fond plus clair
+  border: 1px dashed #ccc;
+  border-radius: 10px;
+  padding: 15px;
+
+  h2 {
+    color: #007bff;
+  }
+
+  .vehicules-table {
+    thead {
+      background-color: #6c757d;
+    }
+  }
+}
+
 
 
 

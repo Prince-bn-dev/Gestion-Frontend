@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getVehiculeByGestionnaire, deleteVehicule } from '../../api/vehiculeApi';
+import { getVehiculeByGestionnaire, getVehiculeByChauffeur, deleteVehicule } from '../../api/vehiculeApi';
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
@@ -14,9 +14,15 @@ function VehiculesList() {
   useEffect(() => {
     const fetchVehicules = async () => {
       try {
-        const response = await getVehiculeByGestionnaire(userId);
-        setVehicules(response.data);
-        toast.success('Véhicules chargés avec succès');
+        if (user.role === "gestionnaire") {
+          const response = await getVehiculeByGestionnaire(userId);
+          setVehicules(response.data);
+          toast.success('Véhicules chargés avec succès');
+        } else if (user.role === "chauffeur") {
+          const response = await getVehiculeByChauffeur(userId);
+          setVehicules(response.data);
+          toast.success('Véhicules chargés avec succès');
+        }
       } catch (err) {
         toast.error(err.response?.data?.message || 'Erreur lors du chargement des véhicules');
       } finally {
@@ -40,12 +46,15 @@ function VehiculesList() {
   };
 
   if (loading) return <p>Chargement des véhicules...</p>;
-
   if (vehicules.length === 0) return <p>Aucun véhicule trouvé.</p>;
 
+  const isGestionnaire = user.role === "gestionnaire";
+
   return (
-    <div className="vehicules-list-container">
-      <h2>Liste des véhicules</h2>
+    <div
+      className={`vehicules-list-container ${!isGestionnaire ? 'chauffeur-style' : ''}`}
+    >
+      <h2> {isGestionnaire ?"Liste des véhicules":" Les véhicules auxquels vous êtes assigné(e)"} </h2>
       <table className="vehicules-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
           <tr style={{ borderBottom: '1px solid #ccc' }}>
@@ -55,7 +64,7 @@ function VehiculesList() {
             <th style={{ padding: '8px' }}>Parc</th>
             <th style={{ padding: '8px' }}>Propriétaire</th>
             <th style={{ padding: '8px' }}>Statut</th>
-            <th style={{ padding: '8px', textAlign: 'center' }}>Actions</th>
+            {isGestionnaire && <th style={{ padding: '8px', textAlign: 'center' }}>Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -65,23 +74,28 @@ function VehiculesList() {
               <td style={{ padding: '8px' }}>{vehicule.modele}</td>
               <td style={{ padding: '8px' }}>{vehicule.immatriculation}</td>
               <td style={{ padding: '8px' }}>{vehicule.parc ? vehicule.parc.nom : 'Non attribué'}</td>
-              <td style={{ padding: '8px' }}>{vehicule.gestionnaire.nom || 'Inconnu'} <br />{vehicule.gestionnaire.prenom } </td>
-              <td style={{ padding: '8px' }}>{vehicule.statut === 'actif' ? 'Disponible' : 'Indisponible'}</td>
-              <td style={{ padding: '8px', textAlign: 'center' }}>
-                <Link to={`/vehicules/${vehicule._id}`} title="Détails" style={{ marginRight: '10px', color: '#007bff' }}>
-                  <FaInfoCircle size={18} />
-                </Link>
-                <button
-                  onClick={() => handleDelete(vehicule._id)}
-                  title="Supprimer"
-                  style={{ background: 'none', border: 'none', color: 'red', cursor: 'pointer', marginRight: '10px' }}
-                >
-                  <FaTrashAlt size={18} />
-                </button>
-                <Link to={`/vehicules/edit/${vehicule._id}`} title="Modifier" style={{ color: '#28a745' }}>
-                  <FaEdit size={18} />
-                </Link>
+              <td style={{ padding: '8px' }}>
+                {vehicule.gestionnaire?.nom || 'Inconnu'}<br />
+                {vehicule.gestionnaire?.prenom}
               </td>
+              <td style={{ padding: '8px' }}>{vehicule.statut === 'actif' ? 'Disponible' : 'Indisponible'}</td>
+              {isGestionnaire && (
+                <td style={{ padding: '8px', textAlign: 'center' }}>
+                  <Link to={`/vehicules/${vehicule._id}`} title="Détails" style={{ marginRight: '10px', color: '#007bff' }}>
+                    <FaInfoCircle size={18} />
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(vehicule._id)}
+                    title="Supprimer"
+                    style={{ background: 'none', border: 'none', color: 'red', cursor: 'pointer', marginRight: '10px' }}
+                  >
+                    <FaTrashAlt size={18} />
+                  </button>
+                  <Link to={`/vehicules/edit/${vehicule._id}`} title="Modifier" style={{ color: '#28a745' }}>
+                    <FaEdit size={18} />
+                  </Link>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

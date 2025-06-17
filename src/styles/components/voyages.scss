@@ -1,6 +1,6 @@
 .my-voyages-container {
-  max-width: 800px;
-  margin: 2rem auto;
+ width: 100%;
+  margin: 1rem auto;
   padding: 1.5rem;
   background-color: var(--white-color);
   border-radius: 1rem;
@@ -54,7 +54,7 @@
         }
 
         &:last-of-type {
-          background-color: #e74c3c;
+          background-color: #b1726b;
           color: var(--white-color);
 
           &:hover {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/vehicules'; // Adapte si besoin
+const API_URL = 'http://localhost:3000/api/vehicules'; 
 
  export const getAuthHeaders = () => {
   const token = localStorage.getItem('token');
@@ -27,4 +27,7 @@ export const deleteVehicule = (id) =>
 
 export const getVehiculeByGestionnaire = (gestionnaireId) =>
   axios.get(`${API_URL}/gestionnaire/${gestionnaireId}`, getAuthHeaders());
+
+export const getVehiculeByChauffeur = (chauffeurId) =>
+  axios.get(`${API_URL}/chauffeur/${chauffeurId}`, getAuthHeaders());
 
