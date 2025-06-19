@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getParcById } from '../../api/parcApi';
-import { toast } from 'react-toastify';
+ 
 
 const ParcDetail = () => {
   const { id } = useParams();
@@ -13,9 +13,9 @@ const ParcDetail = () => {
       try {
         const response = await getParcById(id);
         setParc(response.data);
-        toast.success('Parc chargé avec succès');
+        console.log('Parc chargé avec succès');
       } catch (err) {
-        toast.error(err.response?.data?.message || 'Erreur lors du chargement du parc');
+        console.log(err.response?.data?.message || 'Erreur lors du chargement du parc');
       } finally {
         setLoading(false);
       }

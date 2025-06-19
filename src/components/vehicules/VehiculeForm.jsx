@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { createVehicule, updateVehicule, getVehiculeById } from '../../api/vehiculeApi';
 import { getParcsByGestionnaire } from '../../api/parcApi';
 import { useAuth } from '../../context/AuthContext';
-import { toast } from 'react-toastify';
+ 
 
 function VehiculeForm() {
   const { user } = useAuth();
@@ -47,7 +47,7 @@ function VehiculeForm() {
           });
         })
         .catch(err => {
-          toast.error(err.response?.data?.error || 'Erreur lors du chargement du véhicule');
+          console.log(err.response?.data?.error || 'Erreur lors du chargement du véhicule');
           navigate('/vehicules');
         });
     }
@@ -58,7 +58,7 @@ function VehiculeForm() {
     getParcsByGestionnaire(userId)
       .then(res => setParcs(res.data))
       .catch(err => {
-        toast.error(err.response?.data?.error || 'Erreur lors du chargement des parcs');
+        console.log(err.response?.data?.error || 'Erreur lors du chargement des parcs');
         setParcs([]);
       });
   }, [userId]);
@@ -86,7 +86,7 @@ function VehiculeForm() {
     e.preventDefault();
 
     if (!userId) {
-      toast.error('Vous devez être connecté pour soumettre un véhicule');
+      console.log('Vous devez être connecté pour soumettre un véhicule');
       return;
     }
 
@@ -100,11 +100,11 @@ function VehiculeForm() {
 
       if (id) {
         await updateVehicule(id, dataToSend);
-        toast.success('Véhicule modifié avec succès');
+        console.log('Véhicule modifié avec succès');
         navigate(`/vehicules/${id}`);
       } else {
         const response = await createVehicule(dataToSend);
-        toast.success('Véhicule créé avec succès');
+        console.log('Véhicule créé avec succès');
         setForm({
           marque: '',
           modele: '',
@@ -121,7 +121,7 @@ function VehiculeForm() {
         navigate(`/vehicules/${response.data._id}`);
       }
     } catch (err) {
-      toast.error(err.response?.data?.error || 'Erreur lors de la sauvegarde');
+      console.log(err.response?.data?.error || 'Erreur lors de la sauvegarde');
     }
   };
 

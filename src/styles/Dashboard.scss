@@ -1,149 +1,109 @@
 .dashboard-container {
-  max-width: 960px;
-  margin: 40px auto;
-  padding: 32px 28px;
-  background: var(--white-color);
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(50, 50, 93, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #2d3a4a;
+  padding: 2rem;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Segoe UI', sans-serif;
 
   h1 {
-    text-align: center;
-    font-size: 2.4rem;
-    margin-bottom: 16px;
-    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
   }
 
   .intro-text {
-    max-width: 720px;
-    margin: 0 auto 36px auto;
-    font-size: 1.1rem;
-    color: var(--text-color);
-    line-height: 1.5;
-    text-align: center;
+    margin-bottom: 2rem;
+    color: #555;
   }
 
   .stats-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 24px;
-    margin-bottom: 48px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
 
     .card {
-      background: var(--white-color);
+      background-color: var(--white-color);
       border-radius: 12px;
-      padding: 24px 20px;
-      box-shadow: 0 4px 12px rgba(45, 156, 219, 0.1);
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       text-align: center;
-      transition: box-shadow 0.3s ease;
-
-      &:hover {
-        box-shadow: 0 8px 24px rgba(45, 156, 219, 0.2);
-      }
 
       h3 {
         font-size: 1.2rem;
-        margin-bottom: 12px;
-        color: #219653;
+        margin-bottom: 0.5rem;
       }
 
       p {
-        font-size: 2.4rem;
-        font-weight: 700;
-        color: var(--primary-color);
-        margin-bottom: 8px;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+    }
+
+    .total-vehicules { border-left: 6px solid #1f32e9; }
+    .disponibles     { border-left: 6px solid #00C49F; }
+    .maintenance     { border-left: 6px solid #FFBB28; }
+    .total-parcs     { border-left: 6px solid #f45e03; }
+  }
+
+  .chart-section {
+    margin-top: 2rem;
+    background-color: var(--white-color);
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+
+
+    .donut-chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .legend-custom {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin: 0 1rem;
+
+      .legend-color {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 0.5rem;
       }
 
-      small {
+      span {
         font-size: 0.9rem;
-        color: var(--text-color);
-        display: block;
+        color: #333;
       }
     }
   }
+}
+
+  }
 
   .recent-reservations {
-    max-width: 100%;
-    margin-bottom: 36px;
-
-    h2 {
-      font-size: 1.8rem;
-      margin-bottom: 12px;
-      border-bottom: 2px solid var(--primary-color);
-      padding-bottom: 8px;
-      color: #2d3a4a;
-    }
-
-    .section-description {
-      font-size: 1rem;
-      color: var(--text-color);
-      margin-bottom: 20px;
-      max-width: 720px;
-      line-height: 1.4;
-    }
-
-    p {
-      text-align: center;
-      font-size: 1.1rem;
-      color: var(--text-color);
-    }
+    margin-top: 2rem;
+    background-color: var(--white-color);
+    padding: 1rem;
+    border-radius: 12px;
 
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 1rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      border-radius: 10px;
-      overflow: hidden;
 
-      thead {
-        background-color: var(--primary-color);
-        color: var(--white-color);
-
-        th {
-          padding: 14px 12px;
-          text-align: left;
-          font-weight: 600;
-          user-select: none;
-        }
+      th, td {
+        padding: 0.75rem;
+        border-bottom: 1px solid #eee;
+        text-align: left;
       }
 
-      tbody {
-        tr {
-          border-bottom: 1px solid #e0e4e8;
-          transition: background-color 0.2s ease;
-
-          &:hover {
-            background-color: var(--white-color);
-          }
-
-          td {
-            padding: 12px;
-            color: var(--text-color);
-          }
-        }
+      th {
+        background-color: #f0f0f0;
       }
     }
-  }
-
-  .d-footer {
-    font-family: "font-2";
-    color: var(--black-color);
-  }
-
-  .loading-message,
-  .error-message {
-    text-align: center;
-    font-weight: 600;
-    margin-top: 40px;
-  }
-
-  .error-message {
-    color: #d32f2f;
-  }
-
-  .loading-message {
-    color: var(--primary-color);
   }
 }

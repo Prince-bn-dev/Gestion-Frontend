@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getAllVoyages } from '../../api/voyageApi';
-import { toast } from 'react-toastify';
+ 
 
 const VoyagesTable = () => {
   const [voyages, setVoyages] = useState([]);
@@ -11,9 +11,9 @@ const VoyagesTable = () => {
       try {
         const res = await getAllVoyages();
         setVoyages(res.data);
-        toast.success('Voyages chargés avec succès');
+        console.log('Voyages chargés avec succès');
       } catch (err) {
-        toast.error(err.response?.data?.message || 'Erreur lors du chargement des voyages');
+        console.log(err.response?.data?.message || 'Erreur lors du chargement des voyages');
       } finally {
         setLoading(false);
       }

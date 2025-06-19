@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+ 
 
 function VerifyEmail() {
   const { emailToken } = useParams();
@@ -12,14 +12,14 @@ function VerifyEmail() {
     const verifyEmail = async () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}api/user/verifyEmail/${emailToken}`);
-        toast.success(response.data.message || 'Email vérifié avec succès.');
+        console.log(response.data.message || 'Email vérifié avec succès.');
         setStatus('success');
         setTimeout(() => {
           navigate('/login');
         }, 5000);
       } catch (err) {
         const errMsg = err.response?.data?.message || 'Erreur réseau. Veuillez réessayer.';
-        toast.error(errMsg);
+        console.log(errMsg);
         setStatus('error');
       }
     };

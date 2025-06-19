@@ -1,7 +1,7 @@
-// src/pages/Home.jsx
 import React from 'react';
 import CustomPaging from '../components/Customer';
 import AvisSlider from '../components/pages/AvisSlider';
+import TestMap from '../components/pages/TestMap';
 
 function Home() {
   const marque = [
@@ -37,52 +37,40 @@ function Home() {
       </header>
       <section className="about-section">
         <h2>Pourquoi choisir notre solution ?</h2>
-        <div className='about-container'>
-          <section>
-        <p>
-          Notre plateforme intuitive vous offre un contrôle total sur votre parc automobile. 
-          Que vous gériez une petite flotte ou plusieurs centaines de véhicules, nous vous aidons à optimiser chaque aspect : 
-          maintenance, disponibilité, réservation, et plus encore.
-        </p>
-        <p>
-          Grâce à des outils puissants et des analyses détaillées, vous pouvez anticiper les besoins, réduire les temps d’arrêt 
-          et améliorer la satisfaction de vos utilisateurs.
-        </p>
-          </section>
-         <section>
-        <p>
-          Notre plateforme intuitive vous offre un contrôle total sur votre parc automobile. 
-          Que vous gériez une petite flotte ou plusieurs centaines de véhicules, nous vous aidons à optimiser chaque aspect : 
-          maintenance, disponibilité, réservation, et plus encore.
-        </p>
-        <p>
-          Grâce à des outils puissants et des analyses détaillées, vous pouvez anticiper les besoins, réduire les temps d’arrêt 
-          et améliorer la satisfaction de vos utilisateurs.
-        </p>
-          </section>
-          <section>
-        <p>
-          Notre plateforme intuitive vous offre un contrôle total sur votre parc automobile. 
-          Que vous gériez une petite flotte ou plusieurs centaines de véhicules, nous vous aidons à optimiser chaque aspect : 
-          maintenance, disponibilité, réservation, et plus encore.
-        </p>
-        <p>
-          Grâce à des outils puissants et des analyses détaillées, vous pouvez anticiper les besoins, réduire les temps d’arrêt 
-          et améliorer la satisfaction de vos utilisateurs.
-        </p>
-          </section>
+      <div className='about-container'>
         <section>
-        <p>
-          Notre plateforme intuitive vous offre un contrôle total sur votre parc automobile. 
-          Que vous gériez une petite flotte ou plusieurs centaines de véhicules, nous vous aidons à optimiser chaque aspect : 
-          maintenance, disponibilité, réservation, et plus encore.
-        </p>
-        <p>
-          Grâce à des outils puissants et des analyses détaillées, vous pouvez anticiper les besoins, réduire les temps d’arrêt 
-          et améliorer la satisfaction de vos utilisateurs.
-        </p>
-          </section>
-        </div>
+          <h3>Optimisation de votre flotte</h3>
+          <p>
+            Suivez en temps réel l’état de vos véhicules et planifiez les opérations de maintenance avant qu’elles ne deviennent critiques. 
+            Notre système vous aide à prolonger la durée de vie de votre flotte tout en minimisant les coûts imprévus.
+          </p>
+        </section>
+
+        <section>
+          <h3>Gestion intelligente des réservations</h3>
+          <p>
+            Grâce à notre module de réservation intégré, affectez automatiquement les véhicules disponibles selon la demande. 
+            Gérez les priorités, les trajets et les conducteurs en quelques clics.
+          </p>
+        </section>
+
+        <section>
+          <h3>Analyse et rapports détaillés</h3>
+          <p>
+            Prenez des décisions éclairées grâce à des tableaux de bord dynamiques et des rapports personnalisés. 
+            Suivez les performances par parc, par véhicule ou par conducteur pour ajuster votre stratégie au quotidien.
+          </p>
+        </section>
+
+        <section>
+          <h3>Expérience utilisateur moderne</h3>
+          <p>
+            Notre interface épurée et responsive s’adapte à tous les supports, garantissant une utilisation fluide pour les gestionnaires comme pour les utilisateurs. 
+            La navigation est rapide, intuitive et pensée pour les besoins opérationnels.
+          </p>
+        </section>
+      </div>
+      <TestMap />
       </section>
       <CustomPaging />
       <section className="features-section">

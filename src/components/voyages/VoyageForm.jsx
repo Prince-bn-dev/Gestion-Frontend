@@ -3,10 +3,9 @@ import { createVoyage, updateVoyage, getVoyageById } from '../../api/voyageApi';
 import { getVehiculeByGestionnaire } from '../../api/vehiculeApi';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 function VoyageForm() {
-  const { id } = useParams(); // Si présent => modification
+  const { id } = useParams(); 
   const [formData, setFormData] = useState({
     vehicule: '',
     destination: '',
@@ -26,7 +25,7 @@ function VoyageForm() {
         const res = await getVehiculeByGestionnaire(user._id);
         setVehicules(res.data);
       } catch (err) {
-        toast.error('Erreur lors du chargement des véhicules');
+        console.log('Erreur lors du chargement des véhicules');
       }
     };
 
@@ -44,7 +43,7 @@ function VoyageForm() {
             statut: res.data.statut,
           });
         } catch {
-          toast.error('Voyage introuvable');
+          console.log('Voyage introuvable');
         }
       }
     };
@@ -63,14 +62,14 @@ function VoyageForm() {
     try {
       if (id) {
         await updateVoyage(id, formData);
-        toast.success('Voyage mis à jour avec succès');
+        console.log('Voyage mis à jour avec succès');
       } else {
         await createVoyage(formData);
-        toast.success('Voyage créé avec succès');
+        console.log('Voyage créé avec succès');
       }
       navigate('/voyages');
     } catch (error) {
-      toast.error('Erreur lors de la soumission du formulaire');
+      console.log('Erreur lors de la soumission du formulaire');
     }
   };
 

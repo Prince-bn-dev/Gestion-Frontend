@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getVehiculeByGestionnaire, getVehiculeByChauffeur, deleteVehicule } from '../../api/vehiculeApi';
 import { useAuth } from '../../context/AuthContext';
-import { toast } from 'react-toastify';
+ 
 import { Link } from 'react-router-dom';
 import { FaInfoCircle, FaTrashAlt, FaEdit } from 'react-icons/fa';
 
@@ -17,14 +17,14 @@ function VehiculesList() {
         if (user.role === "gestionnaire") {
           const response = await getVehiculeByGestionnaire(userId);
           setVehicules(response.data);
-          toast.success('Véhicules chargés avec succès');
+          console.log('Véhicules chargés avec succès');
         } else if (user.role === "chauffeur") {
           const response = await getVehiculeByChauffeur(userId);
           setVehicules(response.data);
-          toast.success('Véhicules chargés avec succès');
+          console.log('Véhicules chargés avec succès');
         }
       } catch (err) {
-        toast.error(err.response?.data?.message || 'Erreur lors du chargement des véhicules');
+        console.log(err.response?.data?.message || 'Erreur lors du chargement des véhicules');
       } finally {
         setLoading(false);
       }
@@ -38,9 +38,9 @@ function VehiculesList() {
       try {
         await deleteVehicule(vehiculeId);
         setVehicules(vehicules.filter(v => v._id !== vehiculeId));
-        toast.success('Véhicule supprimé avec succès');
+        console.log('Véhicule supprimé avec succès');
       } catch (err) {
-        toast.error(err.response?.data?.message || 'Erreur lors de la suppression du véhicule');
+        console.log(err.response?.data?.message || 'Erreur lors de la suppression du véhicule');
       }
     }
   };

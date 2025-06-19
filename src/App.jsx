@@ -38,6 +38,7 @@ import VoyagesTable from "./components/voyages/VoyagesTable";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Footer from "./components/Footer";
+import PhoneVerification from "./pages/PhoneVerification";
 
 const EditparcWrapper = () => {
   const { id } = useParams();
@@ -130,6 +131,7 @@ function AppRoutes() {
               <Route path="/register" element={<Register />} />
               <Route path="/forgotPassword" element={<ForgotPassword />} />
               <Route path="/verifyEmail/:emailToken" element={<VerifyEmail />} />
+              <Route path="/verification-telephone" element={<PhoneVerification />} />
               <Route path="/resetPassword/:resetToken" element={<ResetPassword />} />
               
               <Route path="*" element={<h1>404 Not Found</h1>} />

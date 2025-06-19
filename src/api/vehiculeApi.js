@@ -31,3 +31,8 @@ export const getVehiculeByGestionnaire = (gestionnaireId) =>
 export const getVehiculeByChauffeur = (chauffeurId) =>
   axios.get(`${API_URL}/chauffeur/${chauffeurId}`, getAuthHeaders());
 
+export const getVehiculeGps = async (vehiculeId) => {
+  const res = await axios.get(`${API_URL}/${vehiculeId}`, getAuthHeaders());
+  return res.data.gps?.localisation;
+};
+

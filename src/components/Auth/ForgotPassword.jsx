@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+ 
 import ReactFlagsSelect from 'react-flags-select';
 import { FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
 
@@ -45,7 +45,7 @@ function ForgotPassword() {
     const identifiant = mode === 'EMAIL' ? email : `${dialCode}${cleanedPhone}`;
 
     if (!identifiant) {
-      toast.error("Veuillez entrer un identifiant valide.");
+      console.log("Veuillez entrer un identifiant valide.");
       return;
     }
 
@@ -54,10 +54,10 @@ function ForgotPassword() {
       const res = await axios.post(`${import.meta.env.VITE_API_URL}api/user/forgotPassword`, {
         identifiant
       });
-      toast.success(res.data.message);
+      console.log(res.data.message);
     } catch (err) {
       const message = err.response?.data?.message || "Échec de la réinitialisation.";
-      toast.error(message);
+      console.log(message);
     } finally {
       setLoading(false);
     }

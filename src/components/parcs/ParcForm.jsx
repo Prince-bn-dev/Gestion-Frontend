@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createParc, updateParc } from '../../api/parcApi';
-import { toast } from 'react-toastify';
+ 
 import { useAuth } from '../../context/AuthContext';
 
 const ParcForm = ({ parc }) => {
@@ -37,19 +37,19 @@ const ParcForm = ({ parc }) => {
       gestionnaire: gestionnaireId, 
     };
     if (heuresFermeture <= heuresOuverture) {
-      return toast.error("L'heure de fermeture doit être après l'heure d'ouverture");
+      return console.log("L'heure de fermeture doit être après l'heure d'ouverture");
     }
     try {
       if (parc) {
         await updateParc(parc.data._id, data);
-        toast.success('Parc mis à jour avec succès');
+        console.log('Parc mis à jour avec succès');
       } else {
         await createParc(data);
-        toast.success('Parc créé avec succès');
+        console.log('Parc créé avec succès');
       }
       navigate('/parcs');
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Erreur lors de la sauvegarde');
+      console.log(err.response?.data?.message || 'Erreur lors de la sauvegarde');
     }
   };
 

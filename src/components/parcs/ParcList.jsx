@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getParcsByGestionnaire } from '../../api/parcApi';
 import { useAuth } from '../../context/AuthContext';
-import { toast } from 'react-toastify';
+ 
 
 const ParcList = () => {
   const [parcs, setParcs] = useState([]);
@@ -18,12 +18,12 @@ const ParcList = () => {
       const response = await getParcsByGestionnaire(userId);
       const data = response.data;
       setParcs(data);
-      toast.success('Parcs chargés avec succès');
+      console.log('Parcs chargés avec succès');
       if (data.length === 0) {
         toast.info('Aucun parc trouvé pour cet utilisateur.');
       }
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Erreur lors du chargement des parcs');
+      console.log(err.response?.data?.message || 'Erreur lors du chargement des parcs');
     }
   };
 

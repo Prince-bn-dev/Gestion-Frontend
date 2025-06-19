@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+ 
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -17,12 +17,12 @@ function Profile() {
           }
         });
         setUser(res.data);
-        toast.success('Profil chargé avec succès');
+        console.log('Profil chargé avec succès');
       } catch (err) {
         if (err.response?.data?.message) {
-          toast.error(err.response.data.message);
+          console.log(err.response.data.message);
         } else {
-          toast.error('Échec du chargement du profil.');
+          console.log('Échec du chargement du profil.');
         }
       } finally {
         setLoading(false);
@@ -52,7 +52,7 @@ function Profile() {
           'Content-Type': 'multipart/form-data'
         }
       });
-      toast.success('Image de profil mise à jour !');
+      console.log('Image de profil mise à jour !');
       const res = await axios.get(`${import.meta.env.VITE_API_URL}api/user/profile`, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -60,7 +60,7 @@ function Profile() {
       console.log('Image mise à jour avec succès', res.data);
       setSelectedFile(null);
     } catch (err) {
-      toast.error('Erreur lors de l\'upload de l\'image');
+      console.log('Erreur lors de l\'upload de l\'image');
     }
   };
 

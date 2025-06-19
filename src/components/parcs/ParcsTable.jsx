@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getAllParcs } from '../../api/parcApi'; 
-import { toast } from 'react-toastify';
+ 
 
 const ParcsTable = () => {
   const [parcs, setparcs] = useState([]);
@@ -11,9 +11,9 @@ const ParcsTable = () => {
       try {
         const data = await getAllParcs();
         setparcs(data);
-        toast.success('parcs chargés avec succès');
+        console.log('parcs chargés avec succès');
       } catch (err) {
-        toast.error(err.response?.data?.message || 'Erreur lors du chargement des parcs');
+        console.log(err.response?.data?.message || 'Erreur lors du chargement des parcs');
       } finally {
         setLoading(false);
       }

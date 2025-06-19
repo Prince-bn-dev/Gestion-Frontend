@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LineChart, Line  } from 'recharts';
 
 function Dashboard() {
   const [stats, setStats] = useState({
@@ -31,9 +31,24 @@ function Dashboard() {
     { name: 'En maintenance', value: stats.enMaintenance },
     { name: 'Indisponibles', value: stats.totalVehicules - stats.disponibles - stats.enMaintenance },
   ];
+  
+const voyageStats = [
+  { mois: 'Jan', voyages: 20 },
+  { mois: 'Fév', voyages: 35 },
+  { mois: 'Mars', voyages: 50 },
+  { mois: 'Avr', voyages: 45 },
+  { mois: 'Mai', voyages: 30 },
+];
+
+const reservationStats = [
+  { jour: 'Lun', reservations: 12 },
+  { jour: 'Mar', reservations: 18 },
+  { jour: 'Mer', reservations: 25 },
+  { jour: 'Jeu', reservations: 15 },
+  { jour: 'Ven', reservations: 20 },
+];
 
   useEffect(() => {
-    // Données vitrines simulées
     const mockVehiculesStats = {
       total: 35,
       disponibles: 22,
@@ -116,24 +131,60 @@ function Dashboard() {
 
       <section className="chart-section">
         <h2>Répartition des véhicules</h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <PieChart>
-            <Pie
-              data={pieData}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              label={renderCustomizedLabel}
-              outerRadius={100}
-              fill="#8884d8"
-              dataKey="value"
-            >
-              {pieData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
-          </PieChart>
-        </ResponsiveContainer>
+<div className="donut-chart-container">
+  <ResponsiveContainer width="100%" height={300}>
+    <PieChart>
+      <Pie
+        data={pieData}
+        cx="50%"
+        cy="50%"
+        innerRadius={60}
+        outerRadius={90}
+        paddingAngle={5}
+        dataKey="value"
+        label={renderCustomizedLabel}
+      >
+        {pieData.map((entry, index) => (
+          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+        ))}
+      </Pie>
+    </PieChart>
+  </ResponsiveContainer>
+
+  <div className="legend-custom">
+    {pieData.map((entry, index) => (
+      <div key={index} className="legend-item">
+        <span
+          className="legend-color"
+          style={{ backgroundColor: COLORS[index % COLORS.length] }}
+        ></span>
+        <span>{entry.name} ({entry.value})</span>
+      </div>
+    ))}
+  </div>
+</div>
+
+          <h2>Voyages par mois</h2>
+  <ResponsiveContainer width="100%" height={300}>
+    <BarChart data={voyageStats}>
+      <XAxis dataKey="mois" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Bar dataKey="voyages" fill="#1f32e9" />
+    </BarChart>
+  </ResponsiveContainer>
+
+  <h2 style={{ marginTop: '2rem' }}>Réservations par jour</h2>
+  <ResponsiveContainer width="100%" height={300}>
+    <LineChart data={reservationStats}>
+      <XAxis dataKey="jour" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Line type="monotone" dataKey="reservations" stroke="#f45e03" strokeWidth={2} />
+    </LineChart>
+  </ResponsiveContainer>
       </section>
 
       <section className="recent-reservations">

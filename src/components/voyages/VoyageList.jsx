@@ -3,7 +3,7 @@ import { getAllVoyages } from '../../api/voyageApi';
 import { createReservation } from '../../api/reservationApi';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+ 
 import { FaUser, FaBus, FaCheck } from 'react-icons/fa';
 import CommentaireForm from '../commentaires/CommentaireForm';
 import CommentairesSection from '../commentaires/CommentairesSection';
@@ -23,7 +23,7 @@ function VoyagesList() {
         const res = await getAllVoyages();
         setVoyages(res.data);
       } catch (err) {
-        toast.error("Erreur lors du chargement des voyages");
+        console.log("Erreur lors du chargement des voyages");
       } finally {
         setLoading(false);
       }
@@ -38,10 +38,10 @@ function VoyagesList() {
         voyageur: user._id,
         nombre_places: 1,
       });
-      toast.success("Réservation créée. Veuillez procéder au paiement.");
+      console.log("Réservation créée. Veuillez procéder au paiement.");
       navigate(`/reservations/paiement/${res._id}`);
     } catch (error) {
-      toast.error("Erreur lors de la création de la réservation");
+      console.log("Erreur lors de la création de la réservation");
       console.error(error);
     }
   };

@@ -99,6 +99,9 @@
       justify-content: space-evenly;
       gap: 25px 0;
       section{
+        h3{
+          color: var(--primary-color);
+        }
         width: 45%;
         font-family: "font-2";
         padding: 10px;

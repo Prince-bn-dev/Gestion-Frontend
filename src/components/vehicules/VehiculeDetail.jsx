@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getVehiculeById, deleteVehicule } from '../../api/vehiculeApi';
-import { toast } from 'react-toastify';
+ 
 import {
   FaCar, FaRoad, FaCalendarAlt, FaMapMarkerAlt, FaUser
 } from 'react-icons/fa';
 import AddChauffeurToVehicule from './AddChauffeurToVehicule';
+import MapGPS from '../pages/MapGPS';
 
 function VehiculeDetail() {
   const { id } = useParams();
@@ -16,7 +17,7 @@ function VehiculeDetail() {
     getVehiculeById(id)
       .then(res => setVehicule(res.data))
       .catch(err => {
-        toast.error(err.response?.data?.message || 'Véhicule introuvable');
+        console.log(err.response?.data?.message || 'Véhicule introuvable');
         navigate('/vehicules');
       });
   }, [id]);
@@ -25,10 +26,10 @@ function VehiculeDetail() {
     if (window.confirm('Voulez-vous vraiment supprimer ce véhicule ?')) {
       try {
         await deleteVehicule(id);
-        toast.success('Véhicule supprimé avec succès');
+        console.log('Véhicule supprimé avec succès');
         navigate('/vehicules');
       } catch (err) {
-        toast.error(err.response?.data?.message || 'Erreur lors de la suppression');
+        console.log(err.response?.data?.message || 'Erreur lors de la suppression');
       }
     }
   };
@@ -79,6 +80,7 @@ function VehiculeDetail() {
         <Link to="/vehicules" className="btn">Retour</Link>
       </div>
       {vehicule?.chauffeur ?"":<AddChauffeurToVehicule vehiculeId={id} />}
+      <MapGPS vehiculeId={id} />
     </div>
   );
 }

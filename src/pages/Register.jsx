@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { toast } from 'react-toastify';
 import ReactFlagsSelect from 'react-flags-select';
 import {
   FaUser,
@@ -10,6 +9,7 @@ import {
   FaPhoneAlt
 } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const africanCountryCodes = [
@@ -45,7 +45,7 @@ function Register() {
   const [role, setRole] = useState('voyageur');
   const [loading, setLoading] = useState(false);
   const { token, user } = useAuth(); 
-
+  const navigate = useNavigate();
   const handleModal = (e) => {
     setMode(e.target.id);
     setEmail('');
@@ -56,27 +56,27 @@ function Register() {
     e.preventDefault();
 
     if (!nom || !prenom || !motDePasse) {
-      toast.error("Veuillez remplir tous les champs.");
+      console.log("Veuillez remplir tous les champs.");
       return;
     }
 
     if (mode === "EMAIL" && !email) {
-      toast.error("Veuillez entrer votre email.");
+      console.log("Veuillez entrer votre email.");
       return;
     }
 
     if (mode === "TELEPHONE" && !telephone) {
-      toast.error("Veuillez entrer votre numéro de téléphone.");
+      console.log("Veuillez entrer votre numéro de téléphone.");
       return;
     }
 
     if (motDePasse !== confirmMotDePasse) {
-      toast.error("Les mots de passe ne correspondent pas.");
+      console.log("Les mots de passe ne correspondent pas.");
       return;
     }
 
     if (!acceptedTerms) {
-      toast.error("Vous devez accepter les conditions d'utilisation.");
+      console.log("Vous devez accepter les conditions d'utilisation.");
       return;
     }
 
@@ -95,10 +95,16 @@ function Register() {
         role,
       });
 
-      toast.success(res.data.message);
+      if (mode === "TELEPHONE") {
+        navigate(`/verification-telephone?numero=${fullPhone}`);
+      } else {
+        console.log(res.data.message);
+      }
+
+      console.log(res.data.message);
     } catch (err) {
       const message = err.response?.data?.message || "Erreur d'inscription.";
-      toast.error(message);
+      console.log(message);
     } finally {
       setLoading(false);
     }

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getVoyagesByGestionnaire, getVoyagesByChauffeurVehicule, deleteVoyage } from '../../api/voyageApi';
 import { useAuth } from '../../context/AuthContext';
-import { toast } from 'react-toastify';
 
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -27,10 +26,10 @@ function MyVoyages() {
         setVoyages(res.data);
 
         if (res.data.length === 0) {
-          toast.info('Aucun voyage trouvé pour cet utilisateur.');
+          console.log('Aucun voyage trouvé pour cet utilisateur.');
         }
       } catch (error) {
-        toast.error('Erreur lors du chargement des voyages : ' + (error.response?.data?.message || error.message));
+        console.log('Erreur lors du chargement des voyages : ' + (error.response?.data?.message || error.message));
       }
     }
   };
@@ -44,9 +43,9 @@ function MyVoyages() {
       try {
         await deleteVoyage(id);
         fetchVoyages();
-        toast.success('Voyage supprimé avec succès');
+        console.log('Voyage supprimé avec succès');
       } catch (err) {
-        toast.error('Erreur lors de la suppression du voyage : ' + (err.response?.data?.message || err.message));
+        console.log('Erreur lors de la suppression du voyage : ' + (err.response?.data?.message || err.message));
       }
     }
   };
@@ -54,8 +53,6 @@ function MyVoyages() {
   const handleEdit = (id) => {
     navigate(`/voyages/edit/${id}`);
   };
-
-  // 📊 Données statiques pour les graphiques
   const lineChartData = [
     { date: '2025-06-10', passagers: 12 },
     { date: '2025-06-11', passagers: 8 },
