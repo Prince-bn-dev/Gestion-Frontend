@@ -63,7 +63,7 @@ function Login() {
       const finalIdentifiant = mode === 'EMAIL' ? email : fullPhone;
       await login(finalIdentifiant, motDePasse);
       console.log('Connexion réussie !');
-      navigate('/');
+      navigate('/dashboard');
     } catch (err) {
       console.log(err.response?.data?.message || 'Erreur de connexion. Veuillez réessayer.');
     } finally {
