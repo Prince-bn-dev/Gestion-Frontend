@@ -7,6 +7,7 @@ import {
 } from 'react-icons/fa';
 import AddChauffeurToVehicule from './AddChauffeurToVehicule';
 import MapGPS from '../pages/MapGPS';
+import Loader from '../Loader';
 
 function VehiculeDetail() {
   const { id } = useParams();
@@ -47,7 +48,7 @@ function VehiculeDetail() {
     }
   };
 
-  if (!vehicule) return <p>Chargement...</p>;
+  if (!vehicule) return <p><Loader /></p>;
 
   return (
     <div className="vehicule-detail-container">

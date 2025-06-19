@@ -3,7 +3,6 @@ import { getAllVoyages } from '../../api/voyageApi';
 import { createReservation } from '../../api/reservationApi';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
- 
 import { FaUser, FaBus, FaCheck } from 'react-icons/fa';
 import CommentaireForm from '../commentaires/CommentaireForm';
 import CommentairesSection from '../commentaires/CommentairesSection';

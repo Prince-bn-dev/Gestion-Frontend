@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { getVehiculeByGestionnaire, getVehiculeByChauffeur, deleteVehicule } from '../../api/vehiculeApi';
 import { useAuth } from '../../context/AuthContext';
- 
 import { Link } from 'react-router-dom';
 import { FaInfoCircle, FaTrashAlt, FaEdit } from 'react-icons/fa';
+import Loader from '../Loader';
 
 function VehiculesList() {
   const [vehicules, setVehicules] = useState([]);
@@ -45,7 +45,7 @@ function VehiculesList() {
     }
   };
 
-  if (loading) return <p>Chargement des véhicules...</p>;
+  if (loading) return <Loader />;
   if (vehicules.length === 0) return <p>Aucun véhicule trouvé.</p>;
 
   const isGestionnaire = user.role === "gestionnaire";

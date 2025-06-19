@@ -81,7 +81,6 @@ function AppRoutes() {
           <Sidebar />
           <div className="main-content">
             <Routes>
-              <Route path="/" element={<Home/>} />
               <Route path="/register" element={<Register />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/allparcs" element={<ParcsTable />} />

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/vehicules'; 
+const API_URL = 'https://gestion-backend-weld.vercel.app/api/vehicules'; 
 
  export const getAuthHeaders = () => {
   const token = localStorage.getItem('token');

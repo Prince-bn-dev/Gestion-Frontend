@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getReservationsByVoyageur, deleteReservation } from "../../api/reservationApi";
 import { useAuth } from "../../context/AuthContext";
 import ReservationTicket from "./ReservationTicket";
+import Loader from "../Loader";
 
 function MesReservations() {
   const { user } = useAuth();
@@ -35,11 +36,10 @@ function MesReservations() {
   };
 
   const handleEdit = (id) => {
-    // Redirige vers la page d'édition
     window.location.href = `/reservations/edit/${id}`;
   };
 
-  if (!user) return <p>Chargement de vos réservations...</p>;
+  if (!user) return <p><Loader /></p>;
 
   return (
     <div className="mes-reservations">

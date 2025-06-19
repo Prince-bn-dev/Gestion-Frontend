@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getVoyagesByGestionnaire, getVoyagesByChauffeurVehicule, deleteVoyage } from '../../api/voyageApi';
 import { useAuth } from '../../context/AuthContext';
-
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend
@@ -71,7 +70,7 @@ function MyVoyages() {
 
   return (
     <div className="my-voyages-container" style={{ padding: '20px' }}>
-      <h2>📅 Mes Voyages</h2>
+      <h2> Mes Voyages</h2>
       {voyages.length === 0 ? (
         <p>Aucun voyage trouvé.</p>
       ) : (

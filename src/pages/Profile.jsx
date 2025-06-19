@@ -33,7 +33,7 @@ function Profile() {
   }, []);
 
   const handleFileChange = (e) => {
-    setSelectedFile(e.target.files[0]); // Prendre le premier fichier sélectionné
+    setSelectedFile(e.target.files[0]);
   };
 
   const handleUpload = async () => {

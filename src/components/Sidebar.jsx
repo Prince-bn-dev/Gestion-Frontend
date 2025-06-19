@@ -17,14 +17,6 @@ import MobileHeader from './MobileHeader';
 
 const sidebarData = [
   {
-    id: 'Home',
-    label: 'Home',
-    icon: <IoHome />,
-    link: '/',
-    hasSubmenu: false,
-    roles: [ 'admin','gestionnaire', 'voyageur', 'chauffeur'],
-  },
-  {
     id: 'dashboard',
     label: 'Dashboard',
     icon: <FaThLarge />,

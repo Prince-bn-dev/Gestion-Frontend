@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getAllParcs } from '../../api/parcApi'; 
+import Loader from '../Loader';
  
 
 const ParcsTable = () => {
@@ -22,7 +23,7 @@ const ParcsTable = () => {
     loadparcs();
   }, []);
 
-  if (loading) return <div className="parcs-table">Chargement...</div>;
+  if (loading) return <div className="parcs-table"><Loader /></div>;
 
   return (
     <div className="parcs-table">

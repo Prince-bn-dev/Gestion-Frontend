@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getParcById } from '../../api/parcApi';
+import Loader from '../Loader';
  
 
 const ParcDetail = () => {
@@ -23,7 +24,7 @@ const ParcDetail = () => {
     loadParc();
   }, [id]);
 
-  if (loading) return <div className="parc-detail__loading">Chargement...</div>;
+  if (loading) return <div className="parc-detail__loading">< Loader/></div>;
   if (!parc) return <div className="parc-detail__not-found">Parc non trouvé</div>;
 
   return (

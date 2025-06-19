@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:3000/api/parcs', // mets ici ton vrai backend
+  baseURL: 'https://gestion-backend-weld.vercel.app/api/parcs',
 });
 
 API.interceptors.request.use((config) => {

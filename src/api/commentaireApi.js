@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/commentaires'; 
+const API_URL = 'https://gestion-backend-weld.vercel.app/api/commentaires'; 
 
 export const getCommentairesByVoyage = (voyageId) =>
   axios.get(`${API_URL}/voyage/${voyageId}`);

@@ -7,8 +7,6 @@ const AddChauffeurToVehicule = ({ vehiculeId }) => {
   const [selectedChauffeur, setSelectedChauffeur] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-
-  console.log(selectedChauffeur);
   
 
   useEffect(() => {
@@ -42,31 +40,28 @@ const AddChauffeurToVehicule = ({ vehiculeId }) => {
   };
 
   return (
-    <div>
-      <h3>Associer un chauffeur au véhicule</h3>
-
-      {message && <p style={{ color: 'green' }}>{message}</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="chauffeur-select">Choisir un chauffeur :</label>
-        <select
-          id="chauffeur-select"
-          value={selectedChauffeur}
-          onChange={(e) => setSelectedChauffeur(e.target.value)}
-          required
-        >
-          <option value="">-- Sélectionner --</option>
-          {chauffeurs.map((chauffeur) => (
-            <option key={chauffeur._id} value={chauffeur._id}>
-              {chauffeur.name || chauffeur.email}
-            </option>
-          ))}
-        </select>
-
-        <button type="submit">Ajouter Chauffeur</button>
-      </form>
-    </div>
+ <div className="association-container">
+  <h3>Associer un chauffeur au véhicule</h3>
+  {message && <p className="success">{message}</p>}
+  {error && <p className="error">{error}</p>}
+  <form onSubmit={handleSubmit}>
+    <label htmlFor="chauffeur-select">Choisir un chauffeur :</label>
+    <select
+      id="chauffeur-select"
+      value={selectedChauffeur}
+      onChange={(e) => setSelectedChauffeur(e.target.value)}
+      required
+    >
+      <option value="">-- Sélectionner --</option>
+      {chauffeurs.map((chauffeur) => (
+        <option key={chauffeur._id} value={chauffeur._id}>
+          {chauffeur.name || chauffeur.email}
+        </option>
+      ))}
+    </select>
+    <button type="submit">Ajouter Chauffeur</button>
+  </form>
+</div>
   );
 };
 

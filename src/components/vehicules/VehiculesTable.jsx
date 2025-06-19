@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getVehicules } from '../../api/vehiculeApi'; // Assurez-vous que le chemin est correct
+import { getVehicules } from '../../api/vehiculeApi';
+import Loader from '../Loader';
  
 
 const VehiculesTable = () => {
@@ -22,7 +23,7 @@ const VehiculesTable = () => {
     fetchVehicules();
   }, []);
 
-  if (loading) return <div className="vehicules-table">Chargement...</div>;
+  if (loading) return <div className="vehicules-table"><Loader /></div>;
 
   return (
     <div className="vehicules-table">

@@ -14,7 +14,7 @@
     transition: border-color 0.2s;
 
     &:focus {
-      border-color: #3b82f6;
+      border-color: var(--primary-color);
       outline: none;
     }
   }
@@ -30,7 +30,7 @@
       color: #d1d5db; 
 
       &.active {
-        color: #facc15; // jaune
+        color: #facc15; 
       }
 
       transition: color 0.2s;
@@ -45,8 +45,8 @@
 
   .submit-button {
     align-self: flex-start;
-    background-color: #2563eb;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--white-color);
     padding: 0.5rem 1.25rem;
     border-radius: 0.5rem;
     font-size: 0.9rem;
@@ -55,7 +55,7 @@
     transition: background-color 0.2s ease;
 
     &:hover {
-      background-color: #1d4ed8;
+      background-color: var(--secondary-color);
     }
   }
 }
@@ -72,14 +72,14 @@
   .titre-section {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: var(--text-color);
     font-weight: 600;
     text-align: center;
   }
 
   .aucun {
     text-align: center;
-    color: #888;
+    color: var(--text-color);
     font-style: italic;
   }
 
@@ -117,7 +117,7 @@
 
         .auteur {
           font-weight: 600;
-          color: #222;
+          color: var(--text-color);
         }
 
         .etoiles {
@@ -130,7 +130,7 @@
             font-size: 0.6rem;
 
             &.active {
-              color: #f9b234; // gold
+              color: #f9b234; 
             }
           }
         }
@@ -155,7 +155,7 @@
     .texte {
       margin-top: 0.8rem;
       line-height: 1.4;
-      color: #444;
+      color: var(--text-color);
     }
 
     .date-commentaire {
@@ -168,8 +168,8 @@
   .voir-plus {
     margin: 1.2rem auto 0;
     display: block;
-    background-color: #007bff;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--white-color);
     border: none;
     padding: 0.6rem 1.2rem;
     border-radius: 6px;
@@ -178,7 +178,7 @@
     transition: background-color 0.2s ease;
 
     &:hover {
-      background-color: #0056b3;
+      background-color: var(--secondary-color);
     }
   }
 }

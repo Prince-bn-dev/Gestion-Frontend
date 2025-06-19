@@ -28,7 +28,7 @@ function Contact() {
               <input type="email" name="Email" required />
             </div>
             <div>
-              <label htmlFor="Message">Message <span>*</span></label>
+              <label htmlFor="Message"><FaEnvelope />Message <span>*</span></label>
               <textarea name="Message" id="Message" required></textarea>
             </div>
             <button type="submit">

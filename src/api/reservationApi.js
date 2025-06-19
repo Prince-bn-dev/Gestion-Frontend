@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:3000/api/reservations'; 
+const API_BASE_URL = 'https://gestion-backend-weld.vercel.app/api/reservations'; 
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('token');

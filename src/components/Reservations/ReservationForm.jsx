@@ -12,7 +12,7 @@ function ReservationForm() {
   const navigate = useNavigate();
 
   const [reservation, setReservation] = useState(null);
-  const montant = reservation?.voyage.prix_par_place; // Tu peux aussi récupérer montant depuis reservation.voyage.prix_par_place si souhaité
+  const montant = reservation?.voyage.prix_par_place;
 
   useEffect(() => {
     const fetchData = async () => {

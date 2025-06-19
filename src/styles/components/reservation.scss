@@ -1,5 +1,5 @@
 .mes-reservations {
-  max-width: 600px;
+  width: 80%;
   margin: 1.5rem auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: var(--text-color);
@@ -30,7 +30,6 @@
       border-radius: 8px;
       padding: 1rem 1.5rem;
       margin-bottom: 1rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 
       strong {
         display: block;
@@ -83,9 +82,8 @@
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
   margin: 1.5rem auto;
-  max-width: 480px;
+  width: 100%;
   padding: 1.5rem 2rem;
   font-family: 'Segoe UI', Arial, sans-serif;
   position: relative;
@@ -166,14 +164,12 @@
   }
 }
 
-/* Styles pour le formulaire de paiement */
 .reservation-form {
-  max-width: 480px;
+  width: 80%;
   margin: 3rem auto;
   padding: 2rem 2.5rem;
   background-color: var(--white-color);
   border-radius: 1.2rem;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #2d3748;
 

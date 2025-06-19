@@ -146,7 +146,6 @@
     background: white;
     border-radius: 1.5rem;
     padding: 1.5rem;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease;
 
     &:hover {
@@ -161,7 +160,7 @@
 
     .infos {
       font-size: 0.95rem;
-      color: #555;
+      color: var(--text-color);
       margin-bottom: 0.8rem;
     }
 
@@ -173,10 +172,10 @@
 
       svg {
         margin-right: 0.5rem;
-        color: #3498db;
+        color: var(--primary-color);
       }
 
-      color: #333;
+      color: var(--text-color);
     }
 
     .statut {
@@ -202,8 +201,8 @@
       width: 100%;
       margin-top: 1rem;
       padding: 0.6rem;
-      background-color: #3498db;
-      color: white;
+      background-color: var(--primary-color);
+      color: var(--white-color);
       border: none;
       border-radius: 8px;
       font-weight: bold;
@@ -215,7 +214,7 @@
       }
 
       &:hover {
-        background-color: #2980b9;
+        background-color: var(--secondary-color);
       }
     }
 
@@ -246,7 +245,7 @@
   table {
     width: 100%;
     border-collapse: collapse;
-    background: #fff;
+    background: var(--white-color);
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
@@ -258,8 +257,8 @@
     }
 
     th {
-      background-color: #f6f8fa;
-      color: #555;
+      background-color: var(--white-color);
+      color: var(--text-color);
     }
 
     tr:hover {

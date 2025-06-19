@@ -4,6 +4,8 @@
   padding: 10px;
   font-family: 'font-2' !important;
   font-size: 18px;
+  display: flex;
+  flex-direction: column;
 
   &__container {
     display: flex;
@@ -20,6 +22,7 @@
     h4 {
       margin-bottom: 10px;
       font-weight: bold;
+      color: var(--white-color);
     }
 
     ul {
@@ -30,7 +33,7 @@
         margin: 6px 0;
 
         a {
-          color: #fff;
+          color: var(--white-color);
           text-decoration: none;
 
           &:hover {
@@ -43,6 +46,7 @@
     p {
       margin: 10px 0;
       line-height: 1.4;
+       color: var(--white-color);
     }
   }
 
@@ -55,13 +59,13 @@
     margin-top: 10px;
 
     a {
-      color: #fff;
+      color: var(--white-color);
       font-size: 16px;
       margin-right: 10px;
       display: inline-block;
 
       &:hover {
-        color: #e58e1c;
+        color: var(--secondary-color);
       }
     }
   }
@@ -71,7 +75,7 @@
     margin-bottom: 20px;
 
     input {
-      padding: 8px;
+      padding: 10px;
       border: none;
       flex: 1;
       border-radius: 3px 0 0 3px;
@@ -79,10 +83,10 @@
     }
 
     button {
-      background-color: #e58e1c;
+      background-color: var(--secondary-color);
       border: none;
-      color: white;
-      padding: 8px 16px;
+      color: var(--white-color);
+      padding: 10px 16px;
       border-radius: 0 3px 3px 0;
       cursor: pointer;
     }
@@ -91,15 +95,15 @@
   &__bottom {
     text-align: center;
     padding-top: 20px;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--text-color);
     font-size: 12px;
 
     a {
-      color: #fff;
+      color: var(--white-color);
       text-decoration: underline;
 
       &:hover {
-        color: #e58e1c;
+        color: var(--secondary-color);
       }
     }
   }

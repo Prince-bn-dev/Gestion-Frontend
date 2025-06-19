@@ -196,16 +196,15 @@
 
 .vehicules-list-container {
   padding: 20px;
-  background-color: #fff;
+  background-color: var(--white-color);
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   overflow-x: auto;
   min-height: 90vh;
 
   h2 {
     margin-bottom: 20px;
     font-size: 24px;
-    color: #333;
+    color: var(--text-color);
     text-align: center;
   }
 
@@ -221,8 +220,8 @@
     }
 
     thead {
-      background-color: #007bff;
-      color: #fff;
+      background-color: var(--primary-color);
+      color: var(--white-color);
 
       th {
         font-weight: 600;
@@ -254,15 +253,14 @@
   }
 }
 
-// Style spécial pour les chauffeurs
 .chauffeur-style {
-  background-color: #f3f6f9; // fond plus clair
+  background-color: #f3f6f9; 
   border: 1px dashed #ccc;
   border-radius: 10px;
   padding: 15px;
 
   h2 {
-    color: #007bff;
+    color: var(--primary-color);
   }
 
   .vehicules-table {
@@ -291,7 +289,6 @@
     background: #fff;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     thead {
       background-color: red;
       tr{
@@ -317,4 +314,77 @@
     }
   }
 }
+
+
+#root {
+  --primary-color: #1f32e9;
+  --primary-color-hover: #363dc9;
+  --secondary-color: #f45e03;
+  --background-color: #f5f5f5;
+  --text-color: #000000;
+  --black-color: #000;
+  --white-color: #fff;
+}
+
+.association-container {
+  background-color: var(--background-color);
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    font-weight: bold;
+
+    &.success {
+      color: green;
+    }
+
+    &.error {
+      color: red;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    label {
+      font-weight: 500;
+      color: var(--text-color);
+    }
+
+    select {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: var(--primary-color);
+      color: var(--white-color);
+      border: none;
+      padding: 0.7rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: var(--primary-color-hover);
+      }
+    }
+  }
+}
+
 
