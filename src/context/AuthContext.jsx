@@ -80,23 +80,3 @@ export const useAuth = () => {
 
 
 
-          // {user && user.role === 'superAdmin' && (
-          //   <>
-          //     <label htmlFor="role">Rôle (Super Admin uniquement)</label>
-          //     <select id="role" name="role" value={role} onChange={e => setRole(e.target.value)}>
-          //       <option value="voyageur">Voyageur</option>
-          //       <option value="chauffeur">Chauffeur</option>
-          //       <option value="admin">Admin</option>
-          //     </select>
-          //   </>
-          // )}
-          // {user && user.role === 'admin' && (
-          //     <>
-          //     <label htmlFor="role">Rôle (Admin uniquement)</label>
-          //     <select id="role" name="role" value={role} onChange={e => setRole(e.target.value)}>
-          //       <option value="voyageur">Voyageur</option>
-          //       <option value="chauffeur">Chauffeur</option>
-          //     </select>
-          //   </>
-          // )
-          //   }
