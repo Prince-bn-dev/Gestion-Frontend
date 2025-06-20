@@ -5,14 +5,14 @@ import TestMap from '../components/pages/TestMap';
 
 function Home() {
   const marque = [
-    { name:"Toyota" , image:"/images/v-2.png" },
-    { name:"Lexus" , image:"/images/v-3.png" },
-    { name:"Nissan" , image:"/images/v-4.png" },
-    { name:"Hyundai" , image:"/images/v-5.png" },
-    { name:"Honda" , image:"/images/v-6.png" },
-    { name:"Mercedeces" , image:"/images/v-7.png" },
-    { name:"Ford" , image:"/images/v-8.png" },
-    { name:"BMW" , image:"/images/v-9.png" },
+    { name:"Toyota" , image:"/images/V-2.png" },
+    { name:"Lexus" , image:"/images/V-3.png" },
+    { name:"Nissan" , image:"/images/V-4.png" },
+    { name:"Hyundai" , image:"/images/V-5.png" },
+    { name:"Honda" , image:"/images/V-6.png" },
+    { name:"Mercedeces" , image:"/images/V-7.png" },
+    { name:"Ford" , image:"/images/V-8.png" },
+    { name:"BMW" , image:"/images/V-9.png" },
   ]
   return (
     <div className="home-container">
