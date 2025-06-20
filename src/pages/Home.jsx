@@ -2,6 +2,7 @@ import React from 'react';
 import CustomPaging from '../components/Customer';
 import AvisSlider from '../components/pages/AvisSlider';
 import TestMap from '../components/pages/TestMap';
+import Voyages from '../components/pages/Voyages';
 
 function Home() {
   const marque = [
@@ -35,6 +36,7 @@ function Home() {
           />
         </div>
       </header>
+      <Voyages />
       <section className="about-section">
         <h2>Pourquoi choisir notre solution ?</h2>
       <div className='about-container'>
