@@ -112,6 +112,7 @@
           display: none;
           width: 100%;
           padding: 10px;
+          min-height: 20vh;
           background: linear-gradient(135deg, rgba(44, 43, 43, 0.644), rgba(7, 7, 7, 0.863));
         }
 
@@ -433,6 +434,8 @@
     }
 
     .features-section {
+      width: 90%;
+      margin: auto;
       .features-grid {
         flex-direction: column;
         align-items: center;
@@ -440,6 +443,51 @@
         .feature-card{
           max-width: 350px !important;
         }
+      }
+    }
+    .voyages{
+      width: 90%;
+      margin: auto;
+
+      h2{
+        font-size: 1.2rem;
+      }
+
+      .voyages-container{
+        flex-direction: column;
+        padding: 0;
+
+        .voyages-item{
+          width: 100%;
+
+          section{
+            padding: 8px;
+           min-height: 12vh;
+          }
+        }
+      }
+
+    }
+
+    .about-section {
+      width: 90%;
+      margin: auto;
+      h2{
+        font-size: 1.3rem;
+      }
+
+      .about-container{
+        flex-direction: column;
+
+        section{
+          width: 100%;
+        }
+      }
+    }
+
+    .call-to-action{
+      h2{
+        font-size: 1.8rem;
       }
     }
   }

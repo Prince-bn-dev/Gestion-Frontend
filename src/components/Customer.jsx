@@ -24,7 +24,7 @@ function CustomPaging() {
     autoplaySpeed: 3000,
     speed: 500,
     slidesToShow: 2,
-    slidesToScroll: 1
+    slidesToScroll: 1,
   };
   return (
     <div className="slider-container">

@@ -199,5 +199,41 @@
         width: 45%;
       }
     }
+    .services{
+      > header {
+        h2{
+          font-size: 2rem;
+        }
+      }
+
+      .services-list{
+        flex-direction: column;
+        width: 90%;
+        margin: auto;
+      }
+      .service-item {
+        width: 100% !important;
+      }
+    }
+
+    .team {
+        h2{
+        font-size: 2rem;
+      }
+      .team-members{
+        gap: 1.5rem;
+
+        .team-member{
+          width: 45%;
+
+          
+        img {
+          width: 90px;
+          height: 90px;
+        }
+        }
+
+      }
+    }
   }
 }
