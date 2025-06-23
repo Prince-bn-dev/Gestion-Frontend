@@ -25,6 +25,14 @@ function CustomPaging() {
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 1,
+     responsive: [
+      {
+        breakpoint: 758,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
   return (
     <div className="slider-container">

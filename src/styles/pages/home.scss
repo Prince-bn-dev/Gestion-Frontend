@@ -221,10 +221,12 @@
         min-height: 100px;
         width: 30%;
         z-index: 99;
-         img {
+      img {
         width: 100px;
-        height: auto;
-        margin: 0 20px;
+        height: 100px;
+        margin: 0 10px;
+        object-fit: contain;
+
       }
       p{
         font-size: 1.2rem;
@@ -488,6 +490,15 @@
     .call-to-action{
       h2{
         font-size: 1.8rem;
+      }
+    }
+    .marque-section{
+      width: 100% !important;
+      .marque-item {
+       img{
+        width: 80px !important;
+        height: 80px !important;
+       }
       }
     }
   }

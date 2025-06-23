@@ -3,7 +3,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import Slider from "react-slick";
 
 const testimonials = [
   {
@@ -68,13 +67,6 @@ const testimonials = [
 
 
 function AvisSlider() {
-    var settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-    };
   return (
     <div className="avis-container">
         <h2><span>Ce que les gens</span><strong> pensent de nous</strong></h2>
@@ -90,13 +82,13 @@ function AvisSlider() {
           768: { slidesPerView: 2 }
         }}
       >
-            {/* <Slider {...settings}> */}
         {testimonials.map((t, index) => (
           <SwiperSlide key={index}>
             <div className="avis-card">
               <div className="avis-stars">★★★★★</div>
               <div className="avis-date">{t.date}</div>
               <p className="avis-message">{t.message}</p>
+              <hr />
               <div className="avis-user">
                 <img src={t.image} alt={t.name} />
                 <div>
@@ -107,7 +99,6 @@ function AvisSlider() {
             </div>
           </SwiperSlide>
         ))}
-    {/* </Slider> */}
       </Swiper>
     </div>
   );

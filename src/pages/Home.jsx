@@ -127,7 +127,6 @@ function Home() {
         <h2>Top Marque</h2>
         <div className="marque-container">
         {marque.map((item, index) => {
-          console.log("Image source:", item.image); 
           return (
             <div key={index + 2} className="marque-item">
               <img src={item.image} alt={item.name} />
@@ -138,7 +137,6 @@ function Home() {
          </div>
       </div>
    <AvisSlider />
-
       <section className="call-to-action">
         <h2>Prêt à transformer la gestion de votre parc ?</h2>
         <p>Rejoignez des centaines de gestionnaires qui nous font déjà confiance.</p>
