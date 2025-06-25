@@ -89,8 +89,6 @@ function AppRoutes() {
               <Route path="/parcs/:id" element={<ParcDetail />} />
               <Route path="/parcs/edit/:id" element={<EditparcWrapper />}/>
 
-
-
               <Route path="/vehicules" element={<VehiculesList />} />
               <Route path="/vehicules/create" element={<VehiculeForm />} />
               <Route  path="/vehicules/edit/:id" element={<VehiculeForm />}/>
@@ -103,8 +101,7 @@ function AppRoutes() {
               <Route path="/voyages/edit/:id" element={<VoyageForm />} />
               <Route path="/allVoyagesTable" element={<VoyagesTable />} />
               
-
-
+              
               <Route path="/reservations/paiement/:reservationId" element={<ReservationForm />} />
               <Route path="/reservations/edit/:id" element={<ReservationForm />} />
               <Route path="/mes-reservations" element={<MesReservations />} />

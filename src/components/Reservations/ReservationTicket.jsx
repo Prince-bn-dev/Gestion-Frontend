@@ -21,7 +21,7 @@ function ReservationTicket({ reservation, onDelete, onEdit }) {
     doc.text(`Train (immatriculation) : ${voyage?.vehicule?.immatriculation || "N/A"}`, 10, 100);
     doc.text(`Place : A3`, 10, 110); 
     doc.text(`Prix : ${reservation?.paiement.montant || "N/A"} FCFA`, 10, 120);
-    doc.text(`Statut : ${statut}`, 10, 120);
+    doc.text(`Statut : ${statut}`, 10, 130);
     doc.save(`reservation-${reservation._id}.pdf`);
   };
 

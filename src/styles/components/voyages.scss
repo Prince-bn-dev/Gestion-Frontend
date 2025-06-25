@@ -1,75 +1,116 @@
-.my-voyages-container {
- width: 100%;
-  margin: 1rem auto;
-  padding: 1.5rem;
+.mes-voyages-container {
+  padding: 20px;
   background-color: var(--white-color);
-  border-radius: 1rem;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
 
   h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 24px;
     color: var(--text-color);
+    margin-bottom: 20px;
   }
 
-  ul {
+  .no-voyage {
+    text-align: center;
+    font-size: 16px;
+    color: gray;
+  }
+
+  .voyage-list {
     list-style: none;
     padding: 0;
 
-    li {
-      background-color: var(--white-color);
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 0.75rem;
-      border: 1px solid #ddd;
-      transition: background-color 0.3s;
+    .voyage-item {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #f9f9f9;
+      transition: box-shadow 0.3s ease;
 
       &:hover {
-        background-color: #f1f1f1;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       }
 
-      strong {
-        display: block;
-        font-size: 1.2rem;
-        color: #2c3e50;
-        margin-bottom: 0.5rem;
+      p {
+        margin: 5px 0;
+        span{
+          font-weight: bold;
+          font-family: 'font-2';
+          font-size: 1rem;
+        }
       }
 
-      button {
-        padding: 0.4rem 0.8rem;
-        margin-right: 0.5rem;
-        border: none;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        font-size: 0.95rem;
-        transition: background-color 0.2s;
+      .statut {
+        font-weight: bold;
+        &.termine {
+          color: green;
+        }
+        &.annule {
+          color: red;
+        }
+        &.disponible {
+          color: var(--primary-color);
+        }
+      }
 
-        &:first-of-type {
+      .actions {
+        margin-top: 10px;
+        display: flex;
+        gap: 10px;
+
+        .edit-btn {
           background-color: var(--primary-color);
-          color:var(--white-color);
+          color: white;
+          padding: 6px 12px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
 
           &:hover {
-            background-color: var(--primary-color);
+            background-color: var(--primary-color-hover);
           }
         }
 
-        &:last-of-type {
-          background-color: #b1726b;
-          color: var(--white-color);
+        .delete-btn {
+          background-color: red;
+          color: white;
+          padding: 6px 12px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
 
           &:hover {
-            background-color: #c0392b;
+            opacity: 0.8;
           }
         }
       }
     }
   }
 
-  p {
-    color: var(--text-color);
-    text-align: center;
+  @media (max-width: 480px) {
+    h2 {
+      font-size: 20px;
+    }
+
+    .voyage-item {
+      padding: 10px;
+      p {
+        font-size: 14px;
+      }
+
+      .actions {
+        flex-direction: column;
+        .edit-btn,
+        .delete-btn {
+          width: 100%;
+          padding: 8px;
+        }
+      }
+    }
   }
 }
+
 
 
 .voyage-form-container {

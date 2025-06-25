@@ -9,7 +9,7 @@ import {
   FaCar,
  FaParking 
 } from 'react-icons/fa';
-import { IoHome } from 'react-icons/io5';
+import { CiLogout } from "react-icons/ci";
 import { IoIosPerson } from "react-icons/io";
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -158,15 +158,13 @@ const SidebarItem = ({ item, activeItemId, setActiveItemId, isExpanded, toggleMe
 
 const Sidebar = () => {
   const [activeItemId, setActiveItemId] = useState(null);
-  const [expandedMenus, setExpandedMenus] = useState(() => {
-    const saved = localStorage.getItem('expandedMenus');
-    return saved
-      ? JSON.parse(saved)
-      : sidebarData.reduce((acc, item) => {
-          if (item.hasSubmenu) acc[item.id] = false;
-          return acc;
-        }, {});
-  });
+  const initialMenus = {
+  Parcs: false,
+  Vehicules: false,
+  voyages: false,
+  Reservations: false,
+};
+  const [expandedMenus, setExpandedMenus] = useState(initialMenus);
 
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const { logout, user } = useAuth();
@@ -240,7 +238,7 @@ const Sidebar = () => {
 
         <div className="sidebar-footer">
           <button className="logout-button" onClick={handleLogout}>
-            <span>Deconnexion</span>
+            <span>Deconnexion</span><span className="logout-icon"><CiLogout /></span>
           </button>
         </div>
       </div>

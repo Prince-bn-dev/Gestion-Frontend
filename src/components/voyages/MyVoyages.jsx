@@ -69,35 +69,26 @@ function MyVoyages() {
   const COLORS = ['#0088FE', '#FFBB28', '#00C49F'];
 
   return (
-    <div className="my-voyages-container" style={{ padding: '20px' }}>
-      <h2> Mes Voyages</h2>
+    <div  className="mes-voyages-container">
+      <h2>Mes Voyages</h2>
       {voyages.length === 0 ? (
-        <p>Aucun voyage trouvé.</p>
+        <p className="no-voyage">Aucun voyage trouvé.</p>
       ) : (
-        <ul>
+        <ul className="voyage-list">
           {voyages.map((v) => (
-            <li key={v._id} style={{ marginBottom: '20px', borderBottom: '1px solid #ccc', paddingBottom: '10px' }}>
-              <strong>{v.destination}</strong>
-              <br />
-              <span>Départ : {v.heure_depart}</span>
-              <br />
-              <span>Arrivée estimée : {v.heure_arrivee_Estime}</span>
-              <br />
-              <span>Prix : {v.prix_par_place} FCFA</span>
-              <br />
-              <span>Véhicule : {v.vehicule?.marque || 'N/A'} ({v.vehicule?.immatriculation || '---'})</span>
-              <br />
-              <span>Chauffeur : {v.vehicule?.chauffeur?.nom || 'Aucun'} {v.vehicule?.chauffeur?.prenom || ''}</span>
-              <br />
-              <span>Statut : {v.statut}</span>
-              <br />
+            <li className="voyage-item" key={v._id}>
+              <p><strong>{v.destination}</strong></p>
+              <p><span>Départ</span> : {v.heure_depart}</p>
+              <p> <span>Arrivée estimée</span> : {v.heure_arrivee_Estime}</p>
+              <p> <span>Prix</span> : {v.prix_par_place} FCFA</p>
+              <p> <span>Véhicule</span> : {v.vehicule?.marque || 'N/A'} ({v.vehicule?.immatriculation || '---'})</p>
+              <p> <span>Chauffeur</span> : {v.vehicule?.chauffeur?.nom || 'Aucun'} {v.vehicule?.chauffeur?.prenom || ''}</p>
+              <p className={`statut ${v.statut}`}> <span>Statut</span> : {v.statut}</p>
               {user.role === 'gestionnaire' && (
-                <>
-                  <button onClick={() => handleEdit(v._id)}>Modifier</button>{' '}
-                  <button onClick={() => handleDelete(v._id)} style={{ color: 'red' }}>
-                    Supprimer
-                  </button>
-                </>
+                <div className="actions">
+                  <button className="edit-btn" onClick={() => handleEdit(v._id)}>Modifier</button>
+                  <button className="delete-btn" onClick={() => handleDelete(v._id)}>Supprimer</button>
+                </div>
               )}
             </li>
           ))}

@@ -4,6 +4,7 @@ import { getReservationById, updateReservation } from '../../api/reservationApi'
 import { createPaiement } from '../../api/paiementApi';
 import { useNavigate, useParams } from 'react-router-dom';
 import KkiapayButton from '../../components/KkiapayButton';
+import Loader from '../Loader';
  
 
 function ReservationForm() {
@@ -54,7 +55,7 @@ function ReservationForm() {
   };
 
   if (!reservation) {
-    return <p>Chargement de la réservation...</p>;
+    return <p><Loader /></p>;
   }
 
   const voyage = reservation.voyage;

@@ -30,7 +30,6 @@ function PhoneVerification() {
       <div className="verification-box">
         <h2>Vérification du numéro</h2>
         <p>Un code a été envoyé à <strong>{numero}</strong></p>
-
         <input
           type="text"
           placeholder="Code à 6 chiffres"

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LineChart, Line  } from 'recharts';
+import Loader from '../components/Loader';
 
 function Dashboard() {
   const [stats, setStats] = useState({
@@ -100,7 +101,7 @@ const reservationStats = [
     setLoading(false);
   }, []);
 
-  if (loading) return <p className="loading-message">Chargement du tableau de bord...</p>;
+  if (loading) return <p className="loading-message">< Loader/></p>;
 
   return (
     <div className="dashboard-container">
@@ -131,60 +132,60 @@ const reservationStats = [
 
       <section className="chart-section">
         <h2>Répartition des véhicules</h2>
-<div className="donut-chart-container">
-  <ResponsiveContainer width="100%" height={300}>
-    <PieChart>
-      <Pie
-        data={pieData}
-        cx="50%"
-        cy="50%"
-        innerRadius={60}
-        outerRadius={90}
-        paddingAngle={5}
-        dataKey="value"
-        label={renderCustomizedLabel}
-      >
-        {pieData.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-        ))}
-      </Pie>
-    </PieChart>
-  </ResponsiveContainer>
+        <div className="donut-chart-container">
+          <ResponsiveContainer width="100%" height={400}>
+            <PieChart>
+              <Pie
+                data={pieData}
+                cx="50%"
+                cy="50%"
+                innerRadius={40}
+                outerRadius={110}
+                paddingAngle={5}
+                dataKey="value"
+                label={renderCustomizedLabel}
+              >
+                {pieData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} style={{textAlign:'center'}}/>
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
 
-  <div className="legend-custom">
-    {pieData.map((entry, index) => (
-      <div key={index} className="legend-item">
-        <span
-          className="legend-color"
-          style={{ backgroundColor: COLORS[index % COLORS.length] }}
-        ></span>
-        <span>{entry.name} ({entry.value})</span>
-      </div>
-    ))}
-  </div>
-</div>
+          <div className="legend-custom">
+            {pieData.map((entry, index) => (
+              <div key={index} className="legend-item">
+                <span
+                  className="legend-color"
+                  style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                ></span>
+                <span>{entry.name} ({entry.value})</span>
+              </div>
+            ))}
+          </div>
+        </div>
 
           <h2>Voyages par mois</h2>
-  <ResponsiveContainer width="100%" height={300}>
-    <BarChart data={voyageStats}>
-      <XAxis dataKey="mois" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="voyages" fill="#1f32e9" />
-    </BarChart>
-  </ResponsiveContainer>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={voyageStats}>
+              <XAxis dataKey="mois" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="voyages" fill="#1f32e9" />
+            </BarChart>
+          </ResponsiveContainer>
 
-  <h2 style={{ marginTop: '2rem' }}>Réservations par jour</h2>
-  <ResponsiveContainer width="100%" height={300}>
-    <LineChart data={reservationStats}>
-      <XAxis dataKey="jour" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="reservations" stroke="#f45e03" strokeWidth={2} />
-    </LineChart>
-  </ResponsiveContainer>
+          <h2 style={{ marginTop: '2rem' }}>Réservations par jour</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={reservationStats}>
+              <XAxis dataKey="jour" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="reservations" stroke="#f45e03" strokeWidth={2} />
+            </LineChart>
+          </ResponsiveContainer>
       </section>
 
       <section className="recent-reservations">

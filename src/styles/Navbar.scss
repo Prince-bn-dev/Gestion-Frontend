@@ -285,6 +285,8 @@
       border: 2px solid var(--secondary-color);
       color: var(--white-color);
       font-weight: 600;
+      display: flex;
+      justify-content: space-around;
       cursor: pointer;
       border-radius: 4px;
       transition: background-color 0.3s ease, color 0.3s ease;
@@ -292,6 +294,13 @@
         color: var(--white-color);
         text-decoration: none;
         font-family: 'font-2';
+      }
+
+      .logout-icon{
+          font-size: 1rem;
+          display: flex;
+          align-items: center;
+          user-select: none;
       }
 
       &:hover {

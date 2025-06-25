@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { FaInfoCircle, FaTrashAlt, FaEdit } from 'react-icons/fa';
 import Loader from '../Loader';
 
+
 function VehiculesList() {
   const [vehicules, setVehicules] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,15 +15,12 @@ function VehiculesList() {
   useEffect(() => {
     const fetchVehicules = async () => {
       try {
-        if (user.role === "gestionnaire") {
-          const response = await getVehiculeByGestionnaire(userId);
-          setVehicules(response.data);
-          console.log('Véhicules chargés avec succès');
-        } else if (user.role === "chauffeur") {
-          const response = await getVehiculeByChauffeur(userId);
-          setVehicules(response.data);
-          console.log('Véhicules chargés avec succès');
-        }
+        const response = user.role === 'gestionnaire'
+          ? await getVehiculeByGestionnaire(userId)
+          : await getVehiculeByChauffeur(userId);
+
+        setVehicules(response.data);
+        console.log('Véhicules chargés avec succès');
       } catch (err) {
         console.log(err.response?.data?.message || 'Erreur lors du chargement des véhicules');
       } finally {
@@ -31,13 +29,13 @@ function VehiculesList() {
     };
 
     fetchVehicules();
-  }, [userId]);
+  }, [user.role, userId]);
 
   const handleDelete = async (vehiculeId) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer ce véhicule ?')) {
       try {
         await deleteVehicule(vehiculeId);
-        setVehicules(vehicules.filter(v => v._id !== vehiculeId));
+        setVehicules((prev) => prev.filter(v => v._id !== vehiculeId));
         console.log('Véhicule supprimé avec succès');
       } catch (err) {
         console.log(err.response?.data?.message || 'Erreur lors de la suppression du véhicule');
@@ -48,58 +46,54 @@ function VehiculesList() {
   if (loading) return <Loader />;
   if (vehicules.length === 0) return <p>Aucun véhicule trouvé.</p>;
 
-  const isGestionnaire = user.role === "gestionnaire";
+  const isGestionnaire = user.role === 'gestionnaire';
 
   return (
-    <div
-      className={`vehicules-list-container ${!isGestionnaire ? 'chauffeur-style' : ''}`}
-    >
-      <h2> {isGestionnaire ?"Liste des véhicules":" Les véhicules auxquels vous êtes assigné(e)"} </h2>
-      <table className="vehicules-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
-        <thead>
-          <tr style={{ borderBottom: '1px solid #ccc' }}>
-            <th style={{ padding: '8px' }}>Marque</th>
-            <th style={{ padding: '8px' }}>Modèle</th>
-            <th style={{ padding: '8px' }}>Immatriculation</th>
-            <th style={{ padding: '8px' }}>Parc</th>
-            <th style={{ padding: '8px' }}>Propriétaire</th>
-            <th style={{ padding: '8px' }}>Statut</th>
-            {isGestionnaire && <th style={{ padding: '8px', textAlign: 'center' }}>Actions</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {vehicules.map((vehicule) => (
-            <tr key={vehicule._id} style={{ borderBottom: '1px solid #eee' }}>
-              <td style={{ padding: '8px' }}>{vehicule.marque}</td>
-              <td style={{ padding: '8px' }}>{vehicule.modele}</td>
-              <td style={{ padding: '8px' }}>{vehicule.immatriculation}</td>
-              <td style={{ padding: '8px' }}>{vehicule.parc ? vehicule.parc.nom : 'Non attribué'}</td>
-              <td style={{ padding: '8px' }}>
-                {vehicule.gestionnaire?.nom || 'Inconnu'}<br />
-                {vehicule.gestionnaire?.prenom}
-              </td>
-              <td style={{ padding: '8px' }}>{vehicule.statut === 'actif' ? 'Disponible' : 'Indisponible'}</td>
-              {isGestionnaire && (
-                <td style={{ padding: '8px', textAlign: 'center' }}>
-                  <Link to={`/vehicules/${vehicule._id}`} title="Détails" style={{ marginRight: '10px', color: '#007bff' }}>
-                    <FaInfoCircle size={18} />
-                  </Link>
-                  <button
-                    onClick={() => handleDelete(vehicule._id)}
-                    title="Supprimer"
-                    style={{ background: 'none', border: 'none', color: 'red', cursor: 'pointer', marginRight: '10px' }}
-                  >
-                    <FaTrashAlt size={18} />
-                  </button>
-                  <Link to={`/vehicules/edit/${vehicule._id}`} title="Modifier" style={{ color: '#28a745' }}>
-                    <FaEdit size={18} />
-                  </Link>
-                </td>
-              )}
+    <div className={`vehicules-list-container ${!isGestionnaire ? 'chauffeur-style' : ''}`}>
+      <h2>{isGestionnaire ? 'Liste des véhicules' : 'Les véhicules auxquels vous êtes assigné(e)'}</h2>
+      <div className="table-wrapper">
+        <table className="vehicules-table">
+          <thead>
+            <tr>
+              <th>Marque</th>
+              <th>Modèle</th>
+              <th>Immatriculation</th>
+              <th>Parc</th>
+              <th>Propriétaire</th>
+              <th>Statut</th>
+              {isGestionnaire && <th>Actions</th>}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {vehicules.map((vehicule) => (
+              <tr key={vehicule._id}>
+                <td>{vehicule.marque}</td>
+                <td>{vehicule.modele}</td>
+                <td>{vehicule.immatriculation}</td>
+                <td>{vehicule.parc?.nom || 'Non attribué'}</td>
+                <td>
+                  {vehicule.gestionnaire?.nom || 'Inconnu'}<br />
+                  {vehicule.gestionnaire?.prenom}
+                </td>
+                <td>{vehicule.statut === 'actif' ? 'Disponible' : 'Indisponible'}</td>
+                {isGestionnaire && (
+                  <td className="actions">
+                    <Link to={`/vehicules/${vehicule._id}`} title="Détails">
+                      <FaInfoCircle />
+                    </Link>
+                    <button onClick={() => handleDelete(vehicule._id)} title="Supprimer">
+                      <FaTrashAlt />
+                    </button>
+                    <Link to={`/vehicules/edit/${vehicule._id}`} title="Modifier">
+                      <FaEdit />
+                    </Link>
+                  </td>
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

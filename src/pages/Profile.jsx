@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Loader from '../components/Loader';
  
 
 function Profile() {
@@ -65,7 +66,7 @@ function Profile() {
   };
 
   if (loading) {
-    return <div className="message loading">Chargement du profil...</div>;
+    return <div className="message loading">< Loader/></div>;
   }
 
   if (!user) {
@@ -91,9 +92,9 @@ function Profile() {
       </button>
       <p><strong>Nom :</strong> {user.nom}</p>
       <p><strong>Prénom :</strong> {user.prenom}</p>
-      <p><strong>Email :</strong> {user.email}</p>
+      {user.email ?<p><strong>Email :</strong> {user.email}</p>:''}
       <p><strong>Rôle :</strong> {user.role}</p>
-      <p><strong>Téléphone :</strong> {user.telephone}</p>
+      {user.telephone ?<p><strong>Téléphone :</strong> {user.telephone}</p>:''}
       <p className="update-password-link">
         <a href="/password/update">Modifier mon mot de passe</a>
       </p>

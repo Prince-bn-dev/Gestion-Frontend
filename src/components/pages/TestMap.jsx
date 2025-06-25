@@ -26,7 +26,7 @@ const TestMap = () => {
   }, []);
 
   return (
-    <div style={{ height: '500px', margin: '20px' }}>
+    <div style={{ height: '500px', margin: '5px' }}>
       <MapContainer
         center={position || [6.3703, 2.3912]} 
         zoom={13}
