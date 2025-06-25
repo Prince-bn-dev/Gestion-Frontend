@@ -20,7 +20,7 @@ function ReservationTicket({ reservation, onDelete, onEdit }) {
     doc.text(`Heure d'arrivée estimée : ${voyage?.heure_arrivee_Estime || "N/A"}`, 10, 90);
     doc.text(`Train (immatriculation) : ${voyage?.vehicule?.immatriculation || "N/A"}`, 10, 100);
     doc.text(`Place : A3`, 10, 110); 
-    doc.text(`Prix : ${reservation?.paiement.montant || "N/A"} FCFA`, 10, 120);
+    doc.text(`Prix : ${reservation?.paiement?.montant || "N/A"} FCFA`, 10, 120);
     doc.text(`Statut : ${statut}`, 10, 130);
     doc.save(`reservation-${reservation._id}.pdf`);
   };
@@ -62,7 +62,7 @@ function ReservationTicket({ reservation, onDelete, onEdit }) {
         </div>
         <div className="ticket-row">
           <span className="label">Prix :</span>
-          <span className="value">{reservation?.paiement.montant || "N/A"} FCFA</span>
+          <span className="value">{reservation?.paiement?.montant || "N/A"} FCFA</span>
         </div>
         <div className="ticket-row">
           <span className="label">Nombre de places :</span>
