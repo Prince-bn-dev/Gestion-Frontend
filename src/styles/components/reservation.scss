@@ -87,6 +87,7 @@
   padding: 1.5rem 2rem;
   font-family: 'Segoe UI', Arial, sans-serif;
   position: relative;
+  border: solid 1px var(--primary-color);
 
   .ticket-header {
     display: flex;
@@ -162,6 +163,22 @@
       }
     }
   }
+
+    @media screen and (max-width: 768px){
+      background-size: 2rem;
+      padding: 1rem 1.3rem;
+      .ticket-header {
+        .ticket-title{
+          font-size: 0.8rem;
+        }
+        .ticket-class {
+          font-size: 0.7rem;
+        }
+      }
+      .ticket-body{
+        font-size: 10px;
+      }
+  }
 }
 
 .reservation-form {
@@ -207,4 +224,6 @@
       background-color: var(--primary-color-hover);
     }
   }
+
+
 }

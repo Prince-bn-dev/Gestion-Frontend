@@ -114,19 +114,19 @@
       font-weight: 600;
       text-transform: uppercase;
 
-      &.disponible {
+      &.actif {
         background-color: #ecfdf5;
         color: #10b981;
-      }
-
-      &.en-service {
-        background-color: #eef2ff;
-        color: #6366f1;
       }
 
       &.maintenance {
         background-color: #fff7ed;
         color: #f97316;
+      }
+
+      &.hors-service {
+        background-color: #fee2e2;
+        color: #dc2626;
       }
     }
   }
@@ -155,6 +155,28 @@
 
       .gps {
         color: #10b981;
+      }
+
+      .btn-inline {
+        margin-left: 0.5rem;
+        padding: 0.2rem 0.4rem;
+        font-size: 0.8rem;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: #3b82f6;
+        display: inline-flex;
+        align-items: center;
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: scale(1.1);
+          color: #2563eb;
+        }
+
+        svg {
+          margin: 0;
+        }
       }
     }
   }
@@ -190,7 +212,28 @@
       }
     }
   }
+
+  // Responsive
+  @media (max-width: 480px) {
+    padding: 1rem;
+
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .buttons {
+      flex-direction: column;
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
 }
+
 
 
 
@@ -206,6 +249,24 @@
     color: var(--text-color);
     text-align: center;
   }
+
+  .header-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+
+    input[type="text"] {
+      padding: 6px 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      width: 250px;
+      max-width: 100%;
+    }
+  }
+
 
   .table-wrapper {
     overflow-x: auto;
@@ -236,11 +297,13 @@
     tbody {
       tr {
         border: 1px solid #eee;
+
         &:hover {
           background-color: #f9f9f9;
         }
-        td{
-           border: 1px solid #eee;
+
+        td {
+          border: 1px solid #eee;
         }
       }
     }
@@ -273,7 +336,7 @@
         color: red;
       }
 
-      a:last-child {
+      button:last-child {
         color: #28a745;
       }
     }
@@ -287,8 +350,18 @@
     .vehicules-table {
       font-size: 14px;
     }
+
+    .header-actions {
+      flex-direction: column;
+      align-items: stretch;
+
+      input[type="text"] {
+        width: 100%;
+      }
+    }
   }
 
+  // ✅ Responsive mobile
   @media (max-width: 480px) {
     padding: 10px;
 
@@ -315,6 +388,7 @@
     }
   }
 }
+
 
 
 

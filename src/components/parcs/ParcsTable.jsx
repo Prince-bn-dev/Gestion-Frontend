@@ -12,7 +12,7 @@ const ParcsTable = () => {
       try {
         const data = await getAllParcs();
         setparcs(data);
-        console.log('parcs chargés avec succès');
+        console.log('parcs chargés avec succès \ Redirection dans quelques minutes');
       } catch (err) {
         console.log(err.response?.data?.message || 'Erreur lors du chargement des parcs');
       } finally {

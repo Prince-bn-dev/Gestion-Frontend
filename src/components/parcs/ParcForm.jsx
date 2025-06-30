@@ -1,29 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createParc, updateParc } from '../../api/parcApi';
+import { createParc, getParcById, updateParc } from '../../api/parcApi';
 import { useAuth } from '../../context/AuthContext';
+import Loader from '../Loader';
 
-const ParcForm = ({ parc }) => {
+const ParcForm = ({ id, onClose }) => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
   const [nom, setNom] = useState('');
   const [localisation, setLocalisation] = useState('');
   const [description, setDescription] = useState('');
   const [heuresOuverture, setHeuresOuverture] = useState('');
   const [heuresFermeture, setHeuresFermeture] = useState('');
-  const navigate = useNavigate();
-  const {user} = useAuth();
+  const [parc, setParc] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const gestionnaireId = user?._id;
 
+  // Chargement du parc si ID est fourni
   useEffect(() => {
-    if (parc) {
-      setNom(parc.data.nom);
-      setLocalisation(parc.data.localisation);
-      setDescription(parc.data.description);
-      setHeuresOuverture(parc.data.heures_ouverture);
-      setHeuresFermeture(parc.data.heures_fermeture);
+    if (id) {
+      getParcById(id)
+        .then((data) => {
+          setParc(data);
+          const p = data.data;
+          setNom(p.nom);
+          setLocalisation(p.localisation);
+          setDescription(p.description);
+          setHeuresOuverture(p.heures_ouverture);
+          setHeuresFermeture(p.heures_fermeture);
+        })
+        .catch(() => alert('Parc introuvable'))
+        .finally(() => setLoading(false));
+    } else {
+      setLoading(false);
     }
-  }, [parc]);
+  }, [id]);
 
+  // Affichage du loader
+  if (loading) return <div><Loader /></div>;
+
+  // Message d'erreur si ID fourni mais parc introuvable
+  if (id && !parc) return <div>Parc non trouvé</div>;
+
+  // Soumission du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -33,11 +54,13 @@ const ParcForm = ({ parc }) => {
       description,
       heures_ouverture: heuresOuverture,
       heures_fermeture: heuresFermeture,
-      gestionnaire: gestionnaireId, 
+      gestionnaire: gestionnaireId,
     };
+
     if (heuresFermeture <= heuresOuverture) {
       return console.log("L'heure de fermeture doit être après l'heure d'ouverture");
     }
+
     try {
       if (parc) {
         await updateParc(parc.data._id, data);
@@ -46,7 +69,8 @@ const ParcForm = ({ parc }) => {
         await createParc(data);
         console.log('Parc créé avec succès');
       }
-      navigate('/parcs');
+      onClose(); // ferme la modale
+      navigate('/parcs'); // redirige vers la liste
     } catch (err) {
       console.log(err.response?.data?.message || 'Erreur lors de la sauvegarde');
     }
@@ -70,6 +94,7 @@ const ParcForm = ({ parc }) => {
         <label>Description :</label>
         <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
       </div>
+
       <div className="form-group">
         <label>Heures d’ouverture :</label>
         <input
@@ -93,6 +118,7 @@ const ParcForm = ({ parc }) => {
           required
         />
       </div>
+
       <button type="submit" className="submit-btn">
         {parc ? 'Modifier' : 'Créer'}
       </button>

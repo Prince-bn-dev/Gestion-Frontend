@@ -1,26 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getVehiculeById, deleteVehicule } from '../../api/vehiculeApi';
- 
+
 import {
-  FaCar, FaRoad, FaCalendarAlt, FaMapMarkerAlt, FaUser
+  FaCar,
+  FaRoad,
+  FaMapMarkerAlt,
+  FaUser,
+  FaPen,
+  FaTrash,
+  FaPlus,
 } from 'react-icons/fa';
+
 import AddChauffeurToVehicule from './AddChauffeurToVehicule';
+import VehiculeForm from './VehiculeForm';
 import MapGPS from '../pages/MapGPS';
 import Loader from '../Loader';
+import Modal from '../../uikits/Modal';
 
 function VehiculeDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [vehicule, setVehicule] = useState(null);
+  const [showChauffeurModal, setShowChauffeurModal] = useState(false);
+  const [showEditVehiculeModal, setShowEditVehiculeModal] = useState(false);
+
+  const fetchVehicule = async () => {
+    try {
+      const res = await getVehiculeById(id);
+      setVehicule(res.data);
+    } catch (err) {
+      console.log(err.response?.data?.message || 'Véhicule introuvable');
+      navigate('/vehicules');
+    }
+  };
 
   useEffect(() => {
-    getVehiculeById(id)
-      .then(res => setVehicule(res.data))
-      .catch(err => {
-        console.log(err.response?.data?.message || 'Véhicule introuvable');
-        navigate('/vehicules');
-      });
+    fetchVehicule();
   }, [id]);
 
   const handleDelete = async () => {
@@ -37,18 +53,18 @@ function VehiculeDetail() {
 
   const getStatusClass = (statut) => {
     switch (statut) {
-      case 'Disponible':
+      case 'actif':
         return 'disponible';
-      case 'En service':
-        return 'en-service';
-      case 'Maintenance':
+      case 'maintenance':
         return 'maintenance';
+      case 'hors_service':
+        return 'hors-service';
       default:
         return '';
     }
   };
 
-  if (!vehicule) return <p><Loader /></p>;
+  if (!vehicule) return <Loader />;
 
   return (
     <div className="vehicule-detail-container">
@@ -59,16 +75,30 @@ function VehiculeDetail() {
         </span>
       </div>
 
-      <p className="sub">{vehicule.marque} {vehicule.modele}</p>
+      <p className="sub">
+        {vehicule.marque} {vehicule.modele}
+      </p>
 
       <div className="vehicule-info">
         <p><FaCar /> {vehicule.type}</p>
-        <p><FaRoad /> {vehicule.kilometrage.toLocaleString()} km</p>
-        <p><FaMapMarkerAlt className="gps" /> GPS {vehicule.gpsActif ? 'activé' : 'désactivé'}</p>
+        <p><FaRoad /> {vehicule.kilometrage?.toLocaleString()} km</p>
+        <p><FaMapMarkerAlt className="gps" /> GPS {vehicule.gps?.type === 'gps' ? 'activé' : 'désactivé'}</p>
       </div>
 
       <div className="additional-info">
-        <p><FaUser /> <strong>Chauffeur :</strong> {vehicule.chauffeur?.nom || 'Aucun'}</p>
+        <p>
+          <FaUser /> <strong>Chauffeur :</strong>{' '}
+          {vehicule.chauffeur
+            ? `${vehicule.chauffeur.nom} ${vehicule.chauffeur.prenom}`
+            : 'Aucun'}
+          <button
+            className="btn-inline"
+            onClick={() => setShowChauffeurModal(true)}
+            title={vehicule.chauffeur ? 'Modifier chauffeur' : 'Ajouter chauffeur'}
+          >
+            {vehicule.chauffeur ? <FaPen /> : <FaPlus />}
+          </button>
+        </p>
         <p><strong>Parc :</strong> {vehicule.parc?.nom || 'Aucun'}</p>
         <p><strong>Capacité :</strong> {vehicule.capacite} places</p>
         <p><strong>Climatisation :</strong> {vehicule.climatisation ? 'Oui' : 'Non'}</p>
@@ -76,11 +106,47 @@ function VehiculeDetail() {
       </div>
 
       <div className="buttons">
-        <Link to={`/vehicules/edit/${vehicule._id}`} className="btn">Modifier</Link>
-        <button onClick={handleDelete} className="btn btn-danger">Supprimer</button>
+        <button className="btn" onClick={() => setShowEditVehiculeModal(true)}>
+          <FaPen /> Modifier véhicule
+        </button>
+        <button onClick={handleDelete} className="btn btn-danger">
+          <FaTrash /> Supprimer
+        </button>
         <Link to="/vehicules" className="btn">Retour</Link>
       </div>
-      {vehicule?.chauffeur ?"":<AddChauffeurToVehicule vehiculeId={id} />}
+
+      {showChauffeurModal && (
+        <Modal
+          isOpen={true}
+          onClose={() => setShowChauffeurModal(false)}
+          title={vehicule.chauffeur ? 'Modifier chauffeur' : 'Ajouter chauffeur'}
+        >
+          <AddChauffeurToVehicule
+            vehiculeId={id}
+            onSuccess={() => {
+              setShowChauffeurModal(false);
+              fetchVehicule(); 
+            }}
+          />
+        </Modal>
+      )}
+
+      {showEditVehiculeModal && (
+        <Modal
+          isOpen={true}
+          onClose={() => setShowEditVehiculeModal(false)}
+          title="Modifier le véhicule"
+        >
+          <VehiculeForm
+            id={vehicule._id}
+            onClose={() => {
+              setShowEditVehiculeModal(false);
+              fetchVehicule(); 
+            }}
+          />
+        </Modal>
+      )}
+
       <MapGPS vehiculeId={id} />
     </div>
   );

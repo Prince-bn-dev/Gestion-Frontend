@@ -1,21 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { getParcById } from './api/parcApi';
 import { AuthProvider, useAuth } from "./context/AuthContext";
   import { Bounce, ToastContainer } from 'react-toastify';
 import "./slick-theme.min.css";
 import "./slick.min.css";
 
 
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./uikits/Sidebar";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import VerifyEmail from "./components/Auth/VerifyEmail";
 import ForgotPassword from "./components/Auth/ForgotPassword";
 import ResetPassword from "./components/Auth/ResetPassword";
-import Navbar from "./components/Navbar";
-import ParcForm from "./components/parcs/ParcForm";
+import Navbar from "./uikits/Navbar";
 import Profile from "./pages/Profile";
 import ParcList from "./components/parcs/ParcList";
 
@@ -24,7 +20,6 @@ import ParcDetail from "./components/parcs/ParcDetails";
 import UpdatePassword from "./components/Auth/UpdatePassword";
 import Home from "./pages/Home";
 import VehiculesList from "./components/vehicules/VehiculeList";
-import VehiculeForm from "./components/vehicules/VehiculeForm";
 import VehiculeDetail from "./components/vehicules/VehiculeDetail";
 import VoyageForm from "./components/voyages/VoyageForm";
 import MyVoyages from "./components/voyages/MyVoyages";
@@ -37,29 +32,41 @@ import VehiculesTable from "./components/vehicules/VehiculesTable";
 import VoyagesTable from "./components/voyages/VoyagesTable";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
-import Footer from "./components/Footer";
+
 import PhoneVerification from "./pages/PhoneVerification";
+import Footer from "./uikits/Footer";
+import { useState ,useEffect } from "react";
+import TopBar from "./uikits/TopBar ";
+import { useLocation } from "react-router-dom";
+import {sidebarData} from "./uikits/Sidebar"; 
+import TrajetList from "./components/Trajets/TrajetList";
 
-const EditparcWrapper = () => {
-  const { id } = useParams();
-  const [parc, setParc] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    getParcById(id)
-      .then((data) => setParc(data))
-      .catch(() => alert('parc introuvable'))
-      .finally(() => setLoading(false));
-  }, [id]);
-
-  if (loading) return <p>Chargement...</p>;
-  if (!parc) return <p>parc non trouvé</p>;
-
-  return <ParcForm parc={parc} />;
-};
 
 function AppRoutes() {
   const { token, user } = useAuth();
+
+     const handleLabelSelect = (label) => {
+    setSelectedLabel(label);
+  };
+    const location = useLocation();
+  const [currentLabel, setCurrentLabel] = useState("");
+  const findLabelByPath = (path, sidebar) => {
+    for (const item of sidebar) {
+      if (item.separator) continue;
+      if (item.link === path) return item.label;
+      if (item.hasSubmenu && item.submenu) {
+        const foundSub = item.submenu.find(sub => sub.link === path);
+        if (foundSub) return foundSub.label;
+      }
+    }
+    return ""; 
+  };
+
+  useEffect(() => {
+    const label = findLabelByPath(location.pathname, sidebarData);
+    setCurrentLabel(label);
+  }, [location.pathname]);
 
   return (
     <div className="app">
@@ -78,20 +85,17 @@ function AppRoutes() {
         theme="dark"
         transition={Bounce}
         />
-          <Sidebar />
+          <Sidebar onLabelSelect={handleLabelSelect} />
           <div className="main-content">
+            <TopBar currentLabel={currentLabel}/>
             <Routes>
               <Route path="/register" element={<Register />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/allparcs" element={<ParcsTable />} />
               <Route path="/parcs" element={<ParcList />} />
-              <Route path="/parcs/create" element={<ParcForm />} />
               <Route path="/parcs/:id" element={<ParcDetail />} />
-              <Route path="/parcs/edit/:id" element={<EditparcWrapper />}/>
 
               <Route path="/vehicules" element={<VehiculesList />} />
-              <Route path="/vehicules/create" element={<VehiculeForm />} />
-              <Route  path="/vehicules/edit/:id" element={<VehiculeForm />}/>
               <Route path="/vehicules/:id" element={<VehiculeDetail />} />
               <Route path="/allVehicules" element={<VehiculesTable />} />
 
@@ -106,6 +110,9 @@ function AppRoutes() {
               <Route path="/reservations/edit/:id" element={<ReservationForm />} />
               <Route path="/mes-reservations" element={<MesReservations />} />
               <Route path="/allVoyages" element={<VoyageList />} />
+
+
+              <Route path="/trajets" element={<TrajetList />} />
 
 
               <Route path="/profile" element={<Profile/>} />

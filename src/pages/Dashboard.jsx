@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LineChart, Line  } from 'recharts';
 import Loader from '../components/Loader';
+import { FaCar, FaMapMarkerAlt, FaCalendarAlt, FaUser } from "react-icons/fa";
 
 function Dashboard() {
   const [stats, setStats] = useState({
@@ -110,25 +111,49 @@ const reservationStats = [
       <p className="intro-text">
         Ce tableau de bord centralise les informations clés de votre flotte automobile.
       </p>
-
       <section className="stats-cards" aria-label="Statistiques clés du parc automobile">
-        <div className="card total-vehicules">
-          <h3>Total véhicules</h3>
-          <p>{stats.totalVehicules}</p>
+        <div className="card vehicules-actifs">
+          <div className="icon">
+            <FaCar aria-label="Véhicules actifs" />
+          </div>
+          <div>
+            <h3>Véhicules actifs</h3>
+            <p className="stat-value">24</p>
+            <p className="stat-change positive">↗ +2 ce mois</p>
+          </div>
         </div>
-        <div className="card disponibles">
-          <h3>Disponibles</h3>
-          <p>{stats.disponibles}</p>
+        <div className="card voyages">
+          <div className="icon">
+            <FaMapMarkerAlt aria-label="Voyages aujourd'hui" />
+          </div>
+          <div>
+            <h3>Voyages aujourd'hui</h3>
+            <p className="stat-value">8</p>
+            <p className="stat-change positive">↗ +3 ce mois</p>
+          </div>
         </div>
-        <div className="card maintenance">
-          <h3>En maintenance</h3>
-          <p>{stats.enMaintenance}</p>
+        <div className="card reservations">
+          <div className="icon">
+            <FaCalendarAlt aria-label="Réservations" />
+          </div>
+          <div>
+            <h3>Réservations</h3>
+            <p className="stat-value">156</p>
+            <p className="stat-change positive">↗ +12 ce mois</p>
+          </div>
         </div>
-        <div className="card total-parcs">
-          <h3>Parcs</h3>
-          <p>{stats.totalparcs}</p>
+        <div className="card utilisateurs">
+          <div className="icon">
+            <FaUser aria-label="Utilisateurs" />
+          </div>
+          <div>
+            <h3>Utilisateurs</h3>
+            <p className="stat-value">89</p>
+            <p className="stat-change positive">↗ +5 ce mois</p>
+          </div>
         </div>
       </section>
+
 
       <section className="chart-section">
         <h2>Répartition des véhicules</h2>

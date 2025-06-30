@@ -9,13 +9,14 @@ import {
   FaCar,
  FaParking 
 } from 'react-icons/fa';
+import { FaRoute } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
 import { IoIosPerson } from "react-icons/io";
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import MobileHeader from './MobileHeader';
 
-const sidebarData = [
+export const sidebarData = [
   {
     id: 'dashboard',
     label: 'Dashboard',
@@ -32,7 +33,6 @@ const sidebarData = [
     hasSubmenu: true,
     roles: ['admin', 'gestionnaire'],
     submenu: [
-      { id: 'creaction de Parcs', label: 'Creaction de Parcs', link: '/parcs/create', roles: ['gestionnaire'] },
       { id: 'liste des Parcs', label: 'Listes des Parcs', link: '/parcs', roles: ['gestionnaire'] },
       { id: 'Parcs Table', label: 'Parcs Table', link: '/allParcs', roles: ['admin'] },
     ],
@@ -45,9 +45,20 @@ const sidebarData = [
     hasSubmenu: true,
     roles: ['admin', 'chauffeur', 'gestionnaire'],
     submenu: [
-      { id: 'creaction de Vehicules', label: 'Creaction de Vehicules', link: '/vehicules/create', roles: ['gestionnaire'] },
+
       { id: 'liste des Vehicules', label: 'Listes des Vehicules', link: '/vehicules', roles: ['gestionnaire', 'chauffeur'] },
       { id: 'Vehicules Table', label: 'Vehicules Table', link: '/allVehicules', roles: ['admin'] },
+    ],
+  },
+  {
+    id: 'Trajets',
+    label: 'Trajets',
+    icon: <FaRoute />,
+    link: '/trajets',
+    hasSubmenu: true,
+    roles: ['admin', 'chauffeur', 'gestionnaire'],
+    submenu: [
+      { id: 'liste des trajets', label: 'Listes des trajets', link: '/trajets', roles: ['gestionnaire', 'chauffeur'] },
     ],
   },
   {
@@ -58,7 +69,6 @@ const sidebarData = [
     hasSubmenu: true,
     roles: ['admin', 'chauffeur', 'voyageur', 'gestionnaire'],
     submenu: [
-      { id: 'creaction de voyages', label: 'Creaction de voyages', link: '/voyages/new', roles: ['gestionnaire'] },
       { id: 'liste des voyages', label: 'Listes des voyages', link: '/voyages', roles: ['gestionnaire', 'chauffeur'] },
       { id: 'Les voyages', label: 'Les voyages', link: '/allVoyages', roles: ['voyageur'] },
       { id: 'Voyages Table', label: 'Voyages Table', link: '/allVoyagesTable', roles: ['admin'] },
@@ -97,11 +107,12 @@ const sidebarData = [
   }
 ];
 
-const SidebarItem = ({ item, activeItemId, setActiveItemId, isExpanded, toggleMenu }) => {
+const SidebarItem = ({ item, onLabelSelect,activeItemId, setActiveItemId, isExpanded, toggleMenu }) => {
   const handleClick = (e) => {
     if (item.hasSubmenu) {
       e.preventDefault();
       toggleMenu(item.id);
+      onLabelSelect(item.label);
     }
     setActiveItemId(item.id);
   };
@@ -156,7 +167,7 @@ const SidebarItem = ({ item, activeItemId, setActiveItemId, isExpanded, toggleMe
   );
 };
 
-const Sidebar = () => {
+const Sidebar = ({ onLabelSelect }) => {
   const [activeItemId, setActiveItemId] = useState(null);
   const initialMenus = {
   Parcs: false,
@@ -232,6 +243,7 @@ const Sidebar = () => {
               setActiveItemId={setActiveItemId}
               isExpanded={expandedMenus[item.id] || false}
               toggleMenu={toggleMenu}
+              onLabelSelect={onLabelSelect}
             />
           ))}
         </ul>

@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { getParcsByGestionnaire } from '../../api/parcApi';
 import { useAuth } from '../../context/AuthContext';
- 
+import Modal from '../../uikits/Modal';
+import ParcForm from './ParcForm';
+import { FaEdit, FaEye } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const ParcList = () => {
   const [parcs, setParcs] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const { user } = useAuth();
   const userId = user?._id;
+  const navigate = useNavigate();
+
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [editingParcId, setEditingParcId] = useState(null);
 
   useEffect(() => {
     if (userId) loadParcs();
@@ -16,51 +23,90 @@ const ParcList = () => {
   const loadParcs = async () => {
     try {
       const response = await getParcsByGestionnaire(userId);
-      const data = response.data;
-      setParcs(data);
+      setParcs(response.data);
       console.log('Parcs chargés avec succès');
-      if (data.length === 0) {
-        toast.info('Aucun parc trouvé pour cet utilisateur.');
-      }
     } catch (err) {
       console.log(err.response?.data?.message || 'Erreur lors du chargement des parcs');
     }
   };
 
+  const handleCloseModal = () => {
+    setShowCreateModal(false);
+    setEditingParcId(null);
+    loadParcs();
+  };
+
+  // 🔍 Filtrage des parcs par nom
+  const filteredParcs = parcs.filter((parc) =>
+    parc.nom.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="parc-list-container">
       <div className="header">
         <h2>Liste des parcs</h2>
-        <Link to="/parcs/create">
-          <button className="btn primary">Créer un nouveau parc</button>
-        </Link>
+        <div className="header-actions">
+          <input
+            type="text"
+            placeholder="Rechercher par nom..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+          <button className="add-button" onClick={() => setShowCreateModal(true)}>
+            + Ajouter un parc
+          </button>
+        </div>
       </div>
 
-      {parcs.length === 0 ? (
+      {showCreateModal && (
+        <Modal isOpen={true} onClose={handleCloseModal} title="Nouveau parc">
+          <ParcForm onClose={handleCloseModal} />
+        </Modal>
+      )}
+
+      {editingParcId && (
+        <Modal isOpen={true} onClose={handleCloseModal} title="Modification du parc">
+          <ParcForm id={editingParcId} onClose={handleCloseModal} />
+        </Modal>
+      )}
+
+      {filteredParcs.length === 0 ? (
         <p>Aucun parc trouvé.</p>
       ) : (
-        <ul className="parc-list">
-          {parcs.map((parc) => (
-            <li key={parc._id} className="parc-item">
-              <div className="info">
-                <h3>{parc.nom}</h3>
-                <p>{parc.localisation}</p>
-                <p>{parc.description}</p>
-                <p>
-                  <strong>Ouverture :</strong> {parc.heures_ouverture} - {parc.heures_fermeture}
-                </p>
-              </div>
-              <div className="actions">
-                <Link to={`/parcs/${parc._id}`}>
-                  <button className="btn details">Détails</button>
-                </Link>
-                <Link to={`/parcs/edit/${parc._id}`}>
-                  <button className="btn edit">Modifier</button>
-                </Link>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <table className="parc-table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Localisation</th>
+              <th>Description</th>
+              <th>Horaires</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredParcs.map((parc) => (
+              <tr key={parc._id}>
+                <td>{parc.nom}</td>
+                <td>{parc.localisation}</td>
+                <td>{parc.description}</td>
+                <td>{parc.heures_ouverture} - {parc.heures_fermeture}</td>
+                <td className="actions">
+                  <FaEye
+                    className="icon view-icon"
+                    onClick={() => navigate(`/parcs/${parc._id}`)}
+                    title="Voir les détails"
+                  />
+                  <FaEdit
+                    className="icon edit-icon"
+                    onClick={() => setEditingParcId(parc._id)}
+                    title="Modifier"
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </div>
   );

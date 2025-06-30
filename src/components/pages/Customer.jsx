@@ -20,6 +20,7 @@ function CustomPaging() {
     dots: true,
     dotsClass: "slick-dots slick-thumb",
     infinite: true,
+    arrows:false,
     autoplay: true,
     autoplaySpeed: 3000,
     speed: 500,

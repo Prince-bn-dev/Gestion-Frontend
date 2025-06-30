@@ -1,8 +1,11 @@
 import React from 'react';
-import CustomPaging from '../components/Customer';
+import CustomPaging from '../components/pages/Customer';
 import AvisSlider from '../components/pages/AvisSlider';
 import TestMap from '../components/pages/TestMap';
 import Voyages from '../components/pages/Voyages';
+import { BackgroundButton } from '../uikits/Button';
+import Slider from "react-slick";
+
 
 function Home() {
   const marque = [
@@ -15,6 +18,26 @@ function Home() {
     { name:"Ford" , image:"/images/V-8.png" },
     { name:"BMW" , image:"/images/V-9.png" },
   ]
+
+
+   const settings = {
+    dots: false,
+    infinite: true,
+    arrows:false,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+     responsive: [
+      {
+        breakpoint: 758,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+    ],
+  };
   return (
     <div className="home-container">
       <header className="hero-section">
@@ -26,14 +49,7 @@ function Home() {
           <p className="hero-slogan">
             <em>« Maîtrisez votre mobilité, maîtrisez votre avenir »</em>
           </p>
-          <button className="btn-primary"><a href="/login">Commencer maintenant</a></button>
-        </div>
-        <br />
-        <div className="hero-image">
-          <img
-            src="/images/v-1.avif"
-            alt="Parc automobile"
-          />
+          <BackgroundButton isLink={true} link={"/login"} text={"Commencer maintenant"} />
         </div>
       </header>
       <Voyages />
@@ -126,22 +142,18 @@ function Home() {
       <div className='marque-section'>
         <h2>Top Marque</h2>
         <div className="marque-container">
-        {marque.map((item, index) => {
-          return (
-            <div key={index + 2} className="marque-item">
-              <img src={item.image} alt={item.name} />
-              <p>{item.name}</p>
-            </div>
-          );
-        })}
+        <Slider {...settings}>
+          {marque.map((item, index) => {
+            return (
+              <div key={index + 2} className="marque-item">
+                <img src={item.image} alt={item.name} />
+              </div>
+            );
+          })}
+        </Slider>
          </div>
       </div>
-   <AvisSlider />
-      <section className="call-to-action">
-        <h2>Prêt à transformer la gestion de votre parc ?</h2>
-        <p>Rejoignez des centaines de gestionnaires qui nous font déjà confiance.</p>
-        <button className="btn-primary"><a href="/login">Créer un compte gratuit</a></button>
-      </section>
+      <AvisSlider />
     </div>
   );
 }

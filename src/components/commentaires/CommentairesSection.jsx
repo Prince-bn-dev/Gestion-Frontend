@@ -34,7 +34,7 @@ function CommentairesSection({ voyageId, user }) {
 
   return (
     <div className="commentaires-section">
-      <h3 className="titre-section">Commentaires</h3>
+      <h3 className="titre-section">Commentaires{`(${commentaires.length})`} </h3>
       {commentaires.length === 0 ? (
         <p className="aucun">Aucun commentaire pour ce voyage.</p>
       ) : (

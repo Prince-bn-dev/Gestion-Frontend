@@ -4,8 +4,7 @@ import { getVehiculeByGestionnaire } from '../../api/vehiculeApi';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate, useParams } from 'react-router-dom';
 
-function VoyageForm() {
-  const { id } = useParams(); 
+function VoyageForm({id ,onClose}) {
   const [formData, setFormData] = useState({
     vehicule: '',
     destination: '',
@@ -70,6 +69,7 @@ function VoyageForm() {
       navigate('/voyages');
     } catch (error) {
       console.log('Erreur lors de la soumission du formulaire');
+      onClose();
     }
   };
 

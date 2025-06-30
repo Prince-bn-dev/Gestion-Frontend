@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaUser, FaEnvelope, FaPaperPlane, FaUserEdit } from 'react-icons/fa';
+import { BackgroundButton } from '../uikits/Button';
 
 
 function Contact() {
@@ -31,9 +32,7 @@ function Contact() {
               <label htmlFor="Message"><FaEnvelope />Message <span>*</span></label>
               <textarea name="Message" id="Message" required></textarea>
             </div>
-            <button type="submit">
-              <FaPaperPlane /> Envoyer
-            </button>
+            <BackgroundButton text={"Envoyer"} icon={<FaPaperPlane />} type="submit" />
           </form>
         </div>
       </div>
