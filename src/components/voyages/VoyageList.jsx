@@ -22,7 +22,7 @@ function VoyagesList() {
         const res = await getAllVoyages();
         setVoyages(res.data);
       } catch (err) {
-        console.log("Erreur lors du chargement des voyages");
+        console.error("Erreur lors du chargement des voyages", err);
       } finally {
         setLoading(false);
       }
@@ -40,32 +40,40 @@ function VoyagesList() {
       console.log("Réservation créée. Veuillez procéder au paiement.");
       navigate(`/reservations/paiement/${res._id}`);
     } catch (error) {
-      console.log("Erreur lors de la création de la réservation");
-      console.error(error);
+      console.error("Erreur lors de la création de la réservation", error);
     }
   };
+
+  if (loading) return <div>Chargement des voyages...</div>;
 
   return (
     <div className="voyages-list-container">
       <h2>Liste des Voyages</h2>
+
       <div className="voyages-grid">
         {voyages.map(voyage => (
           <div className="voyage-card" key={voyage._id}>
-            <div className="title">
-              {voyage.vehicule?.parc.localisation} → {voyage.destination}
-            </div>
+            <h3 className="title">
+              {voyage.trajet?.lieux_depart} → {voyage.trajet?.lieux_arrive}
+            </h3>
+
             <div className="infos">
-              {new Date(voyage.date_depart).toLocaleDateString()} à {voyage.heure_depart}
-            </div>
-            <div className="conducteur">
-              <FaUser /> Conducteur : {voyage.chauffeur?.nom || 'Inconnu'}
-            </div>
-            <div className="vehicule">
-              <FaBus /> Véhicule : {voyage.vehicule?.modele} ({voyage.vehicule?.immatriculation})
+              <strong>Date :</strong> {new Date(voyage.date_depart).toLocaleDateString()}<br />
+              <strong>Heure départ :</strong> {voyage.heure_depart}<br />
+              <strong>Heure arrivée estimée :</strong> {voyage.heure_arrivee_Estime}<br />
+              <strong>Prix :</strong> {voyage.prix_par_place.toLocaleString()} FCFA
             </div>
 
-            <div className={`statut ${voyage.statut === 'En cours' ? 'en-cours' : 'termine'}`}>
-              {voyage.statut}
+            <div className="chauffeur">
+              <FaUser /> Chauffeur : {voyage.vehicule?.chauffeur?.prenom} {voyage.vehicule?.chauffeur?.nom}
+            </div>
+
+            <div className="vehicule">
+              <FaBus /> Véhicule : {voyage.vehicule?.marque} {voyage.vehicule?.modele} ({voyage.vehicule?.immatriculation})
+            </div>
+
+            <div className={`statut statut-${voyage.statut?.toLowerCase().replace(/\s/g, '-')}`}>
+              <strong>Statut :</strong> {voyage.statut}
             </div>
 
             <button

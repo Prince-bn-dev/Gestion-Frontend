@@ -12,6 +12,7 @@ import {
 } from 'recharts';
 import Modal from '../../uikits/Modal';
 import VoyageForm from './VoyageForm';
+import { filterVoyages } from '../../utils/filterVoyages'; 
 
 function MyVoyages() {
   const { user } = useAuth();
@@ -68,12 +69,7 @@ function MyVoyages() {
 
   const openCreateModal = () => setShowCreateModal(true);
 
-
-  const filteredVoyages = voyages.filter((v) =>
-    v.destination.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    v.vehicule?.marque?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    v.vehicule?.immatriculation?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredVoyages = filterVoyages(voyages, searchTerm);
 
   const lineChartData = [
     { date: '2025-06-10', passagers: 12 },
@@ -95,7 +91,6 @@ function MyVoyages() {
     <div className="mes-voyages-container" style={{ padding: '1rem 2rem' }}>
       <h2>Mes Voyages</h2>
 
-      {/* Barre d’actions : recherche + bouton création */}
       <div
         className="actions-bar"
         style={{
@@ -141,62 +136,33 @@ function MyVoyages() {
         )}
       </div>
 
-      {/* Liste des voyages filtrée */}
       {filteredVoyages.length === 0 ? (
-        <p className="no-voyage" style={{ fontStyle: 'italic', color: '#666' }}>
-          Aucun voyage trouvé.
-        </p>
+        <p className="no-voyage">Aucun voyage trouvé.</p>
       ) : (
-        <ul className="voyage-list" style={{ listStyle: 'none', padding: 0 }}>
+        <ul className="voyage-list">
           {filteredVoyages.map((v) => (
-            <li
-              className="voyage-item"
-              key={v._id}
-              style={{
-                border: '1px solid #ddd',
-                borderRadius: 8,
-                padding: '1rem',
-                marginBottom: '1rem',
-                boxShadow: '0 1px 4px rgba(0,0,0,0.05)',
-              }}
-            >
-              <p><strong>{v.destination}</strong></p>
-              <p><span>Départ</span> : {v.heure_depart}</p>
-              <p><span>Arrivée estimée</span> : {v.heure_arrivee_Estime}</p>
-              <p><span>Prix</span> : {v.prix_par_place} FCFA</p>
-              <p><span>Véhicule</span> : {v.vehicule?.marque || 'N/A'} ({v.vehicule?.immatriculation || '---'})</p>
-              <p><span>Chauffeur</span> : {v.vehicule?.chauffeur?.nom || 'Aucun'} {v.vehicule?.chauffeur?.prenom || ''}</p>
-              <p className={`statut ${v.statut}`}><span>Statut</span> : {v.statut}</p>
+            <li className="voyage-item" key={v._id}>
+              <p className="destination"><strong>{v.trajet?.lieux_depart} → {v.trajet?.lieux_arrive}</strong></p>
+              <p><span>Départ :</span> {v.heure_depart}</p>
+              <p><span>Arrivée estimée :</span> {v.heure_arrivee_Estime}</p>
+              <p><span>Prix :</span> {v.prix_par_place} FCFA</p>
+              <p><span>Véhicule :</span> {v.vehicule?.marque || 'N/A'} ({v.vehicule?.immatriculation || '---'})</p>
+              <p><span>Chauffeur :</span> {v.vehicule?.chauffeur?.nom || 'Aucun'} {v.vehicule?.chauffeur?.prenom || ''}</p>
+              <p className={`statut ${v.statut}`}><span>Statut :</span> {v.statut}</p>
+
               {user.role === 'gestionnaire' && (
-                <div className="actions" style={{ marginTop: '0.5rem' }}>
+                <div className="actions">
                   <button
                     className="edit-btn"
                     onClick={() => handleEdit(v._id)}
-                    style={{
-                      marginRight: '0.5rem',
-                      padding: '0.3rem 0.6rem',
-                      borderRadius: 4,
-                      border: 'none',
-                      backgroundColor: '#4caf50',
-                      color: 'white',
-                      cursor: 'pointer',
-                    }}
-                    aria-label={`Modifier le voyage vers ${v.destination}`}
+                    aria-label={`Modifier le voyage vers ${v.trajet?.lieux_arrive}`}
                   >
                     Modifier
                   </button>
                   <button
                     className="delete-btn"
                     onClick={() => handleDelete(v._id)}
-                    style={{
-                      padding: '0.3rem 0.6rem',
-                      borderRadius: 4,
-                      border: 'none',
-                      backgroundColor: '#f44336',
-                      color: 'white',
-                      cursor: 'pointer',
-                    }}
-                    aria-label={`Supprimer le voyage vers ${v.destination}`}
+                    aria-label={`Supprimer le voyage vers ${v.trajet?.lieux_arrive}`}
                   >
                     Supprimer
                   </button>
@@ -207,7 +173,7 @@ function MyVoyages() {
         </ul>
       )}
 
-      {/* Modal édition */}
+
       {showEditModal && (
         <Modal isOpen={true} onClose={handleCloseModal} title="Modifier le voyage">
           <VoyageForm id={editingVoyageId} onClose={handleCloseModal} />

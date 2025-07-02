@@ -46,7 +46,7 @@ function CommentairesSection({ voyageId, user }) {
                   <img
                     src={
                       com.auteur?.image
-                        ? `${import.meta.env.VITE_API_URL}${com.auteur.image}`
+                        ? `${com.auteur.image}`
                         : '/default-avatar.png'
                     }
                     alt="avatar"

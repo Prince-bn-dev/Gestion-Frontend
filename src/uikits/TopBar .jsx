@@ -6,6 +6,7 @@ const TopBar = ({ currentLabel }) => {
     <header className="topbar">
       <div className="topbar-left">
         <h2>{currentLabel}</h2>
+        <hr />
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <span>Home</span>
           <span className="sep">›</span>

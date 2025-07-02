@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { createVoyage, updateVoyage, getVoyageById } from '../../api/voyageApi';
 import { getVehiculeByGestionnaire } from '../../api/vehiculeApi';
+import { getAllTrajets } from '../../api/trajetApi';
 import { useAuth } from '../../context/AuthContext';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-function VoyageForm({id ,onClose}) {
+function VoyageForm({ id, onClose }) {
   const [formData, setFormData] = useState({
     vehicule: '',
-    destination: '',
+    trajet: '',
     date_depart: '',
     heure_depart: '',
     heure_arrivee_Estime: '',
     prix_par_place: '',
-    statut: 'encours',
+    statut: 'Pas_démarrer',
   });
+
   const [vehicules, setVehicules] = useState([]);
+  const [trajets, setTrajets] = useState([]);
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -28,18 +31,27 @@ function VoyageForm({id ,onClose}) {
       }
     };
 
+    const fetchTrajets = async () => {
+      try {
+        const res = await getAllTrajets();
+        setTrajets(res.data);
+      } catch (err) {
+        console.log('Erreur lors du chargement des trajets');
+      }
+    };
+
     const fetchVoyage = async () => {
       if (id) {
         try {
           const res = await getVoyageById(id);
           setFormData({
-            vehicule: res.data.vehicule?._id,
-            destination: res.data.destination,
-            date_depart: res.data.date_depart.slice(0, 10),
-            heure_depart: res.data.heure_depart,
-            heure_arrivee_Estime: res.data.heure_arrivee_Estime,
-            prix_par_place: res.data.prix_par_place,
-            statut: res.data.statut,
+            vehicule: res.data.vehicule?._id || '',
+            trajet: res.data.trajet?._id || '',
+            date_depart: res.data.date_depart?.slice(0, 10) || '',
+            heure_depart: res.data.heure_depart || '',
+            heure_arrivee_Estime: res.data.heure_arrivee_Estime || '',
+            prix_par_place: res.data.prix_par_place || '',
+            statut: res.data.statut || 'Pas_démarrer',
           });
         } catch {
           console.log('Voyage introuvable');
@@ -48,6 +60,7 @@ function VoyageForm({id ,onClose}) {
     };
 
     fetchVehicules();
+    fetchTrajets();
     fetchVoyage();
   }, [id, user._id]);
 
@@ -69,7 +82,8 @@ function VoyageForm({id ,onClose}) {
       navigate('/voyages');
     } catch (error) {
       console.log('Erreur lors de la soumission du formulaire');
-      onClose();
+    } finally {
+      if (onClose) onClose();
     }
   };
 
@@ -81,12 +95,21 @@ function VoyageForm({id ,onClose}) {
         <select name="vehicule" value={formData.vehicule} onChange={handleChange} required>
           <option value="">-- Choisir un véhicule --</option>
           {vehicules.map(v => (
-            <option key={v._id} value={v._id}>{v.marque} - {v.immatriculation}</option>
+            <option key={v._id} value={v._id}>
+              {v.marque} - {v.immatriculation}
+            </option>
           ))}
         </select>
 
-        <label>Destination</label>
-        <input type="text" name="destination" value={formData.destination} onChange={handleChange} required />
+        <label>Trajet (Destination)</label>
+        <select name="trajet" value={formData.trajet} onChange={handleChange} required>
+          <option value="">-- Choisir un trajet --</option>
+          {trajets.map(t => (
+            <option key={t._id} value={t._id}>
+              {t.lieux_depart} → {t.lieux_arrive}
+            </option>
+          ))}
+        </select>
 
         <label>Date de départ</label>
         <input type="date" name="date_depart" value={formData.date_depart} onChange={handleChange} required />
@@ -102,9 +125,9 @@ function VoyageForm({id ,onClose}) {
 
         <label>Statut</label>
         <select name="statut" value={formData.statut} onChange={handleChange}>
-          <option value="nonInitier">Non initié</option>
-          <option value="encours">En cours</option>
-          <option value="termine">Terminé</option>
+          <option value="Pas_démarrer">Pas démarré</option>
+          <option value="Pret_a_démarrer">Prêt à démarrer</option>
+          <option value="terminé">Terminé</option>
           <option value="annule">Annulé</option>
         </select>
 

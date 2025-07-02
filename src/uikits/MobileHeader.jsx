@@ -13,13 +13,9 @@ const MobileHeader = ({ toggleSidebar }) => {
         <FaSearch className="search-icon" />
       </div>
 
-      <div className="notification-icons">
-        <FaBell className="icon notification-icon" />
-        <FaEnvelope className="icon message-icon" />
-      </div>
 
     <section className="logo-section">
-        <img src={`${import.meta.env.VITE_API_URL}${user.image}` } alt="Logo" />
+        <img src={`${user.image}` } alt="Logo" />
       </section>
     </div>
   );

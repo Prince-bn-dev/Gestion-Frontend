@@ -56,9 +56,9 @@ export const sidebarData = [
     icon: <FaRoute />,
     link: '/trajets',
     hasSubmenu: true,
-    roles: ['admin', 'chauffeur', 'gestionnaire'],
+    roles: ['admin', 'gestionnaire'],
     submenu: [
-      { id: 'liste des trajets', label: 'Listes des trajets', link: '/trajets', roles: ['gestionnaire', 'chauffeur'] },
+      { id: 'liste des trajets', label: 'Listes des trajets', link: '/trajets', roles: ['gestionnaire'] },
     ],
   },
   {

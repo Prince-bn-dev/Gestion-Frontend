@@ -33,7 +33,10 @@ function Profile() {
   const handleFileChange = (e) => setSelectedFile(e.target.files[0]);
 
   const handleUpload = async () => {
-    if (!selectedFile) return;
+    if (!selectedFile || !(selectedFile instanceof File)) {
+      alert("Aucun fichier sélectionné ou fichier invalide.");
+      return;
+    }
     const formData = new FormData();
     formData.append('file', selectedFile);
     formData.append('userId', user._id);
@@ -54,9 +57,17 @@ function Profile() {
       setSelectedFile(null);
       setShowModal(false); 
     } catch (err) {
-      console.log("Erreur lors de l'upload");
-      setShowModal(false);
+  console.log("Réponse complète de l'erreur :", err.response);
+
+    const errorData = err.response?.data?.error;
+    if (errorData) {
+      const { format, maxSize, general } = errorData;
+      alert([format, maxSize, general].filter(Boolean).join("\n"));
+    } else {
+      alert("Erreur inattendue lors de l'envoi du fichier.");
     }
+  setShowModal(false);
+}
   };
 
   if (loading) return <div className="message loading"><Loader /></div>;
@@ -67,11 +78,11 @@ function Profile() {
       <div className='profile-img'>
         <img src="/images/bg.jpg" alt="background" />
         <div className="avatar-container">
-          <img
-            src={`${import.meta.env.VITE_API_URL}${user.image}`}
-            alt="Avatar"
-            className="profil-personne"
-          />
+      <img
+        src={user.image || "/images/default-avatar.png"}
+        alt="Avatar"
+        className="profil-personne"
+      />
           <span className="edit-icon" onClick={() => setShowModal(true)}><FaPencilAlt /></span> 
         </div>
       </div>
@@ -82,6 +93,7 @@ function Profile() {
             <h3>Mettre à jour votre photo</h3>
             <input
               type="file"
+              name="file"
               accept="image/png, image/jpeg, image/jpg"
               onChange={handleFileChange}
             />
@@ -89,6 +101,15 @@ function Profile() {
               <button onClick={handleUpload} disabled={!selectedFile}>Uploader</button>
               <button onClick={() => setShowModal(false)} className="cancel-btn"><IoClose /></button>
             </div>
+            {selectedFile && (
+              <div className="preview">
+                <img
+                  src={URL.createObjectURL(selectedFile)}
+                  alt="Aperçu"
+                  style={{ maxWidth: "100%", marginTop: "10px" }}
+                />
+              </div>
+            )}
           </div>
         </div>
       )}
