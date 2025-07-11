@@ -11,6 +11,7 @@ import Loader from '../Loader';
 import { BackgroundButton } from '../../uikits/Button';
 import VehiculeForm from './VehiculeForm';
 import Modal from '../../uikits/Modal';
+import { toast } from 'react-toastify';
 
 function VehiculesList() {
   const [vehicules, setVehicules] = useState([]);
@@ -30,9 +31,7 @@ function VehiculesList() {
           : await getVehiculeByChauffeur(userId);
       setVehicules(response.data);
     } catch (err) {
-      console.log(
-        err.response?.data?.message || 'Erreur lors du chargement des véhicules'
-      );
+      toast.error('Erreur lors du chargement des véhicules');
     } finally {
       setLoading(false);
     }
@@ -47,11 +46,9 @@ function VehiculesList() {
       try {
         await deleteVehicule(vehiculeId);
         setVehicules((prev) => prev.filter((v) => v._id !== vehiculeId));
-        console.log('Véhicule supprimé avec succès');
+        toast.success('Véhicule supprimé avec succès');
       } catch (err) {
-        console.log(
-          err.response?.data?.message || 'Erreur lors de la suppression du véhicule'
-        );
+        toast.error('Erreur lors de la suppression du véhicule');
       }
     }
   };

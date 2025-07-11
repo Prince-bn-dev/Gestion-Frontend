@@ -4,7 +4,14 @@ import { getParcById } from '../../api/parcApi';
 import Loader from '../Loader';
 import Modal from '../../uikits/Modal';
 import ParcForm from './ParcForm';
-import { FaEdit, FaArrowLeft } from 'react-icons/fa';
+import {
+  FaEdit,
+  FaArrowLeft,
+  FaMapMarkerAlt,
+  FaInfoCircle,
+  FaClock,
+} from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const ParcDetail = () => {
   const { id } = useParams();
@@ -16,9 +23,9 @@ const ParcDetail = () => {
     try {
       const response = await getParcById(id);
       setParc(response.data);
-      console.log('Parc chargé avec succès');
+      toast.success('Parc chargé avec succès');
     } catch (err) {
-      console.log(err.response?.data?.message || 'Erreur lors du chargement du parc');
+      toast.error('Erreur lors du chargement du parc');
     } finally {
       setLoading(false);
     }
@@ -30,11 +37,11 @@ const ParcDetail = () => {
 
   const handleCloseEditModal = () => {
     setIsEditing(false);
-    loadParc(); // Recharger les données après modification
+    loadParc();
   };
 
   if (loading) return <div className="parc-detail__loading"><Loader /></div>;
-  if (!parc) return <div className="parc-detail__not-found">Parc non trouvé</div>;
+  if (!parc) return <div className="parc-detail__not-found">❌ Parc non trouvé</div>;
 
   return (
     <div className="parc-detail">
@@ -42,18 +49,27 @@ const ParcDetail = () => {
         <div className="parc-header">
           <h2>{parc.nom}</h2>
           <div className="icon-buttons">
-            <FaEdit className="icon edit-icon" title="Modifier" onClick={() => setIsEditing(true)} />
-            <Link to="/parcs">
-              <FaArrowLeft className="icon back-icon" title="Retour" />
+            <button className="icon-button" onClick={() => setIsEditing(true)} title="Modifier">
+              <FaEdit />
+            </button>
+            <Link to="/parcs" className="icon-button" title="Retour à la liste">
+              <FaArrowLeft />
             </Link>
           </div>
         </div>
 
         <div className="parc-info">
-          <p><strong>📍 Localisation :</strong> {parc.localisation || 'Non spécifiée'}</p>
-          <p><strong>📝 Description :</strong> {parc.description || 'Non fournie'}</p>
           <p>
-            <strong>⏰ Horaires :</strong> {parc.heures_ouverture || 'N.C'} - {parc.heures_fermeture || 'N.C'}
+            <FaMapMarkerAlt className="info-icon" /> 
+            <strong>Localisation :</strong> {parc.localisation || 'Non spécifiée'}
+          </p>
+          <p>
+            <FaInfoCircle className="info-icon" /> 
+            <strong>Description :</strong> {parc.description || 'Non fournie'}
+          </p>
+          <p>
+            <FaClock className="info-icon" /> 
+            <strong>Horaires :</strong> {parc.heures_ouverture || 'N.C'} - {parc.heures_fermeture || 'N.C'}
           </p>
         </div>
       </div>

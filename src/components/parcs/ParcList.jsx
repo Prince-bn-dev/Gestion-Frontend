@@ -5,6 +5,7 @@ import Modal from '../../uikits/Modal';
 import ParcForm from './ParcForm';
 import { FaEdit, FaEye } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const ParcList = () => {
   const [parcs, setParcs] = useState([]);
@@ -24,9 +25,9 @@ const ParcList = () => {
     try {
       const response = await getParcsByGestionnaire(userId);
       setParcs(response.data);
-      console.log('Parcs chargés avec succès');
+      toast.success('Parcs chargés avec succès');
     } catch (err) {
-      console.log(err.response?.data?.message || 'Erreur lors du chargement des parcs');
+      toast.error('Erreur lors du chargement des parcs');
     }
   };
 
@@ -36,7 +37,6 @@ const ParcList = () => {
     loadParcs();
   };
 
-  // 🔍 Filtrage des parcs par nom
   const filteredParcs = parcs.filter((parc) =>
     parc.nom.toLowerCase().includes(searchTerm.toLowerCase())
   );

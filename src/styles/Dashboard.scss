@@ -15,74 +15,91 @@
     color: var(--text-color);
   }
 
-.stats-cards {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  margin: 2rem 0;
-
-  .card {
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    padding: 1.5rem 2rem;
-    max-width: 250px;
+  .stats-cards {
     display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    transition: box-shadow 0.2s;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
 
-    &:hover {
-      box-shadow: 0 4px 16px rgba(60, 120, 180, 0.13);
-    }
-
-    .icon {
-      font-size: 2.5rem;
-      color: #2196f3; 
-      flex-shrink: 0;
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 1.5rem 2rem;
+      max-width: 250px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      width: 48px;
-      height: 48px;
+      gap: 1.2rem;
+      transition: box-shadow 0.2s;
+
+      &:hover {
+        box-shadow: 0 4px 16px rgba(60, 120, 180, 0.13);
+      }
+
+      .icon {
+        font-size: 2.5rem;
+        color: #2196f3;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        background: #e3f2fd;
+        border-radius: 50%;
+      }
+
+      h3 {
+        margin: 0 0 0.3rem 0;
+        font-size: 1.1rem;
+        color: #333;
+        font-weight: 600;
+      }
+
+      .stat-value {
+        font-size: 2.1rem;
+        font-weight: 700;
+        margin: 0.1rem 0 0.4rem 0;
+        color: #222;
+      }
+
+      .stat-change {
+        font-size: 1rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+
+        &.positive {
+          color: #43a047;
+        }
+
+        &.negative {
+          color: #e53935;
+        }
+      }
+    }
+
+    .vehicules-actifs .icon {
+      color: #2196f3;
       background: #e3f2fd;
-      border-radius: 50%;
+      font-size: 30px;
     }
-
-    h3 {
-      margin: 0 0 0.3rem 0;
-      font-size: 1.1rem;
-      color: #333;
-      font-weight: 600;
+    .voyages .icon {
+      color: #43a047;
+      background: #e8f5e9;
+      font-size: 30px;
     }
-
-    .stat-value {
-      font-size: 2.1rem;
-      font-weight: 700;
-      margin: 0.1rem 0 0.4rem 0;
-      color: #222;
+    .reservations .icon {
+      color: #ff9800;
+      background: #fff3e0;
+      font-size: 30px;
     }
-
-    .stat-change {
-      font-size: 1rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-
-      &.positive {
-        color: #43a047;
-      }
-      &.negative {
-        color: #e53935;
-      }
+    .utilisateurs .icon {
+      color: #8e24aa;
+      background: #f3e5f5;
+      font-size: 30px;
     }
   }
-  .vehicules-actifs .icon { color: #2196f3; background: #e3f2fd; font-size: 30px;}
-  .voyages .icon { color: #43a047; background: #e8f5e9; font-size: 30px;}
-  .reservations .icon { color: #ff9800; background: #fff3e0; font-size: 30px;}
-  .utilisateurs .icon { color: #8e24aa; background: #f3e5f5; font-size: 30px;}
-}
-
 
   .chart-section {
     margin-top: 2rem;
@@ -90,38 +107,36 @@
     padding: 1rem;
     border-radius: 12px;
 
-
     .donut-chart-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-  .legend-custom {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 1rem;
-
-    .legend-item {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      margin: 0 1rem;
 
-      .legend-color {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        margin-right: 0.5rem;
-      }
+      .legend-custom {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 1rem;
 
-      span {
-        font-size: 0.9rem;
-        color: var(--text-color);
+        .legend-item {
+          display: flex;
+          align-items: center;
+          margin: 0 1rem;
+
+          .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+          }
+
+          span {
+            font-size: 0.9rem;
+            color: var(--text-color);
+          }
+        }
       }
     }
-  }
-}
-
   }
 
   .recent-reservations {
@@ -129,20 +144,80 @@
     background-color: var(--white-color);
     padding: 1rem;
     border-radius: 12px;
+    overflow-x: auto;
 
     table {
       width: 100%;
       border-collapse: collapse;
 
-      th, td {
+      th,
+      td {
         padding: 0.75rem;
         border-bottom: 1px solid #eee;
         text-align: left;
+        white-space: nowrap;
       }
 
       th {
         background-color: #f0f0f0;
       }
+    }
+  }
+
+  /* ---------------------- */
+  /*      Responsive        */
+  /* ---------------------- */
+  @media screen and (max-width: 768px) {
+    .stats-cards {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+
+      .card {
+        width: 100%;
+        max-width: 100%;
+        justify-content: flex-start;
+      }
+    }
+
+    .chart-section {
+      padding: 0.8rem;
+    }
+
+    .recent-reservations {
+      padding: 0.8rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    .intro-text {
+      font-size: 0.95rem;
+    }
+
+    .stat-value {
+      font-size: 1.8rem !important;
+    }
+
+    .legend-custom {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .card h3 {
+      font-size: 1rem;
+    }
+
+    .stat-change {
+      font-size: 0.9rem;
+    }
+
+    .chart-section,
+    .recent-reservations {
+      padding: 0.6rem;
     }
   }
 }

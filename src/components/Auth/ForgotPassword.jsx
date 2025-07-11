@@ -3,6 +3,7 @@ import axios from 'axios';
  
 import ReactFlagsSelect from 'react-flags-select';
 import { FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const africanCountryCodes = [
   "ZA", "DZ", "AO", "BJ", "BW", "BF", "BI", "CM", "CV", "KM",
@@ -45,7 +46,7 @@ function ForgotPassword() {
     const identifiant = mode === 'EMAIL' ? email : `${dialCode}${cleanedPhone}`;
 
     if (!identifiant) {
-      console.log("Veuillez entrer un identifiant valide.");
+      toast.info("Veuillez entrer un identifiant valide.");
       return;
     }
 
@@ -54,10 +55,10 @@ function ForgotPassword() {
       const res = await axios.post(`${import.meta.env.VITE_API_URL}api/user/forgotPassword`, {
         identifiant
       });
-      console.log(res.data.message);
+      toast.success('identifiant valide');
     } catch (err) {
-      const message = err.response?.data?.message || "Échec de la réinitialisation.";
-      console.log(message);
+      const message ="Échec de la réinitialisation.";
+      toast.error(message);
     } finally {
       setLoading(false);
     }

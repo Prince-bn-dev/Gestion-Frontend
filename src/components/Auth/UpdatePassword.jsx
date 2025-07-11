@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
  
 
 function UpdatePasswordForm() {
@@ -20,7 +21,7 @@ function UpdatePasswordForm() {
     e.preventDefault();
 
     if (form.newPassword !== form.confirmNewPassword) {
-      return console.log('Les nouveaux mots de passe ne correspondent pas');
+      return toast.info('Les nouveaux mots de passe ne correspondent pas');
     }
 
     try {
@@ -40,7 +41,7 @@ function UpdatePasswordForm() {
         }
       );
 
-      console.log(res.data.message || 'Mot de passe mis à jour avec succès');
+      toast.success( 'Mot de passe mis à jour avec succès');
       setForm({
         oldPassword: '',
         newPassword: '',
@@ -50,7 +51,7 @@ function UpdatePasswordForm() {
         navigate('/profile'); 
       }, 2000);
     } catch (err) {
-      console.log(err.response?.data?.message || 'Erreur lors de la mise à jour du mot de passe');
+      toast.error('Erreur lors de la mise à jour du mot de passe');
     }
   };
 

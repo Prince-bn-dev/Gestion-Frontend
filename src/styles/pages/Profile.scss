@@ -16,22 +16,7 @@
     margin-bottom: 1.5rem;
   }
 
-  .profile-img {
-    position: relative;
-    width: 100%;
-    height: 40vh;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 1rem;
-    }
-
     .avatar-container {
-      position: absolute;
-      bottom: -55px;
-      left: 50%;
       transform: translateX(-50%);
       display: inline-block;
 
@@ -55,7 +40,7 @@
         bottom: 0;
         right: 0;
         background-color: var(--primary-color);
-        color: white;
+        color: var(--white-color);
         border-radius: 50%;
         padding: 0.3rem;
         font-size: 1rem;
@@ -68,7 +53,6 @@
         }
       }
     }
-  }
 
   input[type="file"] {
     margin-bottom: 1rem;
@@ -204,7 +188,7 @@
 
       .cancel-btn {
         background-color: #e53e3e;
-        color: white;
+        color: var(--white-color);
       }
     }
 
@@ -215,7 +199,7 @@
       border-radius: 0.4rem;
       cursor: pointer;
       background-color: var(--primary-color);
-      color: white;
+      color: var(--white-color);
 
       &:disabled {
         background-color: #cbd5e1;

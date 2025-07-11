@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getVehicules } from '../../api/vehiculeApi';
 import Loader from '../Loader';
+import { toast } from 'react-toastify';
  
 
 const VehiculesTable = () => {
@@ -12,9 +13,9 @@ const VehiculesTable = () => {
       try {
         const response = await getVehicules();
         setVehicules(response.data);
-        console.log('Véhicules chargés avec succès');
+        toast.success('Véhicules chargés avec succès');
       } catch (err) {
-        console.log(err.response?.data?.message || 'Erreur lors du chargement des véhicules');
+        toast.error('Erreur lors du chargement des véhicules');
       } finally {
         setLoading(false);
       }

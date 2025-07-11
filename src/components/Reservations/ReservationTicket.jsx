@@ -34,7 +34,6 @@ function ReservationTicket({ reservation, onDelete, onEdit }) {
         <span className="ticket-title">BILLET DE RÉSERVATION</span>
         <span className="ticket-class">AUTO-TRACK</span>
       </div>
-
       <div className="ticket-body">
         <div className="ticket-row">
           <span className="label">Passager :</span>

@@ -3,6 +3,7 @@ import { getReservationsByVoyageur, deleteReservation } from "../../api/reservat
 import { useAuth } from "../../context/AuthContext";
 import ReservationTicket from "./ReservationTicket";
 import Loader from "../Loader";
+import { toast } from "react-toastify";
 
 function MesReservations() {
   const { user } = useAuth();
@@ -16,7 +17,7 @@ function MesReservations() {
       setMessage("");
     } catch (err) {
       setReservations([]);
-      setMessage("Erreur lors du chargement des réservations.");
+      toast.error("Erreur lors du chargement des réservations.");
     }
   };
 
@@ -30,7 +31,7 @@ function MesReservations() {
         await deleteReservation(id);
         fetchData();
       } catch (err) {
-        setMessage("Erreur lors de la suppression.");
+        toast.error("Erreur lors de la suppression.");
       }
     }
   };

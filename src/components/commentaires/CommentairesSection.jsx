@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getCommentairesByVoyage, deleteCommentaire } from '../../api/commentaireApi';
 import { FaStar, FaTrash } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 function CommentairesSection({ voyageId, user }) {
   const [commentaires, setCommentaires] = useState([]);
@@ -11,7 +12,7 @@ function CommentairesSection({ voyageId, user }) {
       const res = await getCommentairesByVoyage(voyageId);
       setCommentaires(res.data);
     } catch (err) {
-      console.error('Erreur lors du chargement des commentaires', err);
+      toast.error('Erreur lors du chargement des commentaires');
     }
   };
 

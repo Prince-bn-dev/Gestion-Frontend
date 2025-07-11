@@ -43,8 +43,8 @@ function MapGPS({ vehiculeId }) {
   if (!position) return <p>Chargement de la position GPS...</p>;
 
   return (
-    <div style={{ height: '500px', width: '100%' }}>
-      <MapContainer center={position} zoom={14} scrollWheelZoom={true} style={{ height: '100%', width: '100%' }}>
+    <div style={{ height: '500px', width: '100%', margin:'10px' }}>
+      <MapContainer center={position} zoom={14} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; OpenStreetMap contributors"

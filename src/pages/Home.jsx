@@ -2,9 +2,9 @@ import React from 'react';
 import CustomPaging from '../components/pages/Customer';
 import AvisSlider from '../components/pages/AvisSlider';
 import TestMap from '../components/pages/TestMap';
-import Voyages from '../components/pages/Voyages';
 import { BackgroundButton } from '../uikits/Button';
 import Slider from "react-slick";
+import Trajet from '../components/pages/Trajet';
 
 
 function Home() {
@@ -37,7 +37,7 @@ function Home() {
         },
       },
     ],
-  };
+    };
   return (
     <div className="home-container">
       <header className="hero-section">
@@ -52,44 +52,63 @@ function Home() {
           <BackgroundButton isLink={true} link={"/login"} text={"Commencer maintenant"} />
         </div>
       </header>
-      <Voyages />
-      <section className="about-section">
-        <h2>Pourquoi choisir notre solution ?</h2>
-      <div className='about-container'>
-        <section>
-          <h3>Optimisation de votre flotte</h3>
-          <p>
-            Suivez en temps réel l’état de vos véhicules et planifiez les opérations de maintenance avant qu’elles ne deviennent critiques. 
-            Notre système vous aide à prolonger la durée de vie de votre flotte tout en minimisant les coûts imprévus.
-          </p>
-        </section>
+      <Trajet />
+         <section className="about-section">
+            <h2>Pourquoi choisir notre solution ?</h2>
+          <div className='about-container'>
+            <section>
+              <span>
+              <h3>Optimisation de votre flotte</h3>
+              <p>
+                Suivez en temps réel l’état de vos véhicules et planifiez les opérations de maintenance avant qu’elles ne deviennent critiques. 
+                Notre système vous aide à prolonger la durée de vie de votre flotte tout en minimisant les coûts imprévus.
+              </p>
+              <img src="./images/bus2.png" alt="" />
+              </span>
+              <img src="./voiture/b2.jpg" alt="" />
+            </section>
 
-        <section>
-          <h3>Gestion intelligente des réservations</h3>
-          <p>
-            Grâce à notre module de réservation intégré, affectez automatiquement les véhicules disponibles selon la demande. 
-            Gérez les priorités, les trajets et les conducteurs en quelques clics.
-          </p>
-        </section>
+            <section >
+              <img src="./aboutimg/a2.jpg" alt="" />
+              <span>
+              <h3>Gestion intelligente des réservations</h3>
+              <p>
+                Grâce à notre module de réservation intégré, affectez automatiquement les véhicules disponibles selon la demande. 
+                Gérez les priorités, les trajets et les conducteurs en quelques clics.
+              </p>
+              <img src="./images/bus2.png" alt="" />
 
-        <section>
-          <h3>Analyse et rapports détaillés</h3>
-          <p>
-            Prenez des décisions éclairées grâce à des tableaux de bord dynamiques et des rapports personnalisés. 
-            Suivez les performances par parc, par véhicule ou par conducteur pour ajuster votre stratégie au quotidien.
-          </p>
-        </section>
+              </span>
+            </section>
 
-        <section>
-          <h3>Expérience utilisateur moderne</h3>
-          <p>
-            Notre interface épurée et responsive s’adapte à tous les supports, garantissant une utilisation fluide pour les gestionnaires comme pour les utilisateurs. 
-            La navigation est rapide, intuitive et pensée pour les besoins opérationnels.
-          </p>
-        </section>
-      </div>
-      <TestMap />
-      </section>
+            <section>
+              <span>
+              <h3>Analyse et rapports détaillés</h3>
+              <p>
+                Prenez des décisions éclairées grâce à des tableaux de bord dynamiques et des rapports personnalisés. 
+                Suivez les performances par parc, par véhicule ou par conducteur pour ajuster votre stratégie au quotidien.
+              </p>
+              <img src="./images/bus2.png" alt="" />
+
+              </span>
+              <img src="./aboutimg/a3.jpg" alt="" />
+            </section>
+
+            <section className='one'>
+            <img src="./aboutimg/a4.jpg" alt="" />
+            <span>
+            <h3>Expérience utilisateur moderne</h3>
+              <p>
+                Notre interface épurée et responsive s’adapte à tous les supports, garantissant une utilisation fluide pour les gestionnaires comme pour les utilisateurs. 
+                La navigation est rapide, intuitive et pensée pour les besoins opérationnels.
+              </p>
+              <img src="./images/bus2.png" alt="" />
+
+            </span>
+            </section>
+          </div>
+          <TestMap />
+          </section>
       <CustomPaging />
       <section className="features-section">
         <h2>Fonctionnalités clés</h2>

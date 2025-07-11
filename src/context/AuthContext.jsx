@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const AuthContext = createContext();
 
@@ -27,7 +28,7 @@ export const AuthProvider = ({ children }) => {
         setUser(response.data);
         localStorage.setItem('user', JSON.stringify(response.data)); 
       } catch (error) {
-        console.error('Erreur récupération profil:', error);
+        toast.error('Erreur récupération profil');
         logout();
       } finally {
         setIsLoading(false);

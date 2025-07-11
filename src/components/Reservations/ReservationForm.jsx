@@ -5,6 +5,7 @@ import { createPaiement } from '../../api/paiementApi';
 import { useNavigate, useParams } from 'react-router-dom';
 import KkiapayButton from '../../components/KkiapayButton';
 import Loader from '../Loader';
+import { toast } from 'react-toastify';
 
 function ReservationForm() {
   const { user } = useAuth();
@@ -17,7 +18,7 @@ function ReservationForm() {
   useEffect(() => {
     const fetchData = async () => {
       if (!user) {
-        console.log("Vous devez être connecté.");
+        toast.info("Vous devez être connecté.");
         return navigate('/login');
       }
 
@@ -25,7 +26,7 @@ function ReservationForm() {
         const resData = await getReservationById(reservationId);
         setReservation(resData);
       } catch (err) {
-        console.log("Erreur lors du chargement des données.");
+        toast.error("Erreur lors du chargement des données.");
         navigate('/allVoyages');
       }
     };
@@ -48,10 +49,10 @@ function ReservationForm() {
         statut: 'confirmee',
       });
 
-      console.log("Paiement confirmé. Réservation validée !");
+      toast.success("Paiement confirmé. Réservation validée !");
       navigate('/mes-reservations');
     } catch (err) {
-      console.log(err.response?.data?.message || "Erreur lors du traitement du paiement.");
+      toast.error("Erreur lors du traitement du paiement.");
     }
   };
 

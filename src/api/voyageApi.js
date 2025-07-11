@@ -18,3 +18,6 @@ export const getVoyageById = (id) => axios.get(`${API_URL}/${id}`, getAuthHeader
 export const createVoyage = (data) => axios.post(API_URL, data, getAuthHeaders());
 export const updateVoyage = (id, data) => axios.put(`${API_URL}/${id}`, data, getAuthHeaders());
 export const deleteVoyage = (id) => axios.delete(`${API_URL}/${id}`, getAuthHeaders());
+export const getVoyagesByTrajet = (trajetId) =>
+  axios.get(`${API_URL}/${trajetId}/Allvoyage`, getAuthHeaders());
+

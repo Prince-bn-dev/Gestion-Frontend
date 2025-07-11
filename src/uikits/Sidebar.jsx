@@ -99,20 +99,20 @@ export const sidebarData = [
   },
   {
     id: 'Creer un utilisateur',
-    label: 'utilisateur',
+    label: 'Utilisateur',
     icon: <IoIosPerson />,
-    link: '/register',
+    link: '/registerUser',
     hasSubmenu: false,
     roles: ['gestionnaire', 'admin'],
   }
 ];
 
-const SidebarItem = ({ item, onLabelSelect,activeItemId, setActiveItemId, isExpanded, toggleMenu }) => {
+const SidebarItem = ({ item,activeItemId, setActiveItemId, isExpanded, toggleMenu }) => {
   const handleClick = (e) => {
     if (item.hasSubmenu) {
       e.preventDefault();
       toggleMenu(item.id);
-      onLabelSelect(item.label);
+      (item.label);
     }
     setActiveItemId(item.id);
   };
@@ -167,7 +167,7 @@ const SidebarItem = ({ item, onLabelSelect,activeItemId, setActiveItemId, isExpa
   );
 };
 
-const Sidebar = ({ onLabelSelect }) => {
+const Sidebar = () => {
   const [activeItemId, setActiveItemId] = useState(null);
   const initialMenus = {
   Parcs: false,
@@ -243,7 +243,6 @@ const Sidebar = ({ onLabelSelect }) => {
               setActiveItemId={setActiveItemId}
               isExpanded={expandedMenus[item.id] || false}
               toggleMenu={toggleMenu}
-              onLabelSelect={onLabelSelect}
             />
           ))}
         </ul>

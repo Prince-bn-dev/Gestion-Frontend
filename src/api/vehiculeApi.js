@@ -36,3 +36,10 @@ export const getVehiculeGps = async (vehiculeId) => {
   return res.data.gps?.localisation;
 };
 
+export const deleteVehiculeImage = async (vehiculeId, imageId) => {
+  return await axios.delete(
+    `${API_URL}/${vehiculeId}/images/${imageId}`,
+    getAuthHeaders()
+  );
+};
+

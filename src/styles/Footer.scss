@@ -76,10 +76,11 @@
 
     input {
       padding: 10px;
-      border: none;
+      border: 2px solid var(--white-color);
       flex: 1;
       border-radius: 3px 0 0 3px;
       outline: none;
+      color: var(--white-color);
     }
 
     button {

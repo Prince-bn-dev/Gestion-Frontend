@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createCommentaire } from '../../api/commentaireApi';
 import { FaStar } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 function CommentaireForm({ voyageId, userId, onCommentAdded }) {
   const [texte, setTexte] = useState('');
@@ -15,7 +16,7 @@ function CommentaireForm({ voyageId, userId, onCommentAdded }) {
       setNote(5);
       onCommentAdded(); 
     } catch (err) {
-      console.error("Erreur lors de l'ajout du commentaire", err);
+      toast.error("Erreur lors de l'ajout du commentaire");
     }
   };
 

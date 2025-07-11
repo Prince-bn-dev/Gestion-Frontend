@@ -4,8 +4,7 @@ import TrajetForm from './TrajetForm';
 import Modal from '../../uikits/Modal';
 import { BackgroundButton } from '../../uikits/Button';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-
-
+import { toast } from 'react-toastify';
 
 const TrajetList = () => {
   const [trajets, setTrajets] = useState([]);
@@ -17,8 +16,9 @@ const TrajetList = () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_API_URL}api/trajets`);
       setTrajets(res.data);
+      toast.success("Chargement réussie")
     } catch (err) {
-      console.error("Erreur lors du chargement :", err.message);
+      toast.error("Erreur lors du chargement ");
     }
   };
 
@@ -27,8 +27,9 @@ const TrajetList = () => {
       try {
         await axios.delete(`${import.meta.env.VITE_API_URL}api/trajets/${id}`);
         fetchTrajets();
+        toast.success("Chargement réussie")
       } catch (err) {
-        console.error("Erreur de suppression :", err.message);
+        toast.error("Erreur de suppression ");
       }
     }
   };
@@ -78,6 +79,8 @@ const TrajetList = () => {
           <tr>
             <th>Départ</th>
             <th>Arrivée</th>
+            <th>Distance (km)</th>
+            <th>Durée </th> 
             <th>Actions</th>
           </tr>
         </thead>
@@ -86,6 +89,8 @@ const TrajetList = () => {
             <tr key={trajet._id}>
               <td>{trajet.lieux_depart}</td>
               <td>{trajet.lieux_arrive}</td>
+              <td>{trajet.distance}</td>
+              <td>{trajet.duree}</td>
               <td className="actions-col">
                 <button className="icon-button edit" onClick={() => handleEdit(trajet)}>
                   <FaEdit />

@@ -35,61 +35,37 @@ import About from "./pages/About";
 
 import PhoneVerification from "./pages/PhoneVerification";
 import Footer from "./uikits/Footer";
-import { useState ,useEffect } from "react";
 import TopBar from "./uikits/TopBar ";
-import { useLocation } from "react-router-dom";
-import {sidebarData} from "./uikits/Sidebar"; 
 import TrajetList from "./components/Trajets/TrajetList";
+import RegisterUser from "./components/Auth/RegisterUser";
+import VoyagesParTrajet from "./components/pages/VoyagesParTrajet";
 
 
 
 function AppRoutes() {
   const { token, user } = useAuth();
-
-     const handleLabelSelect = (label) => {
-    setSelectedLabel(label);
-  };
-    const location = useLocation();
-  const [currentLabel, setCurrentLabel] = useState("");
-  const findLabelByPath = (path, sidebar) => {
-    for (const item of sidebar) {
-      if (item.separator) continue;
-      if (item.link === path) return item.label;
-      if (item.hasSubmenu && item.submenu) {
-        const foundSub = item.submenu.find(sub => sub.link === path);
-        if (foundSub) return foundSub.label;
-      }
-    }
-    return ""; 
-  };
-
-  useEffect(() => {
-    const label = findLabelByPath(location.pathname, sidebarData);
-    setCurrentLabel(label);
-  }, [location.pathname]);
-
   return (
     <div className="app">
       {token && user ? (
         <div className="layout-with-sidebar">
        <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={false}
         rtl={false}
-        pauseOnFocusLoss
+        pauseOnFocusLoss={false}
         draggable
-        pauseOnHover
-        theme="dark"
+        pauseOnHover={false}
+        theme="light"
         transition={Bounce}
         />
-          <Sidebar onLabelSelect={handleLabelSelect} />
+          <Sidebar/>
           <div className="main-content">
-            <TopBar currentLabel={currentLabel}/>
+            <TopBar/>
             <Routes>
-              <Route path="/register" element={<Register />} />
+              <Route path="/registerUser" element={<RegisterUser />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/allparcs" element={<ParcsTable />} />
               <Route path="/parcs" element={<ParcList />} />
@@ -130,6 +106,7 @@ function AppRoutes() {
               <Route path="/" element={<Home/>} />
                <Route path="/about" element={<About/>} />
                 <Route path="/contact" element={<Contact/>} />
+                <Route path="/trajets/:trajetId/voyages" element={<VoyagesParTrajet />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgotPassword" element={<ForgotPassword />} />

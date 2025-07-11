@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
  
 
 
@@ -15,17 +16,13 @@ function ResetPassword() {
             const res = await axios.put(`${import.meta.env.VITE_API_URL}/resetPassword/${resetToken}`, {
                 newPassword
             });
-            console.log(res.data.message || 'Mot de passe réinitialisé avec succès.');
+            toast.success('Mot de passe réinitialisé avec succès.');
             setNewPassword('');
             setTimeout(() => {
                 navigate('/login');
             }, 3000);
         } catch (err) {
-            if (err.response?.data?.message) {
-                console.log(err.response.data.message);
-            } else {
-                console.log('Échec de la réinitialisation du mot de passe.');
-            }
+            toast.error('Échec de la réinitialisation du mot de passe.');
         }
     };
 

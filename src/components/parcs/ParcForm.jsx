@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { createParc, getParcById, updateParc } from '../../api/parcApi';
 import { useAuth } from '../../context/AuthContext';
 import Loader from '../Loader';
+import { toast } from 'react-toastify';
 
 const ParcForm = ({ id, onClose }) => {
   const navigate = useNavigate();
@@ -18,7 +19,6 @@ const ParcForm = ({ id, onClose }) => {
 
   const gestionnaireId = user?._id;
 
-  // Chargement du parc si ID est fourni
   useEffect(() => {
     if (id) {
       getParcById(id)
@@ -38,13 +38,10 @@ const ParcForm = ({ id, onClose }) => {
     }
   }, [id]);
 
-  // Affichage du loader
   if (loading) return <div><Loader /></div>;
 
-  // Message d'erreur si ID fourni mais parc introuvable
   if (id && !parc) return <div>Parc non trouvé</div>;
 
-  // Soumission du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -58,21 +55,21 @@ const ParcForm = ({ id, onClose }) => {
     };
 
     if (heuresFermeture <= heuresOuverture) {
-      return console.log("L'heure de fermeture doit être après l'heure d'ouverture");
+      return toast.info("L'heure de fermeture doit être après l'heure d'ouverture");
     }
 
     try {
       if (parc) {
         await updateParc(parc.data._id, data);
-        console.log('Parc mis à jour avec succès');
+        toast.success('Parc mis à jour avec succès');
       } else {
         await createParc(data);
-        console.log('Parc créé avec succès');
+        toast.success('Parc créé avec succès');
       }
-      onClose(); // ferme la modale
-      navigate('/parcs'); // redirige vers la liste
+      onClose(); 
+      navigate('/parcs'); 
     } catch (err) {
-      console.log(err.response?.data?.message || 'Erreur lors de la sauvegarde');
+      toast.error('Erreur lors de la sauvegarde');
     }
   };
 

@@ -4,6 +4,7 @@ import Loader from '../components/Loader';
 import { BorderButton } from '../uikits/Button';
 import { IoClose } from "react-icons/io5";
 import { FaPencilAlt } from "react-icons/fa";
+import { toast } from 'react-toastify';
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -22,7 +23,7 @@ function Profile() {
         });
         setUser(res.data);
       } catch (err) {
-        console.log(err.response?.data?.message || 'Échec du chargement du profil.');
+        toast.error( 'Échec du chargement du profil.');
       } finally {
         setLoading(false);
       }
@@ -34,7 +35,7 @@ function Profile() {
 
   const handleUpload = async () => {
     if (!selectedFile || !(selectedFile instanceof File)) {
-      alert("Aucun fichier sélectionné ou fichier invalide.");
+      toast.info("Aucun fichier sélectionné ou fichier invalide.");
       return;
     }
     const formData = new FormData();
@@ -57,7 +58,7 @@ function Profile() {
       setSelectedFile(null);
       setShowModal(false); 
     } catch (err) {
-  console.log("Réponse complète de l'erreur :", err.response);
+   toast.error('Échec du chargement');
 
     const errorData = err.response?.data?.error;
     if (errorData) {
@@ -75,18 +76,14 @@ function Profile() {
 
   return (
     <div className="profile-container">
-      <div className='profile-img'>
-        <img src="/images/bg.jpg" alt="background" />
         <div className="avatar-container">
-      <img
-        src={user.image || "/images/default-avatar.png"}
-        alt="Avatar"
-        className="profil-personne"
-      />
+          <img
+            src={user.image || "/images/default-avatar.png"}
+            alt="Avatar"
+            className="profil-personne"
+          />
           <span className="edit-icon" onClick={() => setShowModal(true)}><FaPencilAlt /></span> 
         </div>
-      </div>
-
       {showModal && (
         <div className="modal-backdrop">
           <div className="modal">

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getAuthHeaders } from '../../api/vehiculeApi';
+import { toast } from 'react-toastify';
 
 const AddChauffeurToVehicule = ({ vehiculeId }) => {
   const [chauffeurs, setChauffeurs] = useState([]);
   const [selectedChauffeur, setSelectedChauffeur] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -16,8 +15,9 @@ const AddChauffeurToVehicule = ({ vehiculeId }) => {
           headers: getAuthHeaders().headers,
         });
         setChauffeurs(res.data);
+        toast.success('Chargement réussie')
       } catch (err) {
-        setError('Erreur lors du chargement des chauffeurs');
+        toast.error('Erreur lors du chargement des chauffeurs');
       }
     };
     fetchChauffeurs();
@@ -25,12 +25,10 @@ const AddChauffeurToVehicule = ({ vehiculeId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage('');
-    setError('');
     setLoading(true);
 
     if (!selectedChauffeur) {
-      setError('Veuillez sélectionner un chauffeur');
+      toast.error('Veuillez sélectionner un chauffeur');
       setLoading(false);
       return;
     }
@@ -43,10 +41,10 @@ const AddChauffeurToVehicule = ({ vehiculeId }) => {
           headers: getAuthHeaders().headers,
         }
       );
-      setMessage(res.data.message || 'Chauffeur associé avec succès');
+      toast.success('Chauffeur associé avec succès');
       setSelectedChauffeur('');
     } catch (err) {
-      setError(err.response?.data?.error || "Erreur lors de l'ajout du chauffeur");
+      toast.error("Erreur lors de l'ajout du chauffeur");
     } finally {
       setLoading(false);
     }
@@ -55,8 +53,6 @@ const AddChauffeurToVehicule = ({ vehiculeId }) => {
   return (
     <div className="association-container">
       <h3>Associer un chauffeur au véhicule</h3>
-      {message && <p className="success">{message}</p>}
-      {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
         <label htmlFor="chauffeur-select">Choisir un chauffeur :</label>
         <select

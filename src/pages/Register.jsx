@@ -10,6 +10,7 @@ import {
 } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 const africanCountryCodes = [
@@ -56,27 +57,27 @@ function Register() {
     e.preventDefault();
 
     if (!nom || !prenom || !motDePasse) {
-      console.log("Veuillez remplir tous les champs.");
+      toast.info("Veuillez remplir tous les champs.");
       return;
     }
 
     if (mode === "EMAIL" && !email) {
-      console.log("Veuillez entrer votre email.");
+      toast.info("Veuillez entrer votre email.");
       return;
     }
 
     if (mode === "TELEPHONE" && !telephone) {
-      console.log("Veuillez entrer votre numéro de téléphone.");
+      toast.info("Veuillez entrer votre numéro de téléphone.");
       return;
     }
 
     if (motDePasse !== confirmMotDePasse) {
-      console.log("Les mots de passe ne correspondent pas.");
+      toast.info("Les mots de passe ne correspondent pas.");
       return;
     }
 
     if (!acceptedTerms) {
-      console.log("Vous devez accepter les conditions d'utilisation.");
+      toast.info("Vous devez accepter les conditions d'utilisation.");
       return;
     }
 
@@ -98,13 +99,13 @@ function Register() {
       if (mode === "TELEPHONE") {
         navigate(`/verification-telephone?numero=${fullPhone}`);
       } else {
-        console.log(res.data.message);
+        toast.error('Erreur de connexion.');
       }
 
-      console.log(res.data.message);
+      toast.success('Enregistrement réussie');
     } catch (err) {
-      const message = err.response?.data?.message || "Erreur d'inscription.";
-      console.log(message);
+      const message = "Erreur d'inscription.";
+      toast.error(message);
     } finally {
       setLoading(false);
     }

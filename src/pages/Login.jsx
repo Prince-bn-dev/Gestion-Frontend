@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import ReactFlagsSelect from 'react-flags-select';
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaPhoneAlt } from 'react-icons/fa';
+import { toast } from 'react-toastify';
  
 
 const africanCountryCodes = [
@@ -49,7 +50,7 @@ function Login() {
     const identifiant = mode === 'EMAIL' ? email : telephone;
 
     if (!identifiant || !motDePasse) {
-      console.log('Veuillez remplir tous les champs.');
+      toast.info('Veuillez remplir tous les champs.');
       return;
     }
 
@@ -62,10 +63,10 @@ function Login() {
     try {
       const finalIdentifiant = mode === 'EMAIL' ? email : fullPhone;
       await login(finalIdentifiant, motDePasse);
-      console.log('Connexion réussie !');
+      toast.success('Connexion réussie !');
       navigate('/profile');
     } catch (err) {
-      console.log(err.response?.data?.message || 'Erreur de connexion. Veuillez réessayer.');
+      toast.error('Erreur de connexion. Veuillez réessayer.');
     } finally {
       setIsLoading(false);
     }

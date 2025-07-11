@@ -142,7 +142,7 @@ textarea {
 
   .main-content {
     flex-grow: 1;
-    background-color: #f7f7f7;
+    background-color: var(--white-color);
     overflow-y: auto;
     min-height: 100vh;
     margin-left: 230px;
@@ -177,7 +177,7 @@ textarea {
     width: 100%;
     padding-top: 60px; 
     flex-grow: 1;
-    background-color: #f7f7f7;
+    background-color: var(--white-color);
     overflow-y: auto;
   }
 }
@@ -359,7 +359,7 @@ textarea {
           top: -5px;
           right: -5px;
           background: #e93204;
-          color: white;
+          color: var(--white-color);
           font-size: 0.7rem;
           font-weight: 700;
           border-radius: 50%;
@@ -371,8 +371,23 @@ textarea {
   }
   @media screen and (max-width: 758px) {
     padding-top: 5rem;
+    font-size: 0.4rem !important;
   }
 }
+
+
+.upload-images-modal {
+  input {
+    margin: 1rem 0;
+  }
+
+  .modal-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+  }
+}
+
 
 
 

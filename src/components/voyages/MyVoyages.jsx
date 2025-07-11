@@ -13,6 +13,7 @@ import {
 import Modal from '../../uikits/Modal';
 import VoyageForm from './VoyageForm';
 import { filterVoyages } from '../../utils/filterVoyages'; 
+import { toast } from 'react-toastify';
 
 function MyVoyages() {
   const { user } = useAuth();
@@ -33,7 +34,7 @@ function MyVoyages() {
 
       setVoyages(res.data);
     } catch (error) {
-      console.log('Erreur lors du chargement des voyages :', error.response?.data?.message || error.message);
+      toast.error('Erreur lors du chargement des voyages ');
     }
   };
 
@@ -46,9 +47,9 @@ function MyVoyages() {
       try {
         await deleteVoyage(id);
         fetchVoyages();
-        console.log('Voyage supprimé avec succès');
+        toast.success('Voyage supprimé avec succès');
       } catch (err) {
-        console.log('Erreur lors de la suppression du voyage :', err.response?.data?.message || err.message);
+        toast.error('Erreur lors de la suppression du voyage ');
       }
     }
   };
@@ -180,14 +181,12 @@ function MyVoyages() {
         </Modal>
       )}
 
-      {/* Modal création */}
       {showCreateModal && (
         <Modal isOpen={true} onClose={handleCloseModal} title="Ajouter un voyage">
           <VoyageForm onClose={handleCloseModal} />
         </Modal>
       )}
 
-      {/* Graphiques */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '30px', marginBottom: '40px' }}>
         <div style={{ flex: 1, minWidth: 300, height: 300 }}>
           <h4>Passagers par Jour</h4>

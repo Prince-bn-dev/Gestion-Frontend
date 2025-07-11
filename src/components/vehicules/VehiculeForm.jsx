@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { createVehicule, updateVehicule, getVehiculeById } from '../../api/vehiculeApi';
 import { getParcsByGestionnaire } from '../../api/parcApi';
 import { useAuth } from '../../context/AuthContext';
+import { toast } from 'react-toastify';
 
 function VehiculeForm({ id, onClose }) {
   const { user } = useAuth();
@@ -43,9 +44,10 @@ function VehiculeForm({ id, onClose }) {
             parc: v.parc?._id || '',
             statut: v.statut || 'actif',
           });
+          toast.success('Chargement du véhicule réussie')
         })
         .catch(err => {
-          console.log(err.response?.data?.error || 'Erreur lors du chargement du véhicule');
+          toast.error('Erreur lors du chargement du véhicule');
           navigate('/vehicules');
         });
     }
@@ -54,9 +56,11 @@ function VehiculeForm({ id, onClose }) {
   useEffect(() => {
     if (!userId) return;
     getParcsByGestionnaire(userId)
-      .then(res => setParcs(res.data))
+      .then(res => {
+        setParcs(res.data);
+      })
       .catch(err => {
-        console.log(err.response?.data?.error || 'Erreur lors du chargement des parcs');
+        toast.error('Erreur lors du chargement des parcs');
         setParcs([]);
       });
   }, [userId]);
@@ -78,7 +82,7 @@ function VehiculeForm({ id, onClose }) {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    if (!userId) return console.log('Non connecté');
+    if (!userId) return toast.info('Non connecté');
 
     try {
       const dataToSend = {
@@ -90,15 +94,16 @@ function VehiculeForm({ id, onClose }) {
 
       if (id) {
         await updateVehicule(id, dataToSend);
-        console.log('Véhicule mis à jour');
+        toast.success('Véhicule mis à jour');
         navigate(`/vehicules/${id}`);
+        onClose();
       } else {
         await createVehicule(dataToSend);
-        console.log('Véhicule créé');
+        toast.success('Véhicule créé');
         onClose();
       }
     } catch (err) {
-      console.log(err.response?.data || err.message || 'Erreur lors de la sauvegarde');
+      toast.error('Erreur lors de la sauvegarde');
     }
   };
 

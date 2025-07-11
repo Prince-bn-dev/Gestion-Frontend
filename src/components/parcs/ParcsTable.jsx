@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getAllParcs } from '../../api/parcApi'; 
 import Loader from '../Loader';
+import { toast } from 'react-toastify';
  
 
 const ParcsTable = () => {
@@ -12,9 +13,9 @@ const ParcsTable = () => {
       try {
         const data = await getAllParcs();
         setparcs(data);
-        console.log('parcs chargés avec succès \ Redirection dans quelques minutes');
+        toast.success('parcs chargés avec succès \ Redirection dans quelques minutes');
       } catch (err) {
-        console.log(err.response?.data?.message || 'Erreur lors du chargement des parcs');
+        toast.error('Erreur lors du chargement des parcs');
       } finally {
         setLoading(false);
       }

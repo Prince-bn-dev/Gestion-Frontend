@@ -10,10 +10,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-image: url(/images/v-1.avif);
+        background-image: url(/public/images/bus2.png);
         background-repeat: no-repeat;
         background-size: cover;
-        background-attachment: fixed;
+
 
         h1{
           color: var(--white-color);
@@ -153,9 +153,8 @@
         }
 
         img {
-          width: 150px;
+          width: 100%;
           height: 150px;
-          border-radius: 50%;
           object-fit: cover;
           margin-bottom: 1rem;
         }

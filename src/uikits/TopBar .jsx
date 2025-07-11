@@ -1,18 +1,45 @@
 import React from "react";
-import { FaSearch, FaBell, FaUserCircle, FaSun, FaCog } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
+import { FaBell, FaUserCircle, FaCog } from "react-icons/fa";
 
-const TopBar = ({ currentLabel }) => {
+const routeLabels = {
+  "/dashboard": "Tableau de bord",
+  "/allparcs": "Tous les parcs",
+  "/parcs": "Parcs",
+  "/vehicules": "Véhicules",
+  "/allVehicules": "Table des véhicules",
+  "/voyages": "Mes voyages",
+  "/voyages/new": "Nouveau voyage",
+  "/voyages/edit": "Modifier voyage",
+  "/allVoyages": "Liste des voyages",
+  "/allVoyagesTable": "Table des voyages",
+  "/trajets": "Trajets",
+  "/register": "Nouvel utilisateur",
+  "/profile": "Mon profil",
+  "/password/update": "Changer mot de passe",
+  "/mes-reservations": "Mes réservations",
+  "/reservations/paiement": "Paiement",
+  "/reservations/edit": "Modifier réservation"
+};
+
+const TopBar = () => {
+  const location = useLocation();
+
+  const currentLabel = Object.keys(routeLabels).find((key) =>
+    location.pathname.startsWith(key)
+  );
+
+  const label = routeLabels[currentLabel] || "Tableau de bord";
+
   return (
     <header className="topbar">
       <div className="topbar-left">
-        <h2>{currentLabel}</h2>
+        <h2>{label}</h2>
         <hr />
         <nav className="breadcrumb" aria-label="Breadcrumb">
-          <span>Home</span>
+          <span>Accueil</span>
           <span className="sep">›</span>
-          <span>{currentLabel}</span>
-          <span className="sep">›</span>
-          <span>Default</span>
+          <span>{label}</span>
         </nav>
       </div>
       <div className="topbar-right">

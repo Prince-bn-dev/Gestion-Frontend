@@ -3,14 +3,28 @@ import { getAllVoyages } from '../../api/voyageApi';
 import { createReservation } from '../../api/reservationApi';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { FaUser, FaBus, FaCheck } from 'react-icons/fa';
+import { FaUser, FaBus, FaCheck, FaImages } from 'react-icons/fa';
 import CommentaireForm from '../commentaires/CommentaireForm';
 import CommentairesSection from '../commentaires/CommentairesSection';
+import Modal from '../../uikits/Modal';
+import Loader from '../Loader';
+import { toast } from 'react-toastify';
 
 function VoyagesList() {
   const [voyages, setVoyages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refresh, setRefresh] = useState(false);
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [searchTerm, setSearchTerm] = useState('');
+ const filteredVoyages = voyages.filter((voyage) => {
+  const depart = voyage.trajet?.lieux_depart?.toLowerCase() || '';
+  const arrive = voyage.trajet?.lieux_arrive?.toLowerCase() || '';
+  const term = searchTerm.toLowerCase();
+  return depart.includes(term) || arrive.includes(term);
+});
+
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -22,7 +36,7 @@ function VoyagesList() {
         const res = await getAllVoyages();
         setVoyages(res.data);
       } catch (err) {
-        console.error("Erreur lors du chargement des voyages", err);
+        toast.error("Erreur lors du chargement des voyages");
       } finally {
         setLoading(false);
       }
@@ -37,21 +51,42 @@ function VoyagesList() {
         voyageur: user._id,
         nombre_places: 1,
       });
-      console.log("Réservation créée. Veuillez procéder au paiement.");
+      toast.success("Réservation créée. Veuillez procéder au paiement.");
       navigate(`/reservations/paiement/${res._id}`);
     } catch (error) {
-      console.error("Erreur lors de la création de la réservation", error);
+      toast.error("Erreur lors de la création de la réservation");
     }
   };
 
-  if (loading) return <div>Chargement des voyages...</div>;
+  const handleOpenImages = (images) => {
+    if (!images || images.length === 0) return;
+    setSelectedImages(images);
+    setCurrentImageIndex(0);
+    setShowImageModal(true);
+  };
+
+  const handleCloseImages = () => {
+    setShowImageModal(false);
+    setSelectedImages([]);
+    setCurrentImageIndex(0);
+  };
+
+  if (loading) return <div><Loader /></div>;
 
   return (
     <div className="voyages-list-container">
       <h2>Liste des Voyages</h2>
-
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Rechercher par lieu de départ ou d’arrivée..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+      </div>
       <div className="voyages-grid">
-        {voyages.map(voyage => (
+        {filteredVoyages.map((voyage) => (
           <div className="voyage-card" key={voyage._id}>
             <h3 className="title">
               {voyage.trajet?.lieux_depart} → {voyage.trajet?.lieux_arrive}
@@ -70,6 +105,13 @@ function VoyagesList() {
 
             <div className="vehicule">
               <FaBus /> Véhicule : {voyage.vehicule?.marque} {voyage.vehicule?.modele} ({voyage.vehicule?.immatriculation})
+              {voyage.vehicule?.images?.length > 0 && (
+                <FaImages
+                  title="Voir les images"
+                  style={{ marginLeft: 8, cursor: 'pointer', color: '#555' }}
+                  onClick={() => handleOpenImages(voyage.vehicule.images)}
+                />
+              )}
             </div>
 
             <div className={`statut statut-${voyage.statut?.toLowerCase().replace(/\s/g, '-')}`}>
@@ -94,6 +136,67 @@ function VoyagesList() {
           </div>
         ))}
       </div>
+      {showImageModal && (
+        <Modal isOpen={true} onClose={handleCloseImages} title="Images du véhicule">
+          <div className="vehicule-gallery">
+            <div className="gallery-main">
+              <button
+                className="nav-button left"
+                onClick={() =>
+                  setCurrentImageIndex((prev) =>
+                    prev === 0 ? selectedImages.length - 1 : prev - 1
+                  )
+                }
+              >
+                ←
+              </button>
+
+              {selectedImages.length > 0 ? (
+                <img
+                  src={selectedImages[currentImageIndex].url}
+                  alt="Véhicule"
+                  className="main-image"
+                  style={{ maxWidth: '100%', maxHeight: '400px', borderRadius: '10px' }}
+                />
+              ) : (
+                <div className="placeholder">Aucune image</div>
+              )}
+
+              <button
+                className="nav-button right"
+                onClick={() =>
+                  setCurrentImageIndex((prev) => (prev + 1) % selectedImages.length)
+                }
+              >
+                →
+              </button>
+            </div>
+
+            {selectedImages.length > 0 && (
+              <div className="gallery-thumbs">
+                {selectedImages.map((img, index) => (
+                  <img
+                    key={index}
+                    src={img.url}
+                    alt={`thumb-${index}`}
+                    className={index === currentImageIndex ? 'thumb selected' : 'thumb'}
+                    onClick={() => setCurrentImageIndex(index)}
+                    style={{
+                      width: 60,
+                      height: 60,
+                      objectFit: 'cover',
+                      margin: '8px',
+                      border: index === currentImageIndex ? '3px solid #007bff' : '2px solid #ccc',
+                      borderRadius: '6px',
+                      cursor: 'pointer'
+                    }}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }
